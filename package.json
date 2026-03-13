@@ -1,0 +1,19 @@
+{
+  "name": "harvest-js",
+  "private": true,
+  "description": "Fullstack Farm Simulation Engine",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w apps/web & npm run start:dev -w apps/server",
+    "build": "npm run build --workspaces",
+    "db:generate": "npm run generate -w packages/database",
+    "db:push": "npm run push -w packages/database"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "turbo": "latest"
+  }
+}
