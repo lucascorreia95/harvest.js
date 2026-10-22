@@ -1,4 +1,4 @@
-import { Controller, Put, Body, UseGuards, Req } from '@nestjs/common';
+import { Controller, Get, Put, Body, UseGuards, Req } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
@@ -6,6 +6,11 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 @UseGuards(JwtAuthGuard)
 export class UsersController {
   constructor(private usersService: UsersService) {}
+
+  @Get('profile')
+  async getProfile(@Req() req) {
+    return this.usersService.getUserProfile(req.user.sub);
+  }
 
   @Put('profile')
   async updateProfile(

@@ -1,0 +1,67 @@
+### Testar XP System Reestruturado
+
+### 1. Login para obter token
+# @name login
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "password": "123456"
+}
+
+###
+
+@token = {{ login.response.body.access_token }}
+
+###
+
+### 2. Ver perfil inicial (deve mostrar level 1)
+GET http://localhost:3000/users/profile
+Authorization: Bearer {{token}}
+
+### 3. Ver estado inicial da fazenda
+GET http://localhost:3000/farm
+Authorization: Bearer {{token}}
+
+### 4. Plantar trigo no terreno 0
+POST http://localhost:3000/farm/plant
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "plotIndex": 0,
+  "cropSlug": "wheat"
+}
+
+### 5. Esperar 30 segundos e colher (deve ganhar XP e coins)
+POST http://localhost:3000/farm/harvest
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "plotIndex": 0
+}
+
+### 6. Ver perfil após colheita (deve mostrar XP e level atualizado)
+GET http://localhost:3000/users/profile
+Authorization: Bearer {{token}}
+
+### 7. Repetir plantio/colheita para testar level up
+POST http://localhost:3000/farm/plant
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "plotIndex": 0,
+  "cropSlug": "wheat"
+}
+
+### 8. Colher novamente
+POST http://localhost:3000/farm/harvest
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "plotIndex": 0
+}

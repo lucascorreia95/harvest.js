@@ -1,0 +1,155 @@
+### Testar API do Harvest.js
+
+### Health Check
+GET http://localhost:3000/
+
+### Autenticação
+# @name login
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "password": "123456"
+}
+
+###
+
+@token = {{ login.response.body.access_token }}
+
+###
+
+POST http://localhost:3000/auth/signup
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "password": "123456",
+  "farmName": "Fazenda Teste"
+}
+
+###
+
+GET http://localhost:3000/auth/me
+Authorization: Bearer {{token}}
+
+### Usuários
+GET http://localhost:3000/users/profile
+Authorization: Bearer {{token}}
+
+###
+
+PUT http://localhost:3000/users/profile
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "displayName": "Updated Name",
+  "farmName": "My Farm"
+}
+
+###
+
+### Farm Controller - Rotas Principais
+
+### GET /farm - O Estado da Terra
+GET http://localhost:3000/farm
+Authorization: Bearer {{token}}
+
+###
+
+### POST /farm/unlock - Expansão
+POST http://localhost:3000/farm/unlock
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "plotIndex": 6
+}
+
+###
+
+### POST /farm/plant - Ação de Plantar
+POST http://localhost:3000/farm/plant
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "plotIndex": 0,
+  "cropSlug": "wheat"
+}
+
+###
+
+### POST /farm/harvest - Ação de Colher
+POST http://localhost:3000/farm/harvest
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "plotIndex": 0
+}
+
+### Testes de Fluxo Completo
+
+### 1. Login para obter token
+# @name login
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "password": "123456"
+}
+
+###
+
+@token = {{ login.response.body.access_token }}
+
+###
+
+### 2. Ver perfil do usuário
+GET http://localhost:3000/users/profile
+Authorization: Bearer {{token}}
+
+### 3. Ver estado inicial da fazenda
+GET http://localhost:3000/farm
+Authorization: Bearer {{token}}
+
+### 4. Plantar trigo no terreno 0
+POST http://localhost:3000/farm/plant
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "plotIndex": 0,
+  "cropSlug": "wheat"
+}
+
+### 5. Tentar colher antes do tempo (deve dar erro)
+POST http://localhost:3000/farm/harvest
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "plotIndex": 0
+}
+
+### 6. Esperar 30 segundos e colher
+POST http://localhost:3000/farm/harvest
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "plotIndex": 0
+}
+
+### 7. Desbloquear novo terreno
+POST http://localhost:3000/farm/unlock
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "plotIndex": 6
+}
+

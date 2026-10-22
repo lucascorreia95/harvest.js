@@ -3,6 +3,9 @@ import { ConfigModule } from '@nestjs/config';
 import { PrismaModule } from './prisma/prisma.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { FarmModule } from './farm/farm.module';
+import { ExperienceModule } from './experience/experience.module';
+import { ActivityModule } from './activity/activity.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
@@ -14,6 +17,9 @@ import { AppService } from './app.service';
     PrismaModule,
     AuthModule,
     UsersModule,
+    FarmModule,
+    ExperienceModule,
+    ActivityModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,0 +1,145 @@
+### Activity Log API Tests
+
+# 1. Login para obter token
+# @name login
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "password": "123456"
+}
+
+###
+
+@token = {{ login.response.body.access_token }}
+
+###
+
+# 2. Obter atividades do usuário (com paginação)
+GET http://localhost:3000/activity?limit=10&offset=0
+Authorization: Bearer {{token}}
+
+###
+
+# 3. Obter estatísticas de atividades do usuário
+GET http://localhost:3000/activity/stats
+Authorization: Bearer {{token}}
+
+###
+
+# 4. Obter atividades recentes (global)
+GET http://localhost:3000/activity/recent?limit=20
+Authorization: Bearer {{token}}
+
+###
+
+# 5. Filtrar atividades por tipo (plant)
+GET http://localhost:3000/activity?action=plant&limit=5
+Authorization: Bearer {{token}}
+
+###
+
+# 6. Filtrar atividades por tipo (harvest)
+GET http://localhost:3000/activity?action=harvest&limit=5
+Authorization: Bearer {{token}}
+
+###
+
+# 7. Filtrar atividades por tipo (level_up)
+GET http://localhost:3000/activity?action=level_up&limit=5
+Authorization: Bearer {{token}}
+
+###
+
+# 8. Plantar uma semente (vai gerar log de atividade)
+POST http://localhost:3000/farm/plant
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "plotIndex": 0,
+  "cropSlug": "wheat"
+}
+
+###
+
+# 9. Colher uma plantação (vai gerar log de atividade e possivelmente level up)
+POST http://localhost:3000/farm/harvest
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "plotIndex": 0
+}
+
+###
+
+# 10. Desbloquear um plot (vai gerar log de atividade)
+POST http://localhost:3000/farm/unlock
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "plotIndex": 7
+}
+
+###
+
+# 11. Verificar atividades após as operações
+GET http://localhost:3000/activity?limit=15
+Authorization: Bearer {{token}}
+
+###
+
+# 12. Verificar estatísticas atualizadas
+GET http://localhost:3000/activity/stats
+Authorization: Bearer {{token}}
+
+###
+
+# 13. Testar paginação - página 2
+GET http://localhost:3000/activity?limit=5&offset=5
+Authorization: Bearer {{token}}
+
+###
+
+# 14. Testar limite máximo de atividades
+GET http://localhost:3000/activity?limit=100
+Authorization: Bearer {{token}}
+
+###
+
+# 15. Verificar atividades recentes global (sem filtro de usuário)
+GET http://localhost:3000/activity/recent?limit=10
+Authorization: Bearer {{token}}
+
+###
+
+# 16. Testar filtro com ação inválida (deve retornar vazio ou erro)
+GET http://localhost:3000/activity?action=invalid_action&limit=5
+Authorization: Bearer {{token}}
+
+###
+
+# 17. Testar com offset negativo (deve ignorar ou tratar como 0)
+GET http://localhost:3000/activity?limit=5&offset=-5
+Authorization: Bearer {{token}}
+
+###
+
+# 18. Testar com limite acima do máximo (deve limitar a 100)
+GET http://localhost:3000/activity?limit=200
+Authorization: Bearer {{token}}
+
+###
+
+# 19. Verificar atividades após múltiplas operações
+GET http://localhost:3000/activity?limit=20
+Authorization: Bearer {{token}}
+
+###
+
+# 20. Verificar estatísticas finais
+GET http://localhost:3000/activity/stats
+Authorization: Bearer {{token}}

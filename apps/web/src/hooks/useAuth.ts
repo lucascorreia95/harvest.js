@@ -1,22 +1,25 @@
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
+import { useAuth as useAuthContext } from '../contexts/AuthContext';
 import { authApi, type SignupData, type LoginData } from '../api/auth';
-
-interface User {
-  id: string;
-  username: string;
-  displayName: string;
-  farmName?: string;
-}
 
 export const useAuth = () => {
   const navigate = useNavigate();
+  const { setUser } = useAuthContext();
 
   const loginMutation = useMutation({
     mutationFn: (data: LoginData) => authApi.login(data),
     onSuccess: (response) => {
-      localStorage.setItem('token', response.token);
-      localStorage.setItem('user', JSON.stringify(response.user));
+      localStorage.setItem('harvest_token', response.access_token);
+      localStorage.setItem('harvest_user', JSON.stringify(response.user));
+      
+      // Transformar dados para compatibilizar com AuthContext
+      const userForContext = {
+        ...response.user,
+        createdAt: new Date().toISOString(), // ou pegar da API se disponível
+        updatedAt: new Date().toISOString(),
+      };
+      setUser(userForContext);
       navigate('/game');
     },
     onError: (error) => {
@@ -28,8 +31,16 @@ export const useAuth = () => {
   const signupMutation = useMutation({
     mutationFn: (data: SignupData) => authApi.signup(data),
     onSuccess: (response) => {
-      localStorage.setItem('token', response.token);
-      localStorage.setItem('user', JSON.stringify(response.user));
+      localStorage.setItem('harvest_token', response.access_token);
+      localStorage.setItem('harvest_user', JSON.stringify(response.user));
+      
+      // Transformar dados para compatibilizar com AuthContext
+      const userForContext = {
+        ...response.user,
+        createdAt: new Date().toISOString(), // ou pegar da API se disponível
+        updatedAt: new Date().toISOString(),
+      };
+      setUser(userForContext);
       navigate('/game');
     },
     onError: (error) => {
@@ -39,18 +50,19 @@ export const useAuth = () => {
   });
 
   const logout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    localStorage.removeItem('harvest_token');
+    localStorage.removeItem('harvest_user');
+    setUser(null);
     navigate('/');
   };
 
-  const getCurrentUser = (): User | null => {
-    const userStr = localStorage.getItem('user');
-    return userStr ? JSON.parse(userStr) : null;
+  const getCurrentUser = () => {
+    const { user } = useAuthContext();
+    return user;
   };
 
   const getToken = (): string | null => {
-    return localStorage.getItem('token');
+    return localStorage.getItem('harvest_token');
   };
 
   const isAuthenticated = (): boolean => {

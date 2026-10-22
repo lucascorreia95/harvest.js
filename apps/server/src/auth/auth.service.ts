@@ -46,6 +46,21 @@ export class AuthService {
     };
   }
 
+  async createInitialFarm(profileId: string) {
+    const initialUnlocked = 6;
+
+    const plots = Array.from({ length: initialUnlocked }).map((_, index) => ({
+      profileId,
+      index,
+      isUnlocked: true, // Todos os plots criados inicialmente estão desbloqueados
+    }));
+
+    // Cria apenas os plots iniciais para alta performance e economia de espaço
+    await this.prisma.plot.createMany({
+      data: plots,
+    });
+  }
+
   async signup(signupData: {
     username: string;
     password: string;
@@ -71,11 +86,24 @@ export class AuthService {
         },
       });
 
-      await tx.profile.create({
+      const profile = await tx.profile.create({
         data: {
           userId: newUser.id,
           farmName: signupData.farmName || `${signupData.username}'s Farm`,
         },
+      });
+
+      // Criar apenas os plots iniciais (6 desbloqueados)
+      const initialUnlocked = 6;
+
+      const plots = Array.from({ length: initialUnlocked }).map((_, index) => ({
+        profileId: profile.id,
+        index,
+        isUnlocked: true, // Todos os plots criados inicialmente estão desbloqueados
+      }));
+
+      await tx.plot.createMany({
+        data: plots,
       });
 
       return newUser;

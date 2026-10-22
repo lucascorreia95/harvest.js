@@ -1,0 +1,94 @@
+### Test Global Exception Filter
+### Test various error scenarios to ensure standardized responses
+
+### 1. Login para obter token
+# @name login
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "password": "123456"
+}
+
+###
+
+@token = {{ login.response.body.access_token }}
+
+###
+
+### 2. Validation Error (DTO Validation)
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "username": "",
+  "password": ""
+}
+
+###
+
+### 3. Bad Request - Invalid Plot Index
+POST http://localhost:3000/farm/unlock
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "plotIndex": 50
+}
+
+###
+
+### 4. Not Found - Non-existent Crop
+POST http://localhost:3000/farm/plant
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "plotIndex": 0,
+  "cropSlug": "non-existent-crop"
+}
+
+###
+
+### 5. Bad Request - Insufficient Coins
+POST http://localhost:3000/farm/unlock
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "plotIndex": 10
+}
+
+###
+
+### 6. Bad Request - Plot Not Unlocked
+POST http://localhost:3000/farm/plant
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "plotIndex": 20,
+  "cropSlug": "wheat"
+}
+
+###
+
+### 7. Unauthorized - No Token
+POST http://localhost:3000/farm/unlock
+Content-Type: application/json
+
+{
+  "plotIndex": 0
+}
+
+###
+
+### Expected Response Format:
+{
+  "statusCode": 400,
+  "error": "Bad Request",
+  "message": "Specific error message",
+  "timestamp": "2024-01-01T00:00:00.000Z",
+  "path": "/farm/unlock"
+}

@@ -6,6 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  output   = "../generated"
 }
 
 datasource db {
@@ -38,6 +39,56 @@ model Profile {
   
   // Relations
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plots Plot[]
   
   @@map("profiles")
+}
+
+model Plot {
+  id        String   @id @default(cuid())
+  profileId String
+  index     Int      // Posição no grid (0, 1, 2...)
+  cropType  String?  // 'carrot', 'corn', etc.
+  plantedAt DateTime?
+  isUnlocked Boolean @default(false)
+  
+  profile   Profile  @relation(fields: [profileId], references: [id])
+  crop      Crop?    @relation(fields: [cropType], references: [slug])
+
+  @@unique([profileId, index]) // Um jogador não pode ter dois terrenos na mesma posição
+  @@map("plots")
+}
+
+model Crop {
+  id            String   @id @default(cuid())
+  name          String   @unique // ex: "Cenoura"
+  slug          String   @unique // ex: "carrot" (usado para achar a sprite)
+  
+  // Economia
+  price         Int      // Custo para plantar
+  sellPrice     Int      // Valor de venda ao colher
+  xpReward      Int      // Experiência ganha
+  
+  // Tempo
+  growthTime    Int      // Tempo em segundos
+  
+  // Requisito
+  minLevel      Int      @default(1)
+  
+  plots         Plot[]   // Relação com os terrenos
+  
+  @@map("crops")
+}
+
+model ActivityLog {
+  id          String   @id @default(cuid())
+  userId      String
+  action      String   // 'plant', 'harvest', 'unlock_plot', 'level_up'
+  description String   // "Lucas plantou Cenoura no Plot 3"
+  metadata    Json?    // Dados adicionais: { cropSlug: "carrot", plotIndex: 3, coins: 50 }
+  createdAt   DateTime @default(now())
+  
+  @@index([userId, createdAt])
+  @@index([createdAt])
+  @@map("activity_logs")
 }

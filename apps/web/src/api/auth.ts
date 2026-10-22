@@ -12,7 +12,7 @@ export interface LoginData {
 }
 
 export interface AuthResponse {
-  token: string;
+  access_token: string;
   user: {
     id: string;
     username: string;
