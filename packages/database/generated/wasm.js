@@ -121,15 +121,20 @@ exports.Prisma.PlotScalarFieldEnum = {
   isUnlocked: 'isUnlocked'
 };
 
-exports.Prisma.CropScalarFieldEnum = {
+exports.Prisma.ItemScalarFieldEnum = {
   id: 'id',
-  name: 'name',
   slug: 'slug',
-  price: 'price',
+  name: 'name',
+  description: 'description',
+  type: 'type',
+  buyPrice: 'buyPrice',
   sellPrice: 'sellPrice',
-  xpReward: 'xpReward',
+  minLevel: 'minLevel',
   growthTime: 'growthTime',
-  minLevel: 'minLevel'
+  xpReward: 'xpReward',
+  yieldItemSlug: 'yieldItemSlug',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.ActivityLogScalarFieldEnum = {
@@ -139,6 +144,15 @@ exports.Prisma.ActivityLogScalarFieldEnum = {
   description: 'description',
   metadata: 'metadata',
   createdAt: 'createdAt'
+};
+
+exports.Prisma.InventoryItemScalarFieldEnum = {
+  id: 'id',
+  profileId: 'profileId',
+  itemSlug: 'itemSlug',
+  quantity: 'quantity',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -172,8 +186,9 @@ exports.Prisma.ModelName = {
   User: 'User',
   Profile: 'Profile',
   Plot: 'Plot',
-  Crop: 'Crop',
-  ActivityLog: 'ActivityLog'
+  Item: 'Item',
+  ActivityLog: 'ActivityLog',
+  InventoryItem: 'InventoryItem'
 };
 /**
  * Create the Client
@@ -205,7 +220,7 @@ const config = {
   },
   "relativeEnvPaths": {
     "rootEnvPath": null,
-    "schemaEnvPath": "../.env"
+    "schemaEnvPath": "../../../.env"
   },
   "relativePath": "../prisma",
   "clientVersion": "6.19.2",
@@ -214,6 +229,7 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -222,13 +238,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id        String   @id @default(cuid())\n  username  String   @unique\n  password  String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  // Relations\n  profile Profile?\n\n  @@map(\"users\")\n}\n\nmodel Profile {\n  id         String   @id @default(cuid())\n  userId     String   @unique\n  avatar     String?\n  level      Int      @default(1)\n  experience Int      @default(0)\n  coins      Int      @default(100)\n  farmName   String?\n  createdAt  DateTime @default(now())\n\n  // Relations\n  user  User   @relation(fields: [userId], references: [id], onDelete: Cascade)\n  plots Plot[]\n\n  @@map(\"profiles\")\n}\n\nmodel Plot {\n  id         String    @id @default(cuid())\n  profileId  String\n  index      Int // Posição no grid (0, 1, 2...)\n  cropType   String? // 'carrot', 'corn', etc.\n  plantedAt  DateTime?\n  isUnlocked Boolean   @default(false)\n\n  profile Profile @relation(fields: [profileId], references: [id])\n  crop    Crop?   @relation(fields: [cropType], references: [slug])\n\n  @@unique([profileId, index]) // Um jogador não pode ter dois terrenos na mesma posição\n  @@map(\"plots\")\n}\n\nmodel Crop {\n  id   String @id @default(cuid())\n  name String @unique // ex: \"Cenoura\"\n  slug String @unique // ex: \"carrot\" (usado para achar a sprite)\n\n  // Economia\n  price     Int // Custo para plantar\n  sellPrice Int // Valor de venda ao colher\n  xpReward  Int // Experiência ganha\n\n  // Tempo\n  growthTime Int // Tempo em segundos\n\n  // Requisito\n  minLevel Int @default(1)\n\n  plots Plot[] // Relação com os terrenos\n\n  @@map(\"crops\")\n}\n\nmodel ActivityLog {\n  id          String   @id @default(cuid())\n  userId      String\n  action      String // 'plant', 'harvest', 'unlock_plot', 'level_up'\n  description String // \"Lucas plantou Cenoura no Plot 3\"\n  metadata    Json? // Dados adicionais: { cropSlug: \"carrot\", plotIndex: 3, coins: 50 }\n  createdAt   DateTime @default(now())\n\n  @@index([userId, createdAt])\n  @@index([createdAt])\n  @@map(\"activity_logs\")\n}\n",
-  "inlineSchemaHash": "7e11fa875ac1c0908875ed80ef5964cd05cc03512bc75fae072bb6525853c030",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id        String   @id @default(cuid())\n  username  String   @unique\n  password  String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  // Relations\n  profile Profile?\n\n  @@map(\"users\")\n}\n\nmodel Profile {\n  id         String   @id @default(cuid())\n  userId     String   @unique\n  avatar     String?\n  level      Int      @default(1)\n  experience Int      @default(0)\n  coins      Int      @default(100)\n  farmName   String?\n  createdAt  DateTime @default(now())\n\n  // Relations\n  user      User            @relation(fields: [userId], references: [id], onDelete: Cascade)\n  plots     Plot[]\n  inventory InventoryItem[]\n\n  @@map(\"profiles\")\n}\n\nmodel Plot {\n  id         String    @id @default(cuid())\n  profileId  String\n  index      Int // Posição no grid (0, 1, 2...)\n  cropType   String? // 'wheat_seed', 'carrot_seed', etc.\n  plantedAt  DateTime?\n  isUnlocked Boolean   @default(false)\n\n  profile Profile @relation(fields: [profileId], references: [id])\n  crop    Item?   @relation(\"PlotToCrop\", fields: [cropType], references: [slug])\n\n  @@unique([profileId, index]) // Um jogador não pode ter dois terrenos na mesma posição\n  @@map(\"plots\")\n}\n\nmodel Item {\n  id          String  @id @default(cuid())\n  slug        String  @unique // ex: 'wheat_seed', 'wheat', 'fertilizer_speed'\n  name        String // ex: \"Semente de Trigo\", \"Trigo\"\n  description String?\n  type        String // 'SEED', 'CROP', 'FERTILIZER', 'TOOL'\n\n  // Economia\n  buyPrice  Int @default(0) // Custo para comprar na loja\n  sellPrice Int @default(0) // Valor de venda\n  minLevel  Int @default(1) // Nível necessário para comprar/usar\n\n  // Atributos específicos para cultivo (quando type == 'SEED')\n  growthTime    Int? // Tempo em segundos\n  xpReward      Int? // XP concedido ao colher\n  yieldItemSlug String? // Slug do fruto que essa semente gera (ex: 'wheat')\n\n  inventoryItems InventoryItem[]\n  plots          Plot[]          @relation(\"PlotToCrop\")\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@map(\"items\")\n}\n\nmodel ActivityLog {\n  id          String   @id @default(cuid())\n  userId      String\n  action      String // 'plant', 'harvest', 'unlock_plot', 'level_up'\n  description String // \"Lucas plantou Cenoura no Plot 3\"\n  metadata    Json? // Dados adicionais: { cropSlug: \"carrot\", plotIndex: 3, coins: 50 }\n  createdAt   DateTime @default(now())\n\n  @@index([userId, createdAt])\n  @@index([createdAt])\n  @@map(\"activity_logs\")\n}\n\nmodel InventoryItem {\n  id        String   @id @default(cuid())\n  profileId String\n  itemSlug  String\n  quantity  Int      @default(0)\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)\n  item    Item    @relation(fields: [itemSlug], references: [slug], onDelete: Cascade)\n\n  @@unique([profileId, itemSlug])\n  @@index([profileId])\n  @@map(\"inventory_items\")\n}\n",
+  "inlineSchemaHash": "7ea45d0202b460bbe3a6bcea6183f8d1e38cb56004d1a2bad295fdce529a06e2",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"username\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"profile\",\"kind\":\"object\",\"type\":\"Profile\",\"relationName\":\"ProfileToUser\"}],\"dbName\":\"users\"},\"Profile\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"avatar\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"level\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"experience\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"coins\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"farmName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"ProfileToUser\"},{\"name\":\"plots\",\"kind\":\"object\",\"type\":\"Plot\",\"relationName\":\"PlotToProfile\"}],\"dbName\":\"profiles\"},\"Plot\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"profileId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"index\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"cropType\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"plantedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"isUnlocked\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"profile\",\"kind\":\"object\",\"type\":\"Profile\",\"relationName\":\"PlotToProfile\"},{\"name\":\"crop\",\"kind\":\"object\",\"type\":\"Crop\",\"relationName\":\"CropToPlot\"}],\"dbName\":\"plots\"},\"Crop\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"slug\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"price\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"sellPrice\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"xpReward\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"growthTime\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"minLevel\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"plots\",\"kind\":\"object\",\"type\":\"Plot\",\"relationName\":\"CropToPlot\"}],\"dbName\":\"crops\"},\"ActivityLog\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"action\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"metadata\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":\"activity_logs\"}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"username\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"profile\",\"kind\":\"object\",\"type\":\"Profile\",\"relationName\":\"ProfileToUser\"}],\"dbName\":\"users\"},\"Profile\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"avatar\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"level\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"experience\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"coins\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"farmName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"ProfileToUser\"},{\"name\":\"plots\",\"kind\":\"object\",\"type\":\"Plot\",\"relationName\":\"PlotToProfile\"},{\"name\":\"inventory\",\"kind\":\"object\",\"type\":\"InventoryItem\",\"relationName\":\"InventoryItemToProfile\"}],\"dbName\":\"profiles\"},\"Plot\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"profileId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"index\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"cropType\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"plantedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"isUnlocked\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"profile\",\"kind\":\"object\",\"type\":\"Profile\",\"relationName\":\"PlotToProfile\"},{\"name\":\"crop\",\"kind\":\"object\",\"type\":\"Item\",\"relationName\":\"PlotToCrop\"}],\"dbName\":\"plots\"},\"Item\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"slug\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"buyPrice\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"sellPrice\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"minLevel\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"growthTime\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"xpReward\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"yieldItemSlug\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"inventoryItems\",\"kind\":\"object\",\"type\":\"InventoryItem\",\"relationName\":\"InventoryItemToItem\"},{\"name\":\"plots\",\"kind\":\"object\",\"type\":\"Plot\",\"relationName\":\"PlotToCrop\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":\"items\"},\"ActivityLog\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"action\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"metadata\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":\"activity_logs\"},\"InventoryItem\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"profileId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"itemSlug\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"quantity\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"profile\",\"kind\":\"object\",\"type\":\"Profile\",\"relationName\":\"InventoryItemToProfile\"},{\"name\":\"item\",\"kind\":\"object\",\"type\":\"Item\",\"relationName\":\"InventoryItemToItem\"}],\"dbName\":\"inventory_items\"}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),

@@ -106,6 +106,15 @@ export class AuthService {
         data: plots,
       });
 
+      // Presente de boas-vindas: 5 sementes de trigo no inventário
+      await tx.inventoryItem.create({
+        data: {
+          profileId: profile.id,
+          itemSlug: 'wheat_seed',
+          quantity: 5,
+        },
+      });
+
       return newUser;
     });
 

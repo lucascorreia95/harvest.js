@@ -5,9 +5,10 @@ import { PrismaModule } from '../prisma/prisma.module';
 import { UsersModule } from '../users/users.module';
 import { ExperienceModule } from '../experience/experience.module';
 import { ActivityModule } from '../activity/activity.module';
+import { InventoryModule } from '../inventory/inventory.module';
 
 @Module({
-  imports: [PrismaModule, UsersModule, ExperienceModule, ActivityModule],
+  imports: [PrismaModule, UsersModule, ExperienceModule, ActivityModule, InventoryModule],
   controllers: [FarmController],
   providers: [FarmService],
   exports: [FarmService],

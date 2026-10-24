@@ -149,15 +149,20 @@ exports.Prisma.PlotScalarFieldEnum = {
   isUnlocked: 'isUnlocked'
 };
 
-exports.Prisma.CropScalarFieldEnum = {
+exports.Prisma.ItemScalarFieldEnum = {
   id: 'id',
-  name: 'name',
   slug: 'slug',
-  price: 'price',
+  name: 'name',
+  description: 'description',
+  type: 'type',
+  buyPrice: 'buyPrice',
   sellPrice: 'sellPrice',
-  xpReward: 'xpReward',
+  minLevel: 'minLevel',
   growthTime: 'growthTime',
-  minLevel: 'minLevel'
+  xpReward: 'xpReward',
+  yieldItemSlug: 'yieldItemSlug',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.ActivityLogScalarFieldEnum = {
@@ -167,6 +172,15 @@ exports.Prisma.ActivityLogScalarFieldEnum = {
   description: 'description',
   metadata: 'metadata',
   createdAt: 'createdAt'
+};
+
+exports.Prisma.InventoryItemScalarFieldEnum = {
+  id: 'id',
+  profileId: 'profileId',
+  itemSlug: 'itemSlug',
+  quantity: 'quantity',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -200,8 +214,9 @@ exports.Prisma.ModelName = {
   User: 'User',
   Profile: 'Profile',
   Plot: 'Plot',
-  Crop: 'Crop',
-  ActivityLog: 'ActivityLog'
+  Item: 'Item',
+  ActivityLog: 'ActivityLog',
+  InventoryItem: 'InventoryItem'
 };
 
 /**

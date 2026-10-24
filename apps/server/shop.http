@@ -1,0 +1,56 @@
+### Shop API Tests
+
+# 1. Login para obter token
+# @name login
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "password": "123456"
+}
+
+###
+
+@token = {{ login.response.body.access_token }}
+
+###
+
+# 2. Obter itens da loja (com filtro opcional por tipo)
+# Query param opcional: ?type=SEED|FERTILIZER|TOOL|ANIMAL
+# Retorna: id, slug, name, description, type, price, sellPrice, minLevel, isUnlocked, canAfford
+# Para sementes: growthTime, xpReward, yieldItemSlug, profit, coinsPerMinute
+GET http://localhost:3000/shop
+Authorization: Bearer {{token}}
+
+###
+
+# 3. Obter apenas sementes da loja
+# Retorna: id, slug, name, description, type, price, sellPrice, minLevel, isUnlocked, canAfford
+# Inclui: growthTime, xpReward, yieldItemSlug, profit, coinsPerMinute
+GET http://localhost:3000/shop/seeds
+Authorization: Bearer {{token}}
+
+###
+
+# 4. Obter catálogo geral da loja (estruturado por categorias)
+# Retorna: serverTime, totalItems, availableTypes, categories (record por tipo)
+GET http://localhost:3000/shop/catalog
+Authorization: Bearer {{token}}
+
+###
+
+# 5. Comprar item da loja
+# @name buyItem
+POST http://localhost:3000/shop/buy
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "itemSlug": "wheat_seed",
+  "quantity": 1
+}
+
+###
+
+

@@ -29,15 +29,20 @@ export type Profile = $Result.DefaultSelection<Prisma.$ProfilePayload>
  */
 export type Plot = $Result.DefaultSelection<Prisma.$PlotPayload>
 /**
- * Model Crop
+ * Model Item
  * 
  */
-export type Crop = $Result.DefaultSelection<Prisma.$CropPayload>
+export type Item = $Result.DefaultSelection<Prisma.$ItemPayload>
 /**
  * Model ActivityLog
  * 
  */
 export type ActivityLog = $Result.DefaultSelection<Prisma.$ActivityLogPayload>
+/**
+ * Model InventoryItem
+ * 
+ */
+export type InventoryItem = $Result.DefaultSelection<Prisma.$InventoryItemPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -188,14 +193,14 @@ export class PrismaClient<
   get plot(): Prisma.PlotDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.crop`: Exposes CRUD operations for the **Crop** model.
+   * `prisma.item`: Exposes CRUD operations for the **Item** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Crops
-    * const crops = await prisma.crop.findMany()
+    * // Fetch zero or more Items
+    * const items = await prisma.item.findMany()
     * ```
     */
-  get crop(): Prisma.CropDelegate<ExtArgs, ClientOptions>;
+  get item(): Prisma.ItemDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.activityLog`: Exposes CRUD operations for the **ActivityLog** model.
@@ -206,6 +211,16 @@ export class PrismaClient<
     * ```
     */
   get activityLog(): Prisma.ActivityLogDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.inventoryItem`: Exposes CRUD operations for the **InventoryItem** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more InventoryItems
+    * const inventoryItems = await prisma.inventoryItem.findMany()
+    * ```
+    */
+  get inventoryItem(): Prisma.InventoryItemDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -650,8 +665,9 @@ export namespace Prisma {
     User: 'User',
     Profile: 'Profile',
     Plot: 'Plot',
-    Crop: 'Crop',
-    ActivityLog: 'ActivityLog'
+    Item: 'Item',
+    ActivityLog: 'ActivityLog',
+    InventoryItem: 'InventoryItem'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -670,7 +686,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "profile" | "plot" | "crop" | "activityLog"
+      modelProps: "user" | "profile" | "plot" | "item" | "activityLog" | "inventoryItem"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -896,77 +912,77 @@ export namespace Prisma {
           }
         }
       }
-      Crop: {
-        payload: Prisma.$CropPayload<ExtArgs>
-        fields: Prisma.CropFieldRefs
+      Item: {
+        payload: Prisma.$ItemPayload<ExtArgs>
+        fields: Prisma.ItemFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.CropFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CropPayload> | null
+            args: Prisma.ItemFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.CropFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CropPayload>
+            args: Prisma.ItemFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload>
           }
           findFirst: {
-            args: Prisma.CropFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CropPayload> | null
+            args: Prisma.ItemFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.CropFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CropPayload>
+            args: Prisma.ItemFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload>
           }
           findMany: {
-            args: Prisma.CropFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CropPayload>[]
+            args: Prisma.ItemFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload>[]
           }
           create: {
-            args: Prisma.CropCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CropPayload>
+            args: Prisma.ItemCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload>
           }
           createMany: {
-            args: Prisma.CropCreateManyArgs<ExtArgs>
+            args: Prisma.ItemCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.CropCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CropPayload>[]
+            args: Prisma.ItemCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload>[]
           }
           delete: {
-            args: Prisma.CropDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CropPayload>
+            args: Prisma.ItemDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload>
           }
           update: {
-            args: Prisma.CropUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CropPayload>
+            args: Prisma.ItemUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload>
           }
           deleteMany: {
-            args: Prisma.CropDeleteManyArgs<ExtArgs>
+            args: Prisma.ItemDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.CropUpdateManyArgs<ExtArgs>
+            args: Prisma.ItemUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.CropUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CropPayload>[]
+            args: Prisma.ItemUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload>[]
           }
           upsert: {
-            args: Prisma.CropUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CropPayload>
+            args: Prisma.ItemUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload>
           }
           aggregate: {
-            args: Prisma.CropAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateCrop>
+            args: Prisma.ItemAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateItem>
           }
           groupBy: {
-            args: Prisma.CropGroupByArgs<ExtArgs>
-            result: $Utils.Optional<CropGroupByOutputType>[]
+            args: Prisma.ItemGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ItemGroupByOutputType>[]
           }
           count: {
-            args: Prisma.CropCountArgs<ExtArgs>
-            result: $Utils.Optional<CropCountAggregateOutputType> | number
+            args: Prisma.ItemCountArgs<ExtArgs>
+            result: $Utils.Optional<ItemCountAggregateOutputType> | number
           }
         }
       }
@@ -1041,6 +1057,80 @@ export namespace Prisma {
           count: {
             args: Prisma.ActivityLogCountArgs<ExtArgs>
             result: $Utils.Optional<ActivityLogCountAggregateOutputType> | number
+          }
+        }
+      }
+      InventoryItem: {
+        payload: Prisma.$InventoryItemPayload<ExtArgs>
+        fields: Prisma.InventoryItemFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.InventoryItemFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InventoryItemPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.InventoryItemFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InventoryItemPayload>
+          }
+          findFirst: {
+            args: Prisma.InventoryItemFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InventoryItemPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.InventoryItemFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InventoryItemPayload>
+          }
+          findMany: {
+            args: Prisma.InventoryItemFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InventoryItemPayload>[]
+          }
+          create: {
+            args: Prisma.InventoryItemCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InventoryItemPayload>
+          }
+          createMany: {
+            args: Prisma.InventoryItemCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.InventoryItemCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InventoryItemPayload>[]
+          }
+          delete: {
+            args: Prisma.InventoryItemDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InventoryItemPayload>
+          }
+          update: {
+            args: Prisma.InventoryItemUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InventoryItemPayload>
+          }
+          deleteMany: {
+            args: Prisma.InventoryItemDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.InventoryItemUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.InventoryItemUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InventoryItemPayload>[]
+          }
+          upsert: {
+            args: Prisma.InventoryItemUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InventoryItemPayload>
+          }
+          aggregate: {
+            args: Prisma.InventoryItemAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateInventoryItem>
+          }
+          groupBy: {
+            args: Prisma.InventoryItemGroupByArgs<ExtArgs>
+            result: $Utils.Optional<InventoryItemGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.InventoryItemCountArgs<ExtArgs>
+            result: $Utils.Optional<InventoryItemCountAggregateOutputType> | number
           }
         }
       }
@@ -1143,8 +1233,9 @@ export namespace Prisma {
     user?: UserOmit
     profile?: ProfileOmit
     plot?: PlotOmit
-    crop?: CropOmit
+    item?: ItemOmit
     activityLog?: ActivityLogOmit
+    inventoryItem?: InventoryItemOmit
   }
 
   /* Types for Logging */
@@ -1226,10 +1317,12 @@ export namespace Prisma {
 
   export type ProfileCountOutputType = {
     plots: number
+    inventory: number
   }
 
   export type ProfileCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     plots?: boolean | ProfileCountOutputTypeCountPlotsArgs
+    inventory?: boolean | ProfileCountOutputTypeCountInventoryArgs
   }
 
   // Custom InputTypes
@@ -1250,34 +1343,50 @@ export namespace Prisma {
     where?: PlotWhereInput
   }
 
+  /**
+   * ProfileCountOutputType without action
+   */
+  export type ProfileCountOutputTypeCountInventoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InventoryItemWhereInput
+  }
+
 
   /**
-   * Count Type CropCountOutputType
+   * Count Type ItemCountOutputType
    */
 
-  export type CropCountOutputType = {
+  export type ItemCountOutputType = {
+    inventoryItems: number
     plots: number
   }
 
-  export type CropCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    plots?: boolean | CropCountOutputTypeCountPlotsArgs
+  export type ItemCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    inventoryItems?: boolean | ItemCountOutputTypeCountInventoryItemsArgs
+    plots?: boolean | ItemCountOutputTypeCountPlotsArgs
   }
 
   // Custom InputTypes
   /**
-   * CropCountOutputType without action
+   * ItemCountOutputType without action
    */
-  export type CropCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ItemCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the CropCountOutputType
+     * Select specific fields to fetch from the ItemCountOutputType
      */
-    select?: CropCountOutputTypeSelect<ExtArgs> | null
+    select?: ItemCountOutputTypeSelect<ExtArgs> | null
   }
 
   /**
-   * CropCountOutputType without action
+   * ItemCountOutputType without action
    */
-  export type CropCountOutputTypeCountPlotsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ItemCountOutputTypeCountInventoryItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InventoryItemWhereInput
+  }
+
+  /**
+   * ItemCountOutputType without action
+   */
+  export type ItemCountOutputTypeCountPlotsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PlotWhereInput
   }
 
@@ -2581,6 +2690,7 @@ export namespace Prisma {
     createdAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     plots?: boolean | Profile$plotsArgs<ExtArgs>
+    inventory?: boolean | Profile$inventoryArgs<ExtArgs>
     _count?: boolean | ProfileCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["profile"]>
 
@@ -2623,6 +2733,7 @@ export namespace Prisma {
   export type ProfileInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     plots?: boolean | Profile$plotsArgs<ExtArgs>
+    inventory?: boolean | Profile$inventoryArgs<ExtArgs>
     _count?: boolean | ProfileCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ProfileIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2637,6 +2748,7 @@ export namespace Prisma {
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
       plots: Prisma.$PlotPayload<ExtArgs>[]
+      inventory: Prisma.$InventoryItemPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3043,6 +3155,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     plots<T extends Profile$plotsArgs<ExtArgs> = {}>(args?: Subset<T, Profile$plotsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    inventory<T extends Profile$inventoryArgs<ExtArgs> = {}>(args?: Subset<T, Profile$inventoryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InventoryItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3500,6 +3613,30 @@ export namespace Prisma {
   }
 
   /**
+   * Profile.inventory
+   */
+  export type Profile$inventoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InventoryItem
+     */
+    select?: InventoryItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InventoryItem
+     */
+    omit?: InventoryItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InventoryItemInclude<ExtArgs> | null
+    where?: InventoryItemWhereInput
+    orderBy?: InventoryItemOrderByWithRelationInput | InventoryItemOrderByWithRelationInput[]
+    cursor?: InventoryItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InventoryItemScalarFieldEnum | InventoryItemScalarFieldEnum[]
+  }
+
+  /**
    * Profile without action
    */
   export type ProfileDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3777,7 +3914,7 @@ export namespace Prisma {
     name: "Plot"
     objects: {
       profile: Prisma.$ProfilePayload<ExtArgs>
-      crop: Prisma.$CropPayload<ExtArgs> | null
+      crop: Prisma.$ItemPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4181,7 +4318,7 @@ export namespace Prisma {
   export interface Prisma__PlotClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     profile<T extends ProfileDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProfileDefaultArgs<ExtArgs>>): Prisma__ProfileClient<$Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    crop<T extends Plot$cropArgs<ExtArgs> = {}>(args?: Subset<T, Plot$cropArgs<ExtArgs>>): Prisma__CropClient<$Result.GetResult<Prisma.$CropPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    crop<T extends Plot$cropArgs<ExtArgs> = {}>(args?: Subset<T, Plot$cropArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4617,18 +4754,18 @@ export namespace Prisma {
    */
   export type Plot$cropArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Crop
+     * Select specific fields to fetch from the Item
      */
-    select?: CropSelect<ExtArgs> | null
+    select?: ItemSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Crop
+     * Omit specific fields from the Item
      */
-    omit?: CropOmit<ExtArgs> | null
+    omit?: ItemOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CropInclude<ExtArgs> | null
-    where?: CropWhereInput
+    include?: ItemInclude<ExtArgs> | null
+    where?: ItemWhereInput
   }
 
   /**
@@ -4651,432 +4788,495 @@ export namespace Prisma {
 
 
   /**
-   * Model Crop
+   * Model Item
    */
 
-  export type AggregateCrop = {
-    _count: CropCountAggregateOutputType | null
-    _avg: CropAvgAggregateOutputType | null
-    _sum: CropSumAggregateOutputType | null
-    _min: CropMinAggregateOutputType | null
-    _max: CropMaxAggregateOutputType | null
+  export type AggregateItem = {
+    _count: ItemCountAggregateOutputType | null
+    _avg: ItemAvgAggregateOutputType | null
+    _sum: ItemSumAggregateOutputType | null
+    _min: ItemMinAggregateOutputType | null
+    _max: ItemMaxAggregateOutputType | null
   }
 
-  export type CropAvgAggregateOutputType = {
-    price: number | null
+  export type ItemAvgAggregateOutputType = {
+    buyPrice: number | null
     sellPrice: number | null
-    xpReward: number | null
-    growthTime: number | null
     minLevel: number | null
+    growthTime: number | null
+    xpReward: number | null
   }
 
-  export type CropSumAggregateOutputType = {
-    price: number | null
+  export type ItemSumAggregateOutputType = {
+    buyPrice: number | null
     sellPrice: number | null
-    xpReward: number | null
-    growthTime: number | null
     minLevel: number | null
+    growthTime: number | null
+    xpReward: number | null
   }
 
-  export type CropMinAggregateOutputType = {
+  export type ItemMinAggregateOutputType = {
     id: string | null
-    name: string | null
     slug: string | null
-    price: number | null
+    name: string | null
+    description: string | null
+    type: string | null
+    buyPrice: number | null
     sellPrice: number | null
-    xpReward: number | null
-    growthTime: number | null
     minLevel: number | null
+    growthTime: number | null
+    xpReward: number | null
+    yieldItemSlug: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
-  export type CropMaxAggregateOutputType = {
+  export type ItemMaxAggregateOutputType = {
     id: string | null
-    name: string | null
     slug: string | null
-    price: number | null
+    name: string | null
+    description: string | null
+    type: string | null
+    buyPrice: number | null
     sellPrice: number | null
-    xpReward: number | null
-    growthTime: number | null
     minLevel: number | null
+    growthTime: number | null
+    xpReward: number | null
+    yieldItemSlug: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
-  export type CropCountAggregateOutputType = {
+  export type ItemCountAggregateOutputType = {
     id: number
-    name: number
     slug: number
-    price: number
+    name: number
+    description: number
+    type: number
+    buyPrice: number
     sellPrice: number
-    xpReward: number
-    growthTime: number
     minLevel: number
+    growthTime: number
+    xpReward: number
+    yieldItemSlug: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
 
-  export type CropAvgAggregateInputType = {
-    price?: true
+  export type ItemAvgAggregateInputType = {
+    buyPrice?: true
     sellPrice?: true
-    xpReward?: true
-    growthTime?: true
     minLevel?: true
+    growthTime?: true
+    xpReward?: true
   }
 
-  export type CropSumAggregateInputType = {
-    price?: true
+  export type ItemSumAggregateInputType = {
+    buyPrice?: true
     sellPrice?: true
-    xpReward?: true
-    growthTime?: true
     minLevel?: true
+    growthTime?: true
+    xpReward?: true
   }
 
-  export type CropMinAggregateInputType = {
+  export type ItemMinAggregateInputType = {
     id?: true
-    name?: true
     slug?: true
-    price?: true
+    name?: true
+    description?: true
+    type?: true
+    buyPrice?: true
     sellPrice?: true
-    xpReward?: true
-    growthTime?: true
     minLevel?: true
+    growthTime?: true
+    xpReward?: true
+    yieldItemSlug?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
-  export type CropMaxAggregateInputType = {
+  export type ItemMaxAggregateInputType = {
     id?: true
-    name?: true
     slug?: true
-    price?: true
+    name?: true
+    description?: true
+    type?: true
+    buyPrice?: true
     sellPrice?: true
-    xpReward?: true
-    growthTime?: true
     minLevel?: true
+    growthTime?: true
+    xpReward?: true
+    yieldItemSlug?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
-  export type CropCountAggregateInputType = {
+  export type ItemCountAggregateInputType = {
     id?: true
-    name?: true
     slug?: true
-    price?: true
+    name?: true
+    description?: true
+    type?: true
+    buyPrice?: true
     sellPrice?: true
-    xpReward?: true
-    growthTime?: true
     minLevel?: true
+    growthTime?: true
+    xpReward?: true
+    yieldItemSlug?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
-  export type CropAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Crop to aggregate.
+     * Filter which Item to aggregate.
      */
-    where?: CropWhereInput
+    where?: ItemWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Crops to fetch.
+     * Determine the order of Items to fetch.
      */
-    orderBy?: CropOrderByWithRelationInput | CropOrderByWithRelationInput[]
+    orderBy?: ItemOrderByWithRelationInput | ItemOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: CropWhereUniqueInput
+    cursor?: ItemWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Crops from the position of the cursor.
+     * Take `±n` Items from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Crops.
+     * Skip the first `n` Items.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned Crops
+     * Count returned Items
     **/
-    _count?: true | CropCountAggregateInputType
+    _count?: true | ItemCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: CropAvgAggregateInputType
+    _avg?: ItemAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: CropSumAggregateInputType
+    _sum?: ItemSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: CropMinAggregateInputType
+    _min?: ItemMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: CropMaxAggregateInputType
+    _max?: ItemMaxAggregateInputType
   }
 
-  export type GetCropAggregateType<T extends CropAggregateArgs> = {
-        [P in keyof T & keyof AggregateCrop]: P extends '_count' | 'count'
+  export type GetItemAggregateType<T extends ItemAggregateArgs> = {
+        [P in keyof T & keyof AggregateItem]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateCrop[P]>
-      : GetScalarType<T[P], AggregateCrop[P]>
+        : GetScalarType<T[P], AggregateItem[P]>
+      : GetScalarType<T[P], AggregateItem[P]>
   }
 
 
 
 
-  export type CropGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: CropWhereInput
-    orderBy?: CropOrderByWithAggregationInput | CropOrderByWithAggregationInput[]
-    by: CropScalarFieldEnum[] | CropScalarFieldEnum
-    having?: CropScalarWhereWithAggregatesInput
+  export type ItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ItemWhereInput
+    orderBy?: ItemOrderByWithAggregationInput | ItemOrderByWithAggregationInput[]
+    by: ItemScalarFieldEnum[] | ItemScalarFieldEnum
+    having?: ItemScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: CropCountAggregateInputType | true
-    _avg?: CropAvgAggregateInputType
-    _sum?: CropSumAggregateInputType
-    _min?: CropMinAggregateInputType
-    _max?: CropMaxAggregateInputType
+    _count?: ItemCountAggregateInputType | true
+    _avg?: ItemAvgAggregateInputType
+    _sum?: ItemSumAggregateInputType
+    _min?: ItemMinAggregateInputType
+    _max?: ItemMaxAggregateInputType
   }
 
-  export type CropGroupByOutputType = {
+  export type ItemGroupByOutputType = {
     id: string
-    name: string
     slug: string
-    price: number
+    name: string
+    description: string | null
+    type: string
+    buyPrice: number
     sellPrice: number
-    xpReward: number
-    growthTime: number
     minLevel: number
-    _count: CropCountAggregateOutputType | null
-    _avg: CropAvgAggregateOutputType | null
-    _sum: CropSumAggregateOutputType | null
-    _min: CropMinAggregateOutputType | null
-    _max: CropMaxAggregateOutputType | null
+    growthTime: number | null
+    xpReward: number | null
+    yieldItemSlug: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: ItemCountAggregateOutputType | null
+    _avg: ItemAvgAggregateOutputType | null
+    _sum: ItemSumAggregateOutputType | null
+    _min: ItemMinAggregateOutputType | null
+    _max: ItemMaxAggregateOutputType | null
   }
 
-  type GetCropGroupByPayload<T extends CropGroupByArgs> = Prisma.PrismaPromise<
+  type GetItemGroupByPayload<T extends ItemGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<CropGroupByOutputType, T['by']> &
+      PickEnumerable<ItemGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof CropGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof ItemGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], CropGroupByOutputType[P]>
-            : GetScalarType<T[P], CropGroupByOutputType[P]>
+              : GetScalarType<T[P], ItemGroupByOutputType[P]>
+            : GetScalarType<T[P], ItemGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type CropSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
     slug?: boolean
-    price?: boolean
+    name?: boolean
+    description?: boolean
+    type?: boolean
+    buyPrice?: boolean
     sellPrice?: boolean
-    xpReward?: boolean
-    growthTime?: boolean
     minLevel?: boolean
-    plots?: boolean | Crop$plotsArgs<ExtArgs>
-    _count?: boolean | CropCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["crop"]>
+    growthTime?: boolean
+    xpReward?: boolean
+    yieldItemSlug?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    inventoryItems?: boolean | Item$inventoryItemsArgs<ExtArgs>
+    plots?: boolean | Item$plotsArgs<ExtArgs>
+    _count?: boolean | ItemCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["item"]>
 
-  export type CropSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ItemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
     slug?: boolean
-    price?: boolean
+    name?: boolean
+    description?: boolean
+    type?: boolean
+    buyPrice?: boolean
     sellPrice?: boolean
-    xpReward?: boolean
-    growthTime?: boolean
     minLevel?: boolean
-  }, ExtArgs["result"]["crop"]>
+    growthTime?: boolean
+    xpReward?: boolean
+    yieldItemSlug?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["item"]>
 
-  export type CropSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ItemSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
     slug?: boolean
-    price?: boolean
+    name?: boolean
+    description?: boolean
+    type?: boolean
+    buyPrice?: boolean
     sellPrice?: boolean
-    xpReward?: boolean
-    growthTime?: boolean
     minLevel?: boolean
-  }, ExtArgs["result"]["crop"]>
+    growthTime?: boolean
+    xpReward?: boolean
+    yieldItemSlug?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["item"]>
 
-  export type CropSelectScalar = {
+  export type ItemSelectScalar = {
     id?: boolean
-    name?: boolean
     slug?: boolean
-    price?: boolean
+    name?: boolean
+    description?: boolean
+    type?: boolean
+    buyPrice?: boolean
     sellPrice?: boolean
-    xpReward?: boolean
-    growthTime?: boolean
     minLevel?: boolean
+    growthTime?: boolean
+    xpReward?: boolean
+    yieldItemSlug?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type CropOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "price" | "sellPrice" | "xpReward" | "growthTime" | "minLevel", ExtArgs["result"]["crop"]>
-  export type CropInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    plots?: boolean | Crop$plotsArgs<ExtArgs>
-    _count?: boolean | CropCountOutputTypeDefaultArgs<ExtArgs>
+  export type ItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "name" | "description" | "type" | "buyPrice" | "sellPrice" | "minLevel" | "growthTime" | "xpReward" | "yieldItemSlug" | "createdAt" | "updatedAt", ExtArgs["result"]["item"]>
+  export type ItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    inventoryItems?: boolean | Item$inventoryItemsArgs<ExtArgs>
+    plots?: boolean | Item$plotsArgs<ExtArgs>
+    _count?: boolean | ItemCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type CropIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type CropIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type ItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type ItemIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
-  export type $CropPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Crop"
+  export type $ItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Item"
     objects: {
+      inventoryItems: Prisma.$InventoryItemPayload<ExtArgs>[]
       plots: Prisma.$PlotPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      name: string
       slug: string
-      price: number
+      name: string
+      description: string | null
+      type: string
+      buyPrice: number
       sellPrice: number
-      xpReward: number
-      growthTime: number
       minLevel: number
-    }, ExtArgs["result"]["crop"]>
+      growthTime: number | null
+      xpReward: number | null
+      yieldItemSlug: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["item"]>
     composites: {}
   }
 
-  type CropGetPayload<S extends boolean | null | undefined | CropDefaultArgs> = $Result.GetResult<Prisma.$CropPayload, S>
+  type ItemGetPayload<S extends boolean | null | undefined | ItemDefaultArgs> = $Result.GetResult<Prisma.$ItemPayload, S>
 
-  type CropCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<CropFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: CropCountAggregateInputType | true
+  type ItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ItemFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ItemCountAggregateInputType | true
     }
 
-  export interface CropDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Crop'], meta: { name: 'Crop' } }
+  export interface ItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Item'], meta: { name: 'Item' } }
     /**
-     * Find zero or one Crop that matches the filter.
-     * @param {CropFindUniqueArgs} args - Arguments to find a Crop
+     * Find zero or one Item that matches the filter.
+     * @param {ItemFindUniqueArgs} args - Arguments to find a Item
      * @example
-     * // Get one Crop
-     * const crop = await prisma.crop.findUnique({
+     * // Get one Item
+     * const item = await prisma.item.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends CropFindUniqueArgs>(args: SelectSubset<T, CropFindUniqueArgs<ExtArgs>>): Prisma__CropClient<$Result.GetResult<Prisma.$CropPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends ItemFindUniqueArgs>(args: SelectSubset<T, ItemFindUniqueArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one Crop that matches the filter or throw an error with `error.code='P2025'`
+     * Find one Item that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {CropFindUniqueOrThrowArgs} args - Arguments to find a Crop
+     * @param {ItemFindUniqueOrThrowArgs} args - Arguments to find a Item
      * @example
-     * // Get one Crop
-     * const crop = await prisma.crop.findUniqueOrThrow({
+     * // Get one Item
+     * const item = await prisma.item.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends CropFindUniqueOrThrowArgs>(args: SelectSubset<T, CropFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CropClient<$Result.GetResult<Prisma.$CropPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends ItemFindUniqueOrThrowArgs>(args: SelectSubset<T, ItemFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Crop that matches the filter.
+     * Find the first Item that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {CropFindFirstArgs} args - Arguments to find a Crop
+     * @param {ItemFindFirstArgs} args - Arguments to find a Item
      * @example
-     * // Get one Crop
-     * const crop = await prisma.crop.findFirst({
+     * // Get one Item
+     * const item = await prisma.item.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends CropFindFirstArgs>(args?: SelectSubset<T, CropFindFirstArgs<ExtArgs>>): Prisma__CropClient<$Result.GetResult<Prisma.$CropPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends ItemFindFirstArgs>(args?: SelectSubset<T, ItemFindFirstArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Crop that matches the filter or
+     * Find the first Item that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {CropFindFirstOrThrowArgs} args - Arguments to find a Crop
+     * @param {ItemFindFirstOrThrowArgs} args - Arguments to find a Item
      * @example
-     * // Get one Crop
-     * const crop = await prisma.crop.findFirstOrThrow({
+     * // Get one Item
+     * const item = await prisma.item.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends CropFindFirstOrThrowArgs>(args?: SelectSubset<T, CropFindFirstOrThrowArgs<ExtArgs>>): Prisma__CropClient<$Result.GetResult<Prisma.$CropPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends ItemFindFirstOrThrowArgs>(args?: SelectSubset<T, ItemFindFirstOrThrowArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more Crops that matches the filter.
+     * Find zero or more Items that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {CropFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {ItemFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Crops
-     * const crops = await prisma.crop.findMany()
+     * // Get all Items
+     * const items = await prisma.item.findMany()
      * 
-     * // Get first 10 Crops
-     * const crops = await prisma.crop.findMany({ take: 10 })
+     * // Get first 10 Items
+     * const items = await prisma.item.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const cropWithIdOnly = await prisma.crop.findMany({ select: { id: true } })
+     * const itemWithIdOnly = await prisma.item.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends CropFindManyArgs>(args?: SelectSubset<T, CropFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CropPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends ItemFindManyArgs>(args?: SelectSubset<T, ItemFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a Crop.
-     * @param {CropCreateArgs} args - Arguments to create a Crop.
+     * Create a Item.
+     * @param {ItemCreateArgs} args - Arguments to create a Item.
      * @example
-     * // Create one Crop
-     * const Crop = await prisma.crop.create({
+     * // Create one Item
+     * const Item = await prisma.item.create({
      *   data: {
-     *     // ... data to create a Crop
+     *     // ... data to create a Item
      *   }
      * })
      * 
      */
-    create<T extends CropCreateArgs>(args: SelectSubset<T, CropCreateArgs<ExtArgs>>): Prisma__CropClient<$Result.GetResult<Prisma.$CropPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends ItemCreateArgs>(args: SelectSubset<T, ItemCreateArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many Crops.
-     * @param {CropCreateManyArgs} args - Arguments to create many Crops.
+     * Create many Items.
+     * @param {ItemCreateManyArgs} args - Arguments to create many Items.
      * @example
-     * // Create many Crops
-     * const crop = await prisma.crop.createMany({
+     * // Create many Items
+     * const item = await prisma.item.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends CropCreateManyArgs>(args?: SelectSubset<T, CropCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends ItemCreateManyArgs>(args?: SelectSubset<T, ItemCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many Crops and returns the data saved in the database.
-     * @param {CropCreateManyAndReturnArgs} args - Arguments to create many Crops.
+     * Create many Items and returns the data saved in the database.
+     * @param {ItemCreateManyAndReturnArgs} args - Arguments to create many Items.
      * @example
-     * // Create many Crops
-     * const crop = await prisma.crop.createManyAndReturn({
+     * // Create many Items
+     * const item = await prisma.item.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many Crops and only return the `id`
-     * const cropWithIdOnly = await prisma.crop.createManyAndReturn({
+     * // Create many Items and only return the `id`
+     * const itemWithIdOnly = await prisma.item.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -5086,28 +5286,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends CropCreateManyAndReturnArgs>(args?: SelectSubset<T, CropCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CropPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends ItemCreateManyAndReturnArgs>(args?: SelectSubset<T, ItemCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a Crop.
-     * @param {CropDeleteArgs} args - Arguments to delete one Crop.
+     * Delete a Item.
+     * @param {ItemDeleteArgs} args - Arguments to delete one Item.
      * @example
-     * // Delete one Crop
-     * const Crop = await prisma.crop.delete({
+     * // Delete one Item
+     * const Item = await prisma.item.delete({
      *   where: {
-     *     // ... filter to delete one Crop
+     *     // ... filter to delete one Item
      *   }
      * })
      * 
      */
-    delete<T extends CropDeleteArgs>(args: SelectSubset<T, CropDeleteArgs<ExtArgs>>): Prisma__CropClient<$Result.GetResult<Prisma.$CropPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends ItemDeleteArgs>(args: SelectSubset<T, ItemDeleteArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one Crop.
-     * @param {CropUpdateArgs} args - Arguments to update one Crop.
+     * Update one Item.
+     * @param {ItemUpdateArgs} args - Arguments to update one Item.
      * @example
-     * // Update one Crop
-     * const crop = await prisma.crop.update({
+     * // Update one Item
+     * const item = await prisma.item.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -5117,30 +5317,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends CropUpdateArgs>(args: SelectSubset<T, CropUpdateArgs<ExtArgs>>): Prisma__CropClient<$Result.GetResult<Prisma.$CropPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends ItemUpdateArgs>(args: SelectSubset<T, ItemUpdateArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more Crops.
-     * @param {CropDeleteManyArgs} args - Arguments to filter Crops to delete.
+     * Delete zero or more Items.
+     * @param {ItemDeleteManyArgs} args - Arguments to filter Items to delete.
      * @example
-     * // Delete a few Crops
-     * const { count } = await prisma.crop.deleteMany({
+     * // Delete a few Items
+     * const { count } = await prisma.item.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends CropDeleteManyArgs>(args?: SelectSubset<T, CropDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends ItemDeleteManyArgs>(args?: SelectSubset<T, ItemDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Crops.
+     * Update zero or more Items.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {CropUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {ItemUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Crops
-     * const crop = await prisma.crop.updateMany({
+     * // Update many Items
+     * const item = await prisma.item.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -5150,14 +5350,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends CropUpdateManyArgs>(args: SelectSubset<T, CropUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends ItemUpdateManyArgs>(args: SelectSubset<T, ItemUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Crops and returns the data updated in the database.
-     * @param {CropUpdateManyAndReturnArgs} args - Arguments to update many Crops.
+     * Update zero or more Items and returns the data updated in the database.
+     * @param {ItemUpdateManyAndReturnArgs} args - Arguments to update many Items.
      * @example
-     * // Update many Crops
-     * const crop = await prisma.crop.updateManyAndReturn({
+     * // Update many Items
+     * const item = await prisma.item.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -5166,8 +5366,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Crops and only return the `id`
-     * const cropWithIdOnly = await prisma.crop.updateManyAndReturn({
+     * // Update zero or more Items and only return the `id`
+     * const itemWithIdOnly = await prisma.item.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -5180,56 +5380,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends CropUpdateManyAndReturnArgs>(args: SelectSubset<T, CropUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CropPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends ItemUpdateManyAndReturnArgs>(args: SelectSubset<T, ItemUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one Crop.
-     * @param {CropUpsertArgs} args - Arguments to update or create a Crop.
+     * Create or update one Item.
+     * @param {ItemUpsertArgs} args - Arguments to update or create a Item.
      * @example
-     * // Update or create a Crop
-     * const crop = await prisma.crop.upsert({
+     * // Update or create a Item
+     * const item = await prisma.item.upsert({
      *   create: {
-     *     // ... data to create a Crop
+     *     // ... data to create a Item
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Crop we want to update
+     *     // ... the filter for the Item we want to update
      *   }
      * })
      */
-    upsert<T extends CropUpsertArgs>(args: SelectSubset<T, CropUpsertArgs<ExtArgs>>): Prisma__CropClient<$Result.GetResult<Prisma.$CropPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends ItemUpsertArgs>(args: SelectSubset<T, ItemUpsertArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of Crops.
+     * Count the number of Items.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {CropCountArgs} args - Arguments to filter Crops to count.
+     * @param {ItemCountArgs} args - Arguments to filter Items to count.
      * @example
-     * // Count the number of Crops
-     * const count = await prisma.crop.count({
+     * // Count the number of Items
+     * const count = await prisma.item.count({
      *   where: {
-     *     // ... the filter for the Crops we want to count
+     *     // ... the filter for the Items we want to count
      *   }
      * })
     **/
-    count<T extends CropCountArgs>(
-      args?: Subset<T, CropCountArgs>,
+    count<T extends ItemCountArgs>(
+      args?: Subset<T, ItemCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], CropCountAggregateOutputType>
+          : GetScalarType<T['select'], ItemCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Crop.
+     * Allows you to perform aggregations operations on a Item.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {CropAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {ItemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -5249,13 +5449,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends CropAggregateArgs>(args: Subset<T, CropAggregateArgs>): Prisma.PrismaPromise<GetCropAggregateType<T>>
+    aggregate<T extends ItemAggregateArgs>(args: Subset<T, ItemAggregateArgs>): Prisma.PrismaPromise<GetItemAggregateType<T>>
 
     /**
-     * Group by Crop.
+     * Group by Item.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {CropGroupByArgs} args - Group by arguments.
+     * @param {ItemGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -5270,14 +5470,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends CropGroupByArgs,
+      T extends ItemGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: CropGroupByArgs['orderBy'] }
-        : { orderBy?: CropGroupByArgs['orderBy'] },
+        ? { orderBy: ItemGroupByArgs['orderBy'] }
+        : { orderBy?: ItemGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -5326,22 +5526,23 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, CropGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCropGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, ItemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the Crop model
+   * Fields of the Item model
    */
-  readonly fields: CropFieldRefs;
+  readonly fields: ItemFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for Crop.
+   * The delegate class that acts as a "Promise-like" for Item.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__CropClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__ItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    plots<T extends Crop$plotsArgs<ExtArgs> = {}>(args?: Subset<T, Crop$plotsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    inventoryItems<T extends Item$inventoryItemsArgs<ExtArgs> = {}>(args?: Subset<T, Item$inventoryItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InventoryItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    plots<T extends Item$plotsArgs<ExtArgs> = {}>(args?: Subset<T, Item$plotsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5368,408 +5569,437 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the Crop model
+   * Fields of the Item model
    */
-  interface CropFieldRefs {
-    readonly id: FieldRef<"Crop", 'String'>
-    readonly name: FieldRef<"Crop", 'String'>
-    readonly slug: FieldRef<"Crop", 'String'>
-    readonly price: FieldRef<"Crop", 'Int'>
-    readonly sellPrice: FieldRef<"Crop", 'Int'>
-    readonly xpReward: FieldRef<"Crop", 'Int'>
-    readonly growthTime: FieldRef<"Crop", 'Int'>
-    readonly minLevel: FieldRef<"Crop", 'Int'>
+  interface ItemFieldRefs {
+    readonly id: FieldRef<"Item", 'String'>
+    readonly slug: FieldRef<"Item", 'String'>
+    readonly name: FieldRef<"Item", 'String'>
+    readonly description: FieldRef<"Item", 'String'>
+    readonly type: FieldRef<"Item", 'String'>
+    readonly buyPrice: FieldRef<"Item", 'Int'>
+    readonly sellPrice: FieldRef<"Item", 'Int'>
+    readonly minLevel: FieldRef<"Item", 'Int'>
+    readonly growthTime: FieldRef<"Item", 'Int'>
+    readonly xpReward: FieldRef<"Item", 'Int'>
+    readonly yieldItemSlug: FieldRef<"Item", 'String'>
+    readonly createdAt: FieldRef<"Item", 'DateTime'>
+    readonly updatedAt: FieldRef<"Item", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * Crop findUnique
+   * Item findUnique
    */
-  export type CropFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Crop
+     * Select specific fields to fetch from the Item
      */
-    select?: CropSelect<ExtArgs> | null
+    select?: ItemSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Crop
+     * Omit specific fields from the Item
      */
-    omit?: CropOmit<ExtArgs> | null
+    omit?: ItemOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CropInclude<ExtArgs> | null
+    include?: ItemInclude<ExtArgs> | null
     /**
-     * Filter, which Crop to fetch.
+     * Filter, which Item to fetch.
      */
-    where: CropWhereUniqueInput
+    where: ItemWhereUniqueInput
   }
 
   /**
-   * Crop findUniqueOrThrow
+   * Item findUniqueOrThrow
    */
-  export type CropFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Crop
+     * Select specific fields to fetch from the Item
      */
-    select?: CropSelect<ExtArgs> | null
+    select?: ItemSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Crop
+     * Omit specific fields from the Item
      */
-    omit?: CropOmit<ExtArgs> | null
+    omit?: ItemOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CropInclude<ExtArgs> | null
+    include?: ItemInclude<ExtArgs> | null
     /**
-     * Filter, which Crop to fetch.
+     * Filter, which Item to fetch.
      */
-    where: CropWhereUniqueInput
+    where: ItemWhereUniqueInput
   }
 
   /**
-   * Crop findFirst
+   * Item findFirst
    */
-  export type CropFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Crop
+     * Select specific fields to fetch from the Item
      */
-    select?: CropSelect<ExtArgs> | null
+    select?: ItemSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Crop
+     * Omit specific fields from the Item
      */
-    omit?: CropOmit<ExtArgs> | null
+    omit?: ItemOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CropInclude<ExtArgs> | null
+    include?: ItemInclude<ExtArgs> | null
     /**
-     * Filter, which Crop to fetch.
+     * Filter, which Item to fetch.
      */
-    where?: CropWhereInput
+    where?: ItemWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Crops to fetch.
+     * Determine the order of Items to fetch.
      */
-    orderBy?: CropOrderByWithRelationInput | CropOrderByWithRelationInput[]
+    orderBy?: ItemOrderByWithRelationInput | ItemOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Crops.
+     * Sets the position for searching for Items.
      */
-    cursor?: CropWhereUniqueInput
+    cursor?: ItemWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Crops from the position of the cursor.
+     * Take `±n` Items from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Crops.
+     * Skip the first `n` Items.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Crops.
+     * Filter by unique combinations of Items.
      */
-    distinct?: CropScalarFieldEnum | CropScalarFieldEnum[]
+    distinct?: ItemScalarFieldEnum | ItemScalarFieldEnum[]
   }
 
   /**
-   * Crop findFirstOrThrow
+   * Item findFirstOrThrow
    */
-  export type CropFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Crop
+     * Select specific fields to fetch from the Item
      */
-    select?: CropSelect<ExtArgs> | null
+    select?: ItemSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Crop
+     * Omit specific fields from the Item
      */
-    omit?: CropOmit<ExtArgs> | null
+    omit?: ItemOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CropInclude<ExtArgs> | null
+    include?: ItemInclude<ExtArgs> | null
     /**
-     * Filter, which Crop to fetch.
+     * Filter, which Item to fetch.
      */
-    where?: CropWhereInput
+    where?: ItemWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Crops to fetch.
+     * Determine the order of Items to fetch.
      */
-    orderBy?: CropOrderByWithRelationInput | CropOrderByWithRelationInput[]
+    orderBy?: ItemOrderByWithRelationInput | ItemOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Crops.
+     * Sets the position for searching for Items.
      */
-    cursor?: CropWhereUniqueInput
+    cursor?: ItemWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Crops from the position of the cursor.
+     * Take `±n` Items from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Crops.
+     * Skip the first `n` Items.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Crops.
+     * Filter by unique combinations of Items.
      */
-    distinct?: CropScalarFieldEnum | CropScalarFieldEnum[]
+    distinct?: ItemScalarFieldEnum | ItemScalarFieldEnum[]
   }
 
   /**
-   * Crop findMany
+   * Item findMany
    */
-  export type CropFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Crop
+     * Select specific fields to fetch from the Item
      */
-    select?: CropSelect<ExtArgs> | null
+    select?: ItemSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Crop
+     * Omit specific fields from the Item
      */
-    omit?: CropOmit<ExtArgs> | null
+    omit?: ItemOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CropInclude<ExtArgs> | null
+    include?: ItemInclude<ExtArgs> | null
     /**
-     * Filter, which Crops to fetch.
+     * Filter, which Items to fetch.
      */
-    where?: CropWhereInput
+    where?: ItemWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Crops to fetch.
+     * Determine the order of Items to fetch.
      */
-    orderBy?: CropOrderByWithRelationInput | CropOrderByWithRelationInput[]
+    orderBy?: ItemOrderByWithRelationInput | ItemOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing Crops.
+     * Sets the position for listing Items.
      */
-    cursor?: CropWhereUniqueInput
+    cursor?: ItemWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Crops from the position of the cursor.
+     * Take `±n` Items from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Crops.
+     * Skip the first `n` Items.
      */
     skip?: number
-    distinct?: CropScalarFieldEnum | CropScalarFieldEnum[]
+    distinct?: ItemScalarFieldEnum | ItemScalarFieldEnum[]
   }
 
   /**
-   * Crop create
+   * Item create
    */
-  export type CropCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Crop
+     * Select specific fields to fetch from the Item
      */
-    select?: CropSelect<ExtArgs> | null
+    select?: ItemSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Crop
+     * Omit specific fields from the Item
      */
-    omit?: CropOmit<ExtArgs> | null
+    omit?: ItemOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CropInclude<ExtArgs> | null
+    include?: ItemInclude<ExtArgs> | null
     /**
-     * The data needed to create a Crop.
+     * The data needed to create a Item.
      */
-    data: XOR<CropCreateInput, CropUncheckedCreateInput>
+    data: XOR<ItemCreateInput, ItemUncheckedCreateInput>
   }
 
   /**
-   * Crop createMany
+   * Item createMany
    */
-  export type CropCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many Crops.
+     * The data used to create many Items.
      */
-    data: CropCreateManyInput | CropCreateManyInput[]
+    data: ItemCreateManyInput | ItemCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * Crop createManyAndReturn
+   * Item createManyAndReturn
    */
-  export type CropCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ItemCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Crop
+     * Select specific fields to fetch from the Item
      */
-    select?: CropSelectCreateManyAndReturn<ExtArgs> | null
+    select?: ItemSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the Crop
+     * Omit specific fields from the Item
      */
-    omit?: CropOmit<ExtArgs> | null
+    omit?: ItemOmit<ExtArgs> | null
     /**
-     * The data used to create many Crops.
+     * The data used to create many Items.
      */
-    data: CropCreateManyInput | CropCreateManyInput[]
+    data: ItemCreateManyInput | ItemCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * Crop update
+   * Item update
    */
-  export type CropUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Crop
+     * Select specific fields to fetch from the Item
      */
-    select?: CropSelect<ExtArgs> | null
+    select?: ItemSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Crop
+     * Omit specific fields from the Item
      */
-    omit?: CropOmit<ExtArgs> | null
+    omit?: ItemOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CropInclude<ExtArgs> | null
+    include?: ItemInclude<ExtArgs> | null
     /**
-     * The data needed to update a Crop.
+     * The data needed to update a Item.
      */
-    data: XOR<CropUpdateInput, CropUncheckedUpdateInput>
+    data: XOR<ItemUpdateInput, ItemUncheckedUpdateInput>
     /**
-     * Choose, which Crop to update.
+     * Choose, which Item to update.
      */
-    where: CropWhereUniqueInput
+    where: ItemWhereUniqueInput
   }
 
   /**
-   * Crop updateMany
+   * Item updateMany
    */
-  export type CropUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update Crops.
+     * The data used to update Items.
      */
-    data: XOR<CropUpdateManyMutationInput, CropUncheckedUpdateManyInput>
+    data: XOR<ItemUpdateManyMutationInput, ItemUncheckedUpdateManyInput>
     /**
-     * Filter which Crops to update
+     * Filter which Items to update
      */
-    where?: CropWhereInput
+    where?: ItemWhereInput
     /**
-     * Limit how many Crops to update.
+     * Limit how many Items to update.
      */
     limit?: number
   }
 
   /**
-   * Crop updateManyAndReturn
+   * Item updateManyAndReturn
    */
-  export type CropUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ItemUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Crop
+     * Select specific fields to fetch from the Item
      */
-    select?: CropSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: ItemSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the Crop
+     * Omit specific fields from the Item
      */
-    omit?: CropOmit<ExtArgs> | null
+    omit?: ItemOmit<ExtArgs> | null
     /**
-     * The data used to update Crops.
+     * The data used to update Items.
      */
-    data: XOR<CropUpdateManyMutationInput, CropUncheckedUpdateManyInput>
+    data: XOR<ItemUpdateManyMutationInput, ItemUncheckedUpdateManyInput>
     /**
-     * Filter which Crops to update
+     * Filter which Items to update
      */
-    where?: CropWhereInput
+    where?: ItemWhereInput
     /**
-     * Limit how many Crops to update.
+     * Limit how many Items to update.
      */
     limit?: number
   }
 
   /**
-   * Crop upsert
+   * Item upsert
    */
-  export type CropUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Crop
+     * Select specific fields to fetch from the Item
      */
-    select?: CropSelect<ExtArgs> | null
+    select?: ItemSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Crop
+     * Omit specific fields from the Item
      */
-    omit?: CropOmit<ExtArgs> | null
+    omit?: ItemOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CropInclude<ExtArgs> | null
+    include?: ItemInclude<ExtArgs> | null
     /**
-     * The filter to search for the Crop to update in case it exists.
+     * The filter to search for the Item to update in case it exists.
      */
-    where: CropWhereUniqueInput
+    where: ItemWhereUniqueInput
     /**
-     * In case the Crop found by the `where` argument doesn't exist, create a new Crop with this data.
+     * In case the Item found by the `where` argument doesn't exist, create a new Item with this data.
      */
-    create: XOR<CropCreateInput, CropUncheckedCreateInput>
+    create: XOR<ItemCreateInput, ItemUncheckedCreateInput>
     /**
-     * In case the Crop was found with the provided `where` argument, update it with this data.
+     * In case the Item was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<CropUpdateInput, CropUncheckedUpdateInput>
+    update: XOR<ItemUpdateInput, ItemUncheckedUpdateInput>
   }
 
   /**
-   * Crop delete
+   * Item delete
    */
-  export type CropDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Crop
+     * Select specific fields to fetch from the Item
      */
-    select?: CropSelect<ExtArgs> | null
+    select?: ItemSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Crop
+     * Omit specific fields from the Item
      */
-    omit?: CropOmit<ExtArgs> | null
+    omit?: ItemOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CropInclude<ExtArgs> | null
+    include?: ItemInclude<ExtArgs> | null
     /**
-     * Filter which Crop to delete.
+     * Filter which Item to delete.
      */
-    where: CropWhereUniqueInput
+    where: ItemWhereUniqueInput
   }
 
   /**
-   * Crop deleteMany
+   * Item deleteMany
    */
-  export type CropDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Crops to delete
+     * Filter which Items to delete
      */
-    where?: CropWhereInput
+    where?: ItemWhereInput
     /**
-     * Limit how many Crops to delete.
+     * Limit how many Items to delete.
      */
     limit?: number
   }
 
   /**
-   * Crop.plots
+   * Item.inventoryItems
    */
-  export type Crop$plotsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Item$inventoryItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InventoryItem
+     */
+    select?: InventoryItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InventoryItem
+     */
+    omit?: InventoryItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InventoryItemInclude<ExtArgs> | null
+    where?: InventoryItemWhereInput
+    orderBy?: InventoryItemOrderByWithRelationInput | InventoryItemOrderByWithRelationInput[]
+    cursor?: InventoryItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InventoryItemScalarFieldEnum | InventoryItemScalarFieldEnum[]
+  }
+
+  /**
+   * Item.plots
+   */
+  export type Item$plotsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Plot
      */
@@ -5791,21 +6021,21 @@ export namespace Prisma {
   }
 
   /**
-   * Crop without action
+   * Item without action
    */
-  export type CropDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Crop
+     * Select specific fields to fetch from the Item
      */
-    select?: CropSelect<ExtArgs> | null
+    select?: ItemSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Crop
+     * Omit specific fields from the Item
      */
-    omit?: CropOmit<ExtArgs> | null
+    omit?: ItemOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CropInclude<ExtArgs> | null
+    include?: ItemInclude<ExtArgs> | null
   }
 
 
@@ -6814,6 +7044,1119 @@ export namespace Prisma {
 
 
   /**
+   * Model InventoryItem
+   */
+
+  export type AggregateInventoryItem = {
+    _count: InventoryItemCountAggregateOutputType | null
+    _avg: InventoryItemAvgAggregateOutputType | null
+    _sum: InventoryItemSumAggregateOutputType | null
+    _min: InventoryItemMinAggregateOutputType | null
+    _max: InventoryItemMaxAggregateOutputType | null
+  }
+
+  export type InventoryItemAvgAggregateOutputType = {
+    quantity: number | null
+  }
+
+  export type InventoryItemSumAggregateOutputType = {
+    quantity: number | null
+  }
+
+  export type InventoryItemMinAggregateOutputType = {
+    id: string | null
+    profileId: string | null
+    itemSlug: string | null
+    quantity: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type InventoryItemMaxAggregateOutputType = {
+    id: string | null
+    profileId: string | null
+    itemSlug: string | null
+    quantity: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type InventoryItemCountAggregateOutputType = {
+    id: number
+    profileId: number
+    itemSlug: number
+    quantity: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type InventoryItemAvgAggregateInputType = {
+    quantity?: true
+  }
+
+  export type InventoryItemSumAggregateInputType = {
+    quantity?: true
+  }
+
+  export type InventoryItemMinAggregateInputType = {
+    id?: true
+    profileId?: true
+    itemSlug?: true
+    quantity?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type InventoryItemMaxAggregateInputType = {
+    id?: true
+    profileId?: true
+    itemSlug?: true
+    quantity?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type InventoryItemCountAggregateInputType = {
+    id?: true
+    profileId?: true
+    itemSlug?: true
+    quantity?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type InventoryItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which InventoryItem to aggregate.
+     */
+    where?: InventoryItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InventoryItems to fetch.
+     */
+    orderBy?: InventoryItemOrderByWithRelationInput | InventoryItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: InventoryItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InventoryItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InventoryItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned InventoryItems
+    **/
+    _count?: true | InventoryItemCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: InventoryItemAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: InventoryItemSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: InventoryItemMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: InventoryItemMaxAggregateInputType
+  }
+
+  export type GetInventoryItemAggregateType<T extends InventoryItemAggregateArgs> = {
+        [P in keyof T & keyof AggregateInventoryItem]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateInventoryItem[P]>
+      : GetScalarType<T[P], AggregateInventoryItem[P]>
+  }
+
+
+
+
+  export type InventoryItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InventoryItemWhereInput
+    orderBy?: InventoryItemOrderByWithAggregationInput | InventoryItemOrderByWithAggregationInput[]
+    by: InventoryItemScalarFieldEnum[] | InventoryItemScalarFieldEnum
+    having?: InventoryItemScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: InventoryItemCountAggregateInputType | true
+    _avg?: InventoryItemAvgAggregateInputType
+    _sum?: InventoryItemSumAggregateInputType
+    _min?: InventoryItemMinAggregateInputType
+    _max?: InventoryItemMaxAggregateInputType
+  }
+
+  export type InventoryItemGroupByOutputType = {
+    id: string
+    profileId: string
+    itemSlug: string
+    quantity: number
+    createdAt: Date
+    updatedAt: Date
+    _count: InventoryItemCountAggregateOutputType | null
+    _avg: InventoryItemAvgAggregateOutputType | null
+    _sum: InventoryItemSumAggregateOutputType | null
+    _min: InventoryItemMinAggregateOutputType | null
+    _max: InventoryItemMaxAggregateOutputType | null
+  }
+
+  type GetInventoryItemGroupByPayload<T extends InventoryItemGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<InventoryItemGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof InventoryItemGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], InventoryItemGroupByOutputType[P]>
+            : GetScalarType<T[P], InventoryItemGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type InventoryItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    profileId?: boolean
+    itemSlug?: boolean
+    quantity?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    profile?: boolean | ProfileDefaultArgs<ExtArgs>
+    item?: boolean | ItemDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["inventoryItem"]>
+
+  export type InventoryItemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    profileId?: boolean
+    itemSlug?: boolean
+    quantity?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    profile?: boolean | ProfileDefaultArgs<ExtArgs>
+    item?: boolean | ItemDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["inventoryItem"]>
+
+  export type InventoryItemSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    profileId?: boolean
+    itemSlug?: boolean
+    quantity?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    profile?: boolean | ProfileDefaultArgs<ExtArgs>
+    item?: boolean | ItemDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["inventoryItem"]>
+
+  export type InventoryItemSelectScalar = {
+    id?: boolean
+    profileId?: boolean
+    itemSlug?: boolean
+    quantity?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type InventoryItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "profileId" | "itemSlug" | "quantity" | "createdAt" | "updatedAt", ExtArgs["result"]["inventoryItem"]>
+  export type InventoryItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    profile?: boolean | ProfileDefaultArgs<ExtArgs>
+    item?: boolean | ItemDefaultArgs<ExtArgs>
+  }
+  export type InventoryItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    profile?: boolean | ProfileDefaultArgs<ExtArgs>
+    item?: boolean | ItemDefaultArgs<ExtArgs>
+  }
+  export type InventoryItemIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    profile?: boolean | ProfileDefaultArgs<ExtArgs>
+    item?: boolean | ItemDefaultArgs<ExtArgs>
+  }
+
+  export type $InventoryItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "InventoryItem"
+    objects: {
+      profile: Prisma.$ProfilePayload<ExtArgs>
+      item: Prisma.$ItemPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      profileId: string
+      itemSlug: string
+      quantity: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["inventoryItem"]>
+    composites: {}
+  }
+
+  type InventoryItemGetPayload<S extends boolean | null | undefined | InventoryItemDefaultArgs> = $Result.GetResult<Prisma.$InventoryItemPayload, S>
+
+  type InventoryItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<InventoryItemFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: InventoryItemCountAggregateInputType | true
+    }
+
+  export interface InventoryItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['InventoryItem'], meta: { name: 'InventoryItem' } }
+    /**
+     * Find zero or one InventoryItem that matches the filter.
+     * @param {InventoryItemFindUniqueArgs} args - Arguments to find a InventoryItem
+     * @example
+     * // Get one InventoryItem
+     * const inventoryItem = await prisma.inventoryItem.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends InventoryItemFindUniqueArgs>(args: SelectSubset<T, InventoryItemFindUniqueArgs<ExtArgs>>): Prisma__InventoryItemClient<$Result.GetResult<Prisma.$InventoryItemPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one InventoryItem that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {InventoryItemFindUniqueOrThrowArgs} args - Arguments to find a InventoryItem
+     * @example
+     * // Get one InventoryItem
+     * const inventoryItem = await prisma.inventoryItem.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends InventoryItemFindUniqueOrThrowArgs>(args: SelectSubset<T, InventoryItemFindUniqueOrThrowArgs<ExtArgs>>): Prisma__InventoryItemClient<$Result.GetResult<Prisma.$InventoryItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first InventoryItem that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InventoryItemFindFirstArgs} args - Arguments to find a InventoryItem
+     * @example
+     * // Get one InventoryItem
+     * const inventoryItem = await prisma.inventoryItem.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends InventoryItemFindFirstArgs>(args?: SelectSubset<T, InventoryItemFindFirstArgs<ExtArgs>>): Prisma__InventoryItemClient<$Result.GetResult<Prisma.$InventoryItemPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first InventoryItem that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InventoryItemFindFirstOrThrowArgs} args - Arguments to find a InventoryItem
+     * @example
+     * // Get one InventoryItem
+     * const inventoryItem = await prisma.inventoryItem.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends InventoryItemFindFirstOrThrowArgs>(args?: SelectSubset<T, InventoryItemFindFirstOrThrowArgs<ExtArgs>>): Prisma__InventoryItemClient<$Result.GetResult<Prisma.$InventoryItemPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more InventoryItems that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InventoryItemFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all InventoryItems
+     * const inventoryItems = await prisma.inventoryItem.findMany()
+     * 
+     * // Get first 10 InventoryItems
+     * const inventoryItems = await prisma.inventoryItem.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const inventoryItemWithIdOnly = await prisma.inventoryItem.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends InventoryItemFindManyArgs>(args?: SelectSubset<T, InventoryItemFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InventoryItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a InventoryItem.
+     * @param {InventoryItemCreateArgs} args - Arguments to create a InventoryItem.
+     * @example
+     * // Create one InventoryItem
+     * const InventoryItem = await prisma.inventoryItem.create({
+     *   data: {
+     *     // ... data to create a InventoryItem
+     *   }
+     * })
+     * 
+     */
+    create<T extends InventoryItemCreateArgs>(args: SelectSubset<T, InventoryItemCreateArgs<ExtArgs>>): Prisma__InventoryItemClient<$Result.GetResult<Prisma.$InventoryItemPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many InventoryItems.
+     * @param {InventoryItemCreateManyArgs} args - Arguments to create many InventoryItems.
+     * @example
+     * // Create many InventoryItems
+     * const inventoryItem = await prisma.inventoryItem.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends InventoryItemCreateManyArgs>(args?: SelectSubset<T, InventoryItemCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many InventoryItems and returns the data saved in the database.
+     * @param {InventoryItemCreateManyAndReturnArgs} args - Arguments to create many InventoryItems.
+     * @example
+     * // Create many InventoryItems
+     * const inventoryItem = await prisma.inventoryItem.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many InventoryItems and only return the `id`
+     * const inventoryItemWithIdOnly = await prisma.inventoryItem.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends InventoryItemCreateManyAndReturnArgs>(args?: SelectSubset<T, InventoryItemCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InventoryItemPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a InventoryItem.
+     * @param {InventoryItemDeleteArgs} args - Arguments to delete one InventoryItem.
+     * @example
+     * // Delete one InventoryItem
+     * const InventoryItem = await prisma.inventoryItem.delete({
+     *   where: {
+     *     // ... filter to delete one InventoryItem
+     *   }
+     * })
+     * 
+     */
+    delete<T extends InventoryItemDeleteArgs>(args: SelectSubset<T, InventoryItemDeleteArgs<ExtArgs>>): Prisma__InventoryItemClient<$Result.GetResult<Prisma.$InventoryItemPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one InventoryItem.
+     * @param {InventoryItemUpdateArgs} args - Arguments to update one InventoryItem.
+     * @example
+     * // Update one InventoryItem
+     * const inventoryItem = await prisma.inventoryItem.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends InventoryItemUpdateArgs>(args: SelectSubset<T, InventoryItemUpdateArgs<ExtArgs>>): Prisma__InventoryItemClient<$Result.GetResult<Prisma.$InventoryItemPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more InventoryItems.
+     * @param {InventoryItemDeleteManyArgs} args - Arguments to filter InventoryItems to delete.
+     * @example
+     * // Delete a few InventoryItems
+     * const { count } = await prisma.inventoryItem.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends InventoryItemDeleteManyArgs>(args?: SelectSubset<T, InventoryItemDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more InventoryItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InventoryItemUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many InventoryItems
+     * const inventoryItem = await prisma.inventoryItem.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends InventoryItemUpdateManyArgs>(args: SelectSubset<T, InventoryItemUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more InventoryItems and returns the data updated in the database.
+     * @param {InventoryItemUpdateManyAndReturnArgs} args - Arguments to update many InventoryItems.
+     * @example
+     * // Update many InventoryItems
+     * const inventoryItem = await prisma.inventoryItem.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more InventoryItems and only return the `id`
+     * const inventoryItemWithIdOnly = await prisma.inventoryItem.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends InventoryItemUpdateManyAndReturnArgs>(args: SelectSubset<T, InventoryItemUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InventoryItemPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one InventoryItem.
+     * @param {InventoryItemUpsertArgs} args - Arguments to update or create a InventoryItem.
+     * @example
+     * // Update or create a InventoryItem
+     * const inventoryItem = await prisma.inventoryItem.upsert({
+     *   create: {
+     *     // ... data to create a InventoryItem
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the InventoryItem we want to update
+     *   }
+     * })
+     */
+    upsert<T extends InventoryItemUpsertArgs>(args: SelectSubset<T, InventoryItemUpsertArgs<ExtArgs>>): Prisma__InventoryItemClient<$Result.GetResult<Prisma.$InventoryItemPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of InventoryItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InventoryItemCountArgs} args - Arguments to filter InventoryItems to count.
+     * @example
+     * // Count the number of InventoryItems
+     * const count = await prisma.inventoryItem.count({
+     *   where: {
+     *     // ... the filter for the InventoryItems we want to count
+     *   }
+     * })
+    **/
+    count<T extends InventoryItemCountArgs>(
+      args?: Subset<T, InventoryItemCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], InventoryItemCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a InventoryItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InventoryItemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends InventoryItemAggregateArgs>(args: Subset<T, InventoryItemAggregateArgs>): Prisma.PrismaPromise<GetInventoryItemAggregateType<T>>
+
+    /**
+     * Group by InventoryItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InventoryItemGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends InventoryItemGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: InventoryItemGroupByArgs['orderBy'] }
+        : { orderBy?: InventoryItemGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, InventoryItemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetInventoryItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the InventoryItem model
+   */
+  readonly fields: InventoryItemFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for InventoryItem.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__InventoryItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    profile<T extends ProfileDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProfileDefaultArgs<ExtArgs>>): Prisma__ProfileClient<$Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    item<T extends ItemDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ItemDefaultArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the InventoryItem model
+   */
+  interface InventoryItemFieldRefs {
+    readonly id: FieldRef<"InventoryItem", 'String'>
+    readonly profileId: FieldRef<"InventoryItem", 'String'>
+    readonly itemSlug: FieldRef<"InventoryItem", 'String'>
+    readonly quantity: FieldRef<"InventoryItem", 'Int'>
+    readonly createdAt: FieldRef<"InventoryItem", 'DateTime'>
+    readonly updatedAt: FieldRef<"InventoryItem", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * InventoryItem findUnique
+   */
+  export type InventoryItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InventoryItem
+     */
+    select?: InventoryItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InventoryItem
+     */
+    omit?: InventoryItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InventoryItemInclude<ExtArgs> | null
+    /**
+     * Filter, which InventoryItem to fetch.
+     */
+    where: InventoryItemWhereUniqueInput
+  }
+
+  /**
+   * InventoryItem findUniqueOrThrow
+   */
+  export type InventoryItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InventoryItem
+     */
+    select?: InventoryItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InventoryItem
+     */
+    omit?: InventoryItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InventoryItemInclude<ExtArgs> | null
+    /**
+     * Filter, which InventoryItem to fetch.
+     */
+    where: InventoryItemWhereUniqueInput
+  }
+
+  /**
+   * InventoryItem findFirst
+   */
+  export type InventoryItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InventoryItem
+     */
+    select?: InventoryItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InventoryItem
+     */
+    omit?: InventoryItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InventoryItemInclude<ExtArgs> | null
+    /**
+     * Filter, which InventoryItem to fetch.
+     */
+    where?: InventoryItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InventoryItems to fetch.
+     */
+    orderBy?: InventoryItemOrderByWithRelationInput | InventoryItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for InventoryItems.
+     */
+    cursor?: InventoryItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InventoryItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InventoryItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of InventoryItems.
+     */
+    distinct?: InventoryItemScalarFieldEnum | InventoryItemScalarFieldEnum[]
+  }
+
+  /**
+   * InventoryItem findFirstOrThrow
+   */
+  export type InventoryItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InventoryItem
+     */
+    select?: InventoryItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InventoryItem
+     */
+    omit?: InventoryItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InventoryItemInclude<ExtArgs> | null
+    /**
+     * Filter, which InventoryItem to fetch.
+     */
+    where?: InventoryItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InventoryItems to fetch.
+     */
+    orderBy?: InventoryItemOrderByWithRelationInput | InventoryItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for InventoryItems.
+     */
+    cursor?: InventoryItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InventoryItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InventoryItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of InventoryItems.
+     */
+    distinct?: InventoryItemScalarFieldEnum | InventoryItemScalarFieldEnum[]
+  }
+
+  /**
+   * InventoryItem findMany
+   */
+  export type InventoryItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InventoryItem
+     */
+    select?: InventoryItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InventoryItem
+     */
+    omit?: InventoryItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InventoryItemInclude<ExtArgs> | null
+    /**
+     * Filter, which InventoryItems to fetch.
+     */
+    where?: InventoryItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InventoryItems to fetch.
+     */
+    orderBy?: InventoryItemOrderByWithRelationInput | InventoryItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing InventoryItems.
+     */
+    cursor?: InventoryItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InventoryItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InventoryItems.
+     */
+    skip?: number
+    distinct?: InventoryItemScalarFieldEnum | InventoryItemScalarFieldEnum[]
+  }
+
+  /**
+   * InventoryItem create
+   */
+  export type InventoryItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InventoryItem
+     */
+    select?: InventoryItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InventoryItem
+     */
+    omit?: InventoryItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InventoryItemInclude<ExtArgs> | null
+    /**
+     * The data needed to create a InventoryItem.
+     */
+    data: XOR<InventoryItemCreateInput, InventoryItemUncheckedCreateInput>
+  }
+
+  /**
+   * InventoryItem createMany
+   */
+  export type InventoryItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many InventoryItems.
+     */
+    data: InventoryItemCreateManyInput | InventoryItemCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * InventoryItem createManyAndReturn
+   */
+  export type InventoryItemCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InventoryItem
+     */
+    select?: InventoryItemSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the InventoryItem
+     */
+    omit?: InventoryItemOmit<ExtArgs> | null
+    /**
+     * The data used to create many InventoryItems.
+     */
+    data: InventoryItemCreateManyInput | InventoryItemCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InventoryItemIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * InventoryItem update
+   */
+  export type InventoryItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InventoryItem
+     */
+    select?: InventoryItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InventoryItem
+     */
+    omit?: InventoryItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InventoryItemInclude<ExtArgs> | null
+    /**
+     * The data needed to update a InventoryItem.
+     */
+    data: XOR<InventoryItemUpdateInput, InventoryItemUncheckedUpdateInput>
+    /**
+     * Choose, which InventoryItem to update.
+     */
+    where: InventoryItemWhereUniqueInput
+  }
+
+  /**
+   * InventoryItem updateMany
+   */
+  export type InventoryItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update InventoryItems.
+     */
+    data: XOR<InventoryItemUpdateManyMutationInput, InventoryItemUncheckedUpdateManyInput>
+    /**
+     * Filter which InventoryItems to update
+     */
+    where?: InventoryItemWhereInput
+    /**
+     * Limit how many InventoryItems to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * InventoryItem updateManyAndReturn
+   */
+  export type InventoryItemUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InventoryItem
+     */
+    select?: InventoryItemSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the InventoryItem
+     */
+    omit?: InventoryItemOmit<ExtArgs> | null
+    /**
+     * The data used to update InventoryItems.
+     */
+    data: XOR<InventoryItemUpdateManyMutationInput, InventoryItemUncheckedUpdateManyInput>
+    /**
+     * Filter which InventoryItems to update
+     */
+    where?: InventoryItemWhereInput
+    /**
+     * Limit how many InventoryItems to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InventoryItemIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * InventoryItem upsert
+   */
+  export type InventoryItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InventoryItem
+     */
+    select?: InventoryItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InventoryItem
+     */
+    omit?: InventoryItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InventoryItemInclude<ExtArgs> | null
+    /**
+     * The filter to search for the InventoryItem to update in case it exists.
+     */
+    where: InventoryItemWhereUniqueInput
+    /**
+     * In case the InventoryItem found by the `where` argument doesn't exist, create a new InventoryItem with this data.
+     */
+    create: XOR<InventoryItemCreateInput, InventoryItemUncheckedCreateInput>
+    /**
+     * In case the InventoryItem was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<InventoryItemUpdateInput, InventoryItemUncheckedUpdateInput>
+  }
+
+  /**
+   * InventoryItem delete
+   */
+  export type InventoryItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InventoryItem
+     */
+    select?: InventoryItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InventoryItem
+     */
+    omit?: InventoryItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InventoryItemInclude<ExtArgs> | null
+    /**
+     * Filter which InventoryItem to delete.
+     */
+    where: InventoryItemWhereUniqueInput
+  }
+
+  /**
+   * InventoryItem deleteMany
+   */
+  export type InventoryItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which InventoryItems to delete
+     */
+    where?: InventoryItemWhereInput
+    /**
+     * Limit how many InventoryItems to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * InventoryItem without action
+   */
+  export type InventoryItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InventoryItem
+     */
+    select?: InventoryItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InventoryItem
+     */
+    omit?: InventoryItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InventoryItemInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -6864,18 +8207,23 @@ export namespace Prisma {
   export type PlotScalarFieldEnum = (typeof PlotScalarFieldEnum)[keyof typeof PlotScalarFieldEnum]
 
 
-  export const CropScalarFieldEnum: {
+  export const ItemScalarFieldEnum: {
     id: 'id',
-    name: 'name',
     slug: 'slug',
-    price: 'price',
+    name: 'name',
+    description: 'description',
+    type: 'type',
+    buyPrice: 'buyPrice',
     sellPrice: 'sellPrice',
-    xpReward: 'xpReward',
+    minLevel: 'minLevel',
     growthTime: 'growthTime',
-    minLevel: 'minLevel'
+    xpReward: 'xpReward',
+    yieldItemSlug: 'yieldItemSlug',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
-  export type CropScalarFieldEnum = (typeof CropScalarFieldEnum)[keyof typeof CropScalarFieldEnum]
+  export type ItemScalarFieldEnum = (typeof ItemScalarFieldEnum)[keyof typeof ItemScalarFieldEnum]
 
 
   export const ActivityLogScalarFieldEnum: {
@@ -6888,6 +8236,18 @@ export namespace Prisma {
   };
 
   export type ActivityLogScalarFieldEnum = (typeof ActivityLogScalarFieldEnum)[keyof typeof ActivityLogScalarFieldEnum]
+
+
+  export const InventoryItemScalarFieldEnum: {
+    id: 'id',
+    profileId: 'profileId',
+    itemSlug: 'itemSlug',
+    quantity: 'quantity',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type InventoryItemScalarFieldEnum = (typeof InventoryItemScalarFieldEnum)[keyof typeof InventoryItemScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -7085,6 +8445,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Profile"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     plots?: PlotListRelationFilter
+    inventory?: InventoryItemListRelationFilter
   }
 
   export type ProfileOrderByWithRelationInput = {
@@ -7098,6 +8459,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     user?: UserOrderByWithRelationInput
     plots?: PlotOrderByRelationAggregateInput
+    inventory?: InventoryItemOrderByRelationAggregateInput
   }
 
   export type ProfileWhereUniqueInput = Prisma.AtLeast<{
@@ -7114,6 +8476,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Profile"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     plots?: PlotListRelationFilter
+    inventory?: InventoryItemListRelationFilter
   }, "id" | "userId">
 
   export type ProfileOrderByWithAggregationInput = {
@@ -7157,7 +8520,7 @@ export namespace Prisma {
     plantedAt?: DateTimeNullableFilter<"Plot"> | Date | string | null
     isUnlocked?: BoolFilter<"Plot"> | boolean
     profile?: XOR<ProfileScalarRelationFilter, ProfileWhereInput>
-    crop?: XOR<CropNullableScalarRelationFilter, CropWhereInput> | null
+    crop?: XOR<ItemNullableScalarRelationFilter, ItemWhereInput> | null
   }
 
   export type PlotOrderByWithRelationInput = {
@@ -7168,7 +8531,7 @@ export namespace Prisma {
     plantedAt?: SortOrderInput | SortOrder
     isUnlocked?: SortOrder
     profile?: ProfileOrderByWithRelationInput
-    crop?: CropOrderByWithRelationInput
+    crop?: ItemOrderByWithRelationInput
   }
 
   export type PlotWhereUniqueInput = Prisma.AtLeast<{
@@ -7183,7 +8546,7 @@ export namespace Prisma {
     plantedAt?: DateTimeNullableFilter<"Plot"> | Date | string | null
     isUnlocked?: BoolFilter<"Plot"> | boolean
     profile?: XOR<ProfileScalarRelationFilter, ProfileWhereInput>
-    crop?: XOR<CropNullableScalarRelationFilter, CropWhereInput> | null
+    crop?: XOR<ItemNullableScalarRelationFilter, ItemWhereInput> | null
   }, "id" | "profileId_index">
 
   export type PlotOrderByWithAggregationInput = {
@@ -7212,76 +8575,104 @@ export namespace Prisma {
     isUnlocked?: BoolWithAggregatesFilter<"Plot"> | boolean
   }
 
-  export type CropWhereInput = {
-    AND?: CropWhereInput | CropWhereInput[]
-    OR?: CropWhereInput[]
-    NOT?: CropWhereInput | CropWhereInput[]
-    id?: StringFilter<"Crop"> | string
-    name?: StringFilter<"Crop"> | string
-    slug?: StringFilter<"Crop"> | string
-    price?: IntFilter<"Crop"> | number
-    sellPrice?: IntFilter<"Crop"> | number
-    xpReward?: IntFilter<"Crop"> | number
-    growthTime?: IntFilter<"Crop"> | number
-    minLevel?: IntFilter<"Crop"> | number
+  export type ItemWhereInput = {
+    AND?: ItemWhereInput | ItemWhereInput[]
+    OR?: ItemWhereInput[]
+    NOT?: ItemWhereInput | ItemWhereInput[]
+    id?: StringFilter<"Item"> | string
+    slug?: StringFilter<"Item"> | string
+    name?: StringFilter<"Item"> | string
+    description?: StringNullableFilter<"Item"> | string | null
+    type?: StringFilter<"Item"> | string
+    buyPrice?: IntFilter<"Item"> | number
+    sellPrice?: IntFilter<"Item"> | number
+    minLevel?: IntFilter<"Item"> | number
+    growthTime?: IntNullableFilter<"Item"> | number | null
+    xpReward?: IntNullableFilter<"Item"> | number | null
+    yieldItemSlug?: StringNullableFilter<"Item"> | string | null
+    createdAt?: DateTimeFilter<"Item"> | Date | string
+    updatedAt?: DateTimeFilter<"Item"> | Date | string
+    inventoryItems?: InventoryItemListRelationFilter
     plots?: PlotListRelationFilter
   }
 
-  export type CropOrderByWithRelationInput = {
+  export type ItemOrderByWithRelationInput = {
     id?: SortOrder
-    name?: SortOrder
     slug?: SortOrder
-    price?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    type?: SortOrder
+    buyPrice?: SortOrder
     sellPrice?: SortOrder
-    xpReward?: SortOrder
-    growthTime?: SortOrder
     minLevel?: SortOrder
+    growthTime?: SortOrderInput | SortOrder
+    xpReward?: SortOrderInput | SortOrder
+    yieldItemSlug?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    inventoryItems?: InventoryItemOrderByRelationAggregateInput
     plots?: PlotOrderByRelationAggregateInput
   }
 
-  export type CropWhereUniqueInput = Prisma.AtLeast<{
+  export type ItemWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    name?: string
     slug?: string
-    AND?: CropWhereInput | CropWhereInput[]
-    OR?: CropWhereInput[]
-    NOT?: CropWhereInput | CropWhereInput[]
-    price?: IntFilter<"Crop"> | number
-    sellPrice?: IntFilter<"Crop"> | number
-    xpReward?: IntFilter<"Crop"> | number
-    growthTime?: IntFilter<"Crop"> | number
-    minLevel?: IntFilter<"Crop"> | number
+    AND?: ItemWhereInput | ItemWhereInput[]
+    OR?: ItemWhereInput[]
+    NOT?: ItemWhereInput | ItemWhereInput[]
+    name?: StringFilter<"Item"> | string
+    description?: StringNullableFilter<"Item"> | string | null
+    type?: StringFilter<"Item"> | string
+    buyPrice?: IntFilter<"Item"> | number
+    sellPrice?: IntFilter<"Item"> | number
+    minLevel?: IntFilter<"Item"> | number
+    growthTime?: IntNullableFilter<"Item"> | number | null
+    xpReward?: IntNullableFilter<"Item"> | number | null
+    yieldItemSlug?: StringNullableFilter<"Item"> | string | null
+    createdAt?: DateTimeFilter<"Item"> | Date | string
+    updatedAt?: DateTimeFilter<"Item"> | Date | string
+    inventoryItems?: InventoryItemListRelationFilter
     plots?: PlotListRelationFilter
-  }, "id" | "name" | "slug">
+  }, "id" | "slug">
 
-  export type CropOrderByWithAggregationInput = {
+  export type ItemOrderByWithAggregationInput = {
     id?: SortOrder
-    name?: SortOrder
     slug?: SortOrder
-    price?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    type?: SortOrder
+    buyPrice?: SortOrder
     sellPrice?: SortOrder
-    xpReward?: SortOrder
-    growthTime?: SortOrder
     minLevel?: SortOrder
-    _count?: CropCountOrderByAggregateInput
-    _avg?: CropAvgOrderByAggregateInput
-    _max?: CropMaxOrderByAggregateInput
-    _min?: CropMinOrderByAggregateInput
-    _sum?: CropSumOrderByAggregateInput
+    growthTime?: SortOrderInput | SortOrder
+    xpReward?: SortOrderInput | SortOrder
+    yieldItemSlug?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ItemCountOrderByAggregateInput
+    _avg?: ItemAvgOrderByAggregateInput
+    _max?: ItemMaxOrderByAggregateInput
+    _min?: ItemMinOrderByAggregateInput
+    _sum?: ItemSumOrderByAggregateInput
   }
 
-  export type CropScalarWhereWithAggregatesInput = {
-    AND?: CropScalarWhereWithAggregatesInput | CropScalarWhereWithAggregatesInput[]
-    OR?: CropScalarWhereWithAggregatesInput[]
-    NOT?: CropScalarWhereWithAggregatesInput | CropScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Crop"> | string
-    name?: StringWithAggregatesFilter<"Crop"> | string
-    slug?: StringWithAggregatesFilter<"Crop"> | string
-    price?: IntWithAggregatesFilter<"Crop"> | number
-    sellPrice?: IntWithAggregatesFilter<"Crop"> | number
-    xpReward?: IntWithAggregatesFilter<"Crop"> | number
-    growthTime?: IntWithAggregatesFilter<"Crop"> | number
-    minLevel?: IntWithAggregatesFilter<"Crop"> | number
+  export type ItemScalarWhereWithAggregatesInput = {
+    AND?: ItemScalarWhereWithAggregatesInput | ItemScalarWhereWithAggregatesInput[]
+    OR?: ItemScalarWhereWithAggregatesInput[]
+    NOT?: ItemScalarWhereWithAggregatesInput | ItemScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Item"> | string
+    slug?: StringWithAggregatesFilter<"Item"> | string
+    name?: StringWithAggregatesFilter<"Item"> | string
+    description?: StringNullableWithAggregatesFilter<"Item"> | string | null
+    type?: StringWithAggregatesFilter<"Item"> | string
+    buyPrice?: IntWithAggregatesFilter<"Item"> | number
+    sellPrice?: IntWithAggregatesFilter<"Item"> | number
+    minLevel?: IntWithAggregatesFilter<"Item"> | number
+    growthTime?: IntNullableWithAggregatesFilter<"Item"> | number | null
+    xpReward?: IntNullableWithAggregatesFilter<"Item"> | number | null
+    yieldItemSlug?: StringNullableWithAggregatesFilter<"Item"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Item"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Item"> | Date | string
   }
 
   export type ActivityLogWhereInput = {
@@ -7339,6 +8730,72 @@ export namespace Prisma {
     description?: StringWithAggregatesFilter<"ActivityLog"> | string
     metadata?: JsonNullableWithAggregatesFilter<"ActivityLog">
     createdAt?: DateTimeWithAggregatesFilter<"ActivityLog"> | Date | string
+  }
+
+  export type InventoryItemWhereInput = {
+    AND?: InventoryItemWhereInput | InventoryItemWhereInput[]
+    OR?: InventoryItemWhereInput[]
+    NOT?: InventoryItemWhereInput | InventoryItemWhereInput[]
+    id?: StringFilter<"InventoryItem"> | string
+    profileId?: StringFilter<"InventoryItem"> | string
+    itemSlug?: StringFilter<"InventoryItem"> | string
+    quantity?: IntFilter<"InventoryItem"> | number
+    createdAt?: DateTimeFilter<"InventoryItem"> | Date | string
+    updatedAt?: DateTimeFilter<"InventoryItem"> | Date | string
+    profile?: XOR<ProfileScalarRelationFilter, ProfileWhereInput>
+    item?: XOR<ItemScalarRelationFilter, ItemWhereInput>
+  }
+
+  export type InventoryItemOrderByWithRelationInput = {
+    id?: SortOrder
+    profileId?: SortOrder
+    itemSlug?: SortOrder
+    quantity?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    profile?: ProfileOrderByWithRelationInput
+    item?: ItemOrderByWithRelationInput
+  }
+
+  export type InventoryItemWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    profileId_itemSlug?: InventoryItemProfileIdItemSlugCompoundUniqueInput
+    AND?: InventoryItemWhereInput | InventoryItemWhereInput[]
+    OR?: InventoryItemWhereInput[]
+    NOT?: InventoryItemWhereInput | InventoryItemWhereInput[]
+    profileId?: StringFilter<"InventoryItem"> | string
+    itemSlug?: StringFilter<"InventoryItem"> | string
+    quantity?: IntFilter<"InventoryItem"> | number
+    createdAt?: DateTimeFilter<"InventoryItem"> | Date | string
+    updatedAt?: DateTimeFilter<"InventoryItem"> | Date | string
+    profile?: XOR<ProfileScalarRelationFilter, ProfileWhereInput>
+    item?: XOR<ItemScalarRelationFilter, ItemWhereInput>
+  }, "id" | "profileId_itemSlug">
+
+  export type InventoryItemOrderByWithAggregationInput = {
+    id?: SortOrder
+    profileId?: SortOrder
+    itemSlug?: SortOrder
+    quantity?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: InventoryItemCountOrderByAggregateInput
+    _avg?: InventoryItemAvgOrderByAggregateInput
+    _max?: InventoryItemMaxOrderByAggregateInput
+    _min?: InventoryItemMinOrderByAggregateInput
+    _sum?: InventoryItemSumOrderByAggregateInput
+  }
+
+  export type InventoryItemScalarWhereWithAggregatesInput = {
+    AND?: InventoryItemScalarWhereWithAggregatesInput | InventoryItemScalarWhereWithAggregatesInput[]
+    OR?: InventoryItemScalarWhereWithAggregatesInput[]
+    NOT?: InventoryItemScalarWhereWithAggregatesInput | InventoryItemScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"InventoryItem"> | string
+    profileId?: StringWithAggregatesFilter<"InventoryItem"> | string
+    itemSlug?: StringWithAggregatesFilter<"InventoryItem"> | string
+    quantity?: IntWithAggregatesFilter<"InventoryItem"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"InventoryItem"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"InventoryItem"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -7411,6 +8868,7 @@ export namespace Prisma {
     createdAt?: Date | string
     user: UserCreateNestedOneWithoutProfileInput
     plots?: PlotCreateNestedManyWithoutProfileInput
+    inventory?: InventoryItemCreateNestedManyWithoutProfileInput
   }
 
   export type ProfileUncheckedCreateInput = {
@@ -7423,6 +8881,7 @@ export namespace Prisma {
     farmName?: string | null
     createdAt?: Date | string
     plots?: PlotUncheckedCreateNestedManyWithoutProfileInput
+    inventory?: InventoryItemUncheckedCreateNestedManyWithoutProfileInput
   }
 
   export type ProfileUpdateInput = {
@@ -7435,6 +8894,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutProfileNestedInput
     plots?: PlotUpdateManyWithoutProfileNestedInput
+    inventory?: InventoryItemUpdateManyWithoutProfileNestedInput
   }
 
   export type ProfileUncheckedUpdateInput = {
@@ -7447,6 +8907,7 @@ export namespace Prisma {
     farmName?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     plots?: PlotUncheckedUpdateManyWithoutProfileNestedInput
+    inventory?: InventoryItemUncheckedUpdateManyWithoutProfileNestedInput
   }
 
   export type ProfileCreateManyInput = {
@@ -7487,7 +8948,7 @@ export namespace Prisma {
     plantedAt?: Date | string | null
     isUnlocked?: boolean
     profile: ProfileCreateNestedOneWithoutPlotsInput
-    crop?: CropCreateNestedOneWithoutPlotsInput
+    crop?: ItemCreateNestedOneWithoutPlotsInput
   }
 
   export type PlotUncheckedCreateInput = {
@@ -7505,7 +8966,7 @@ export namespace Prisma {
     plantedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isUnlocked?: BoolFieldUpdateOperationsInput | boolean
     profile?: ProfileUpdateOneRequiredWithoutPlotsNestedInput
-    crop?: CropUpdateOneWithoutPlotsNestedInput
+    crop?: ItemUpdateOneWithoutPlotsNestedInput
   }
 
   export type PlotUncheckedUpdateInput = {
@@ -7542,85 +9003,124 @@ export namespace Prisma {
     isUnlocked?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type CropCreateInput = {
+  export type ItemCreateInput = {
     id?: string
-    name: string
     slug: string
-    price: number
-    sellPrice: number
-    xpReward: number
-    growthTime: number
+    name: string
+    description?: string | null
+    type: string
+    buyPrice?: number
+    sellPrice?: number
     minLevel?: number
+    growthTime?: number | null
+    xpReward?: number | null
+    yieldItemSlug?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    inventoryItems?: InventoryItemCreateNestedManyWithoutItemInput
     plots?: PlotCreateNestedManyWithoutCropInput
   }
 
-  export type CropUncheckedCreateInput = {
+  export type ItemUncheckedCreateInput = {
     id?: string
-    name: string
     slug: string
-    price: number
-    sellPrice: number
-    xpReward: number
-    growthTime: number
+    name: string
+    description?: string | null
+    type: string
+    buyPrice?: number
+    sellPrice?: number
     minLevel?: number
+    growthTime?: number | null
+    xpReward?: number | null
+    yieldItemSlug?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    inventoryItems?: InventoryItemUncheckedCreateNestedManyWithoutItemInput
     plots?: PlotUncheckedCreateNestedManyWithoutCropInput
   }
 
-  export type CropUpdateInput = {
+  export type ItemUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
-    price?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    buyPrice?: IntFieldUpdateOperationsInput | number
     sellPrice?: IntFieldUpdateOperationsInput | number
-    xpReward?: IntFieldUpdateOperationsInput | number
-    growthTime?: IntFieldUpdateOperationsInput | number
     minLevel?: IntFieldUpdateOperationsInput | number
+    growthTime?: NullableIntFieldUpdateOperationsInput | number | null
+    xpReward?: NullableIntFieldUpdateOperationsInput | number | null
+    yieldItemSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inventoryItems?: InventoryItemUpdateManyWithoutItemNestedInput
     plots?: PlotUpdateManyWithoutCropNestedInput
   }
 
-  export type CropUncheckedUpdateInput = {
+  export type ItemUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
-    price?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    buyPrice?: IntFieldUpdateOperationsInput | number
     sellPrice?: IntFieldUpdateOperationsInput | number
-    xpReward?: IntFieldUpdateOperationsInput | number
-    growthTime?: IntFieldUpdateOperationsInput | number
     minLevel?: IntFieldUpdateOperationsInput | number
+    growthTime?: NullableIntFieldUpdateOperationsInput | number | null
+    xpReward?: NullableIntFieldUpdateOperationsInput | number | null
+    yieldItemSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inventoryItems?: InventoryItemUncheckedUpdateManyWithoutItemNestedInput
     plots?: PlotUncheckedUpdateManyWithoutCropNestedInput
   }
 
-  export type CropCreateManyInput = {
+  export type ItemCreateManyInput = {
     id?: string
-    name: string
     slug: string
-    price: number
-    sellPrice: number
-    xpReward: number
-    growthTime: number
+    name: string
+    description?: string | null
+    type: string
+    buyPrice?: number
+    sellPrice?: number
     minLevel?: number
+    growthTime?: number | null
+    xpReward?: number | null
+    yieldItemSlug?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
-  export type CropUpdateManyMutationInput = {
+  export type ItemUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
-    price?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    buyPrice?: IntFieldUpdateOperationsInput | number
     sellPrice?: IntFieldUpdateOperationsInput | number
-    xpReward?: IntFieldUpdateOperationsInput | number
-    growthTime?: IntFieldUpdateOperationsInput | number
     minLevel?: IntFieldUpdateOperationsInput | number
+    growthTime?: NullableIntFieldUpdateOperationsInput | number | null
+    xpReward?: NullableIntFieldUpdateOperationsInput | number | null
+    yieldItemSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type CropUncheckedUpdateManyInput = {
+  export type ItemUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
-    price?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    buyPrice?: IntFieldUpdateOperationsInput | number
     sellPrice?: IntFieldUpdateOperationsInput | number
-    xpReward?: IntFieldUpdateOperationsInput | number
-    growthTime?: IntFieldUpdateOperationsInput | number
     minLevel?: IntFieldUpdateOperationsInput | number
+    growthTime?: NullableIntFieldUpdateOperationsInput | number | null
+    xpReward?: NullableIntFieldUpdateOperationsInput | number | null
+    yieldItemSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ActivityLogCreateInput = {
@@ -7684,6 +9184,67 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     metadata?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InventoryItemCreateInput = {
+    id?: string
+    quantity?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    profile: ProfileCreateNestedOneWithoutInventoryInput
+    item: ItemCreateNestedOneWithoutInventoryItemsInput
+  }
+
+  export type InventoryItemUncheckedCreateInput = {
+    id?: string
+    profileId: string
+    itemSlug: string
+    quantity?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InventoryItemUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    profile?: ProfileUpdateOneRequiredWithoutInventoryNestedInput
+    item?: ItemUpdateOneRequiredWithoutInventoryItemsNestedInput
+  }
+
+  export type InventoryItemUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    profileId?: StringFieldUpdateOperationsInput | string
+    itemSlug?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InventoryItemCreateManyInput = {
+    id?: string
+    profileId: string
+    itemSlug: string
+    quantity?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InventoryItemUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InventoryItemUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    profileId?: StringFieldUpdateOperationsInput | string
+    itemSlug?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -7810,12 +9371,22 @@ export namespace Prisma {
     none?: PlotWhereInput
   }
 
+  export type InventoryItemListRelationFilter = {
+    every?: InventoryItemWhereInput
+    some?: InventoryItemWhereInput
+    none?: InventoryItemWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
   }
 
   export type PlotOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type InventoryItemOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -7919,9 +9490,9 @@ export namespace Prisma {
     isNot?: ProfileWhereInput
   }
 
-  export type CropNullableScalarRelationFilter = {
-    is?: CropWhereInput | null
-    isNot?: CropWhereInput | null
+  export type ItemNullableScalarRelationFilter = {
+    is?: ItemWhereInput | null
+    isNot?: ItemWhereInput | null
   }
 
   export type PlotProfileIdIndexCompoundUniqueInput = {
@@ -7986,53 +9557,95 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
-  export type CropCountOrderByAggregateInput = {
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type ItemCountOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
     slug?: SortOrder
-    price?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    type?: SortOrder
+    buyPrice?: SortOrder
     sellPrice?: SortOrder
-    xpReward?: SortOrder
-    growthTime?: SortOrder
     minLevel?: SortOrder
+    growthTime?: SortOrder
+    xpReward?: SortOrder
+    yieldItemSlug?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
-  export type CropAvgOrderByAggregateInput = {
-    price?: SortOrder
+  export type ItemAvgOrderByAggregateInput = {
+    buyPrice?: SortOrder
     sellPrice?: SortOrder
-    xpReward?: SortOrder
-    growthTime?: SortOrder
     minLevel?: SortOrder
+    growthTime?: SortOrder
+    xpReward?: SortOrder
   }
 
-  export type CropMaxOrderByAggregateInput = {
+  export type ItemMaxOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
     slug?: SortOrder
-    price?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    type?: SortOrder
+    buyPrice?: SortOrder
     sellPrice?: SortOrder
-    xpReward?: SortOrder
-    growthTime?: SortOrder
     minLevel?: SortOrder
+    growthTime?: SortOrder
+    xpReward?: SortOrder
+    yieldItemSlug?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
-  export type CropMinOrderByAggregateInput = {
+  export type ItemMinOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
     slug?: SortOrder
-    price?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    type?: SortOrder
+    buyPrice?: SortOrder
     sellPrice?: SortOrder
-    xpReward?: SortOrder
-    growthTime?: SortOrder
     minLevel?: SortOrder
+    growthTime?: SortOrder
+    xpReward?: SortOrder
+    yieldItemSlug?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
-  export type CropSumOrderByAggregateInput = {
-    price?: SortOrder
+  export type ItemSumOrderByAggregateInput = {
+    buyPrice?: SortOrder
     sellPrice?: SortOrder
-    xpReward?: SortOrder
-    growthTime?: SortOrder
     minLevel?: SortOrder
+    growthTime?: SortOrder
+    xpReward?: SortOrder
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
   export type JsonNullableFilter<$PrismaModel = never> =
     | PatchUndefined<
@@ -8109,6 +9722,51 @@ export namespace Prisma {
     _max?: NestedJsonNullableFilter<$PrismaModel>
   }
 
+  export type ItemScalarRelationFilter = {
+    is?: ItemWhereInput
+    isNot?: ItemWhereInput
+  }
+
+  export type InventoryItemProfileIdItemSlugCompoundUniqueInput = {
+    profileId: string
+    itemSlug: string
+  }
+
+  export type InventoryItemCountOrderByAggregateInput = {
+    id?: SortOrder
+    profileId?: SortOrder
+    itemSlug?: SortOrder
+    quantity?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type InventoryItemAvgOrderByAggregateInput = {
+    quantity?: SortOrder
+  }
+
+  export type InventoryItemMaxOrderByAggregateInput = {
+    id?: SortOrder
+    profileId?: SortOrder
+    itemSlug?: SortOrder
+    quantity?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type InventoryItemMinOrderByAggregateInput = {
+    id?: SortOrder
+    profileId?: SortOrder
+    itemSlug?: SortOrder
+    quantity?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type InventoryItemSumOrderByAggregateInput = {
+    quantity?: SortOrder
+  }
+
   export type ProfileCreateNestedOneWithoutUserInput = {
     create?: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
     connectOrCreate?: ProfileCreateOrConnectWithoutUserInput
@@ -8162,11 +9820,25 @@ export namespace Prisma {
     connect?: PlotWhereUniqueInput | PlotWhereUniqueInput[]
   }
 
+  export type InventoryItemCreateNestedManyWithoutProfileInput = {
+    create?: XOR<InventoryItemCreateWithoutProfileInput, InventoryItemUncheckedCreateWithoutProfileInput> | InventoryItemCreateWithoutProfileInput[] | InventoryItemUncheckedCreateWithoutProfileInput[]
+    connectOrCreate?: InventoryItemCreateOrConnectWithoutProfileInput | InventoryItemCreateOrConnectWithoutProfileInput[]
+    createMany?: InventoryItemCreateManyProfileInputEnvelope
+    connect?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
+  }
+
   export type PlotUncheckedCreateNestedManyWithoutProfileInput = {
     create?: XOR<PlotCreateWithoutProfileInput, PlotUncheckedCreateWithoutProfileInput> | PlotCreateWithoutProfileInput[] | PlotUncheckedCreateWithoutProfileInput[]
     connectOrCreate?: PlotCreateOrConnectWithoutProfileInput | PlotCreateOrConnectWithoutProfileInput[]
     createMany?: PlotCreateManyProfileInputEnvelope
     connect?: PlotWhereUniqueInput | PlotWhereUniqueInput[]
+  }
+
+  export type InventoryItemUncheckedCreateNestedManyWithoutProfileInput = {
+    create?: XOR<InventoryItemCreateWithoutProfileInput, InventoryItemUncheckedCreateWithoutProfileInput> | InventoryItemCreateWithoutProfileInput[] | InventoryItemUncheckedCreateWithoutProfileInput[]
+    connectOrCreate?: InventoryItemCreateOrConnectWithoutProfileInput | InventoryItemCreateOrConnectWithoutProfileInput[]
+    createMany?: InventoryItemCreateManyProfileInputEnvelope
+    connect?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -8203,6 +9875,20 @@ export namespace Prisma {
     deleteMany?: PlotScalarWhereInput | PlotScalarWhereInput[]
   }
 
+  export type InventoryItemUpdateManyWithoutProfileNestedInput = {
+    create?: XOR<InventoryItemCreateWithoutProfileInput, InventoryItemUncheckedCreateWithoutProfileInput> | InventoryItemCreateWithoutProfileInput[] | InventoryItemUncheckedCreateWithoutProfileInput[]
+    connectOrCreate?: InventoryItemCreateOrConnectWithoutProfileInput | InventoryItemCreateOrConnectWithoutProfileInput[]
+    upsert?: InventoryItemUpsertWithWhereUniqueWithoutProfileInput | InventoryItemUpsertWithWhereUniqueWithoutProfileInput[]
+    createMany?: InventoryItemCreateManyProfileInputEnvelope
+    set?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
+    disconnect?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
+    delete?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
+    connect?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
+    update?: InventoryItemUpdateWithWhereUniqueWithoutProfileInput | InventoryItemUpdateWithWhereUniqueWithoutProfileInput[]
+    updateMany?: InventoryItemUpdateManyWithWhereWithoutProfileInput | InventoryItemUpdateManyWithWhereWithoutProfileInput[]
+    deleteMany?: InventoryItemScalarWhereInput | InventoryItemScalarWhereInput[]
+  }
+
   export type PlotUncheckedUpdateManyWithoutProfileNestedInput = {
     create?: XOR<PlotCreateWithoutProfileInput, PlotUncheckedCreateWithoutProfileInput> | PlotCreateWithoutProfileInput[] | PlotUncheckedCreateWithoutProfileInput[]
     connectOrCreate?: PlotCreateOrConnectWithoutProfileInput | PlotCreateOrConnectWithoutProfileInput[]
@@ -8217,16 +9903,30 @@ export namespace Prisma {
     deleteMany?: PlotScalarWhereInput | PlotScalarWhereInput[]
   }
 
+  export type InventoryItemUncheckedUpdateManyWithoutProfileNestedInput = {
+    create?: XOR<InventoryItemCreateWithoutProfileInput, InventoryItemUncheckedCreateWithoutProfileInput> | InventoryItemCreateWithoutProfileInput[] | InventoryItemUncheckedCreateWithoutProfileInput[]
+    connectOrCreate?: InventoryItemCreateOrConnectWithoutProfileInput | InventoryItemCreateOrConnectWithoutProfileInput[]
+    upsert?: InventoryItemUpsertWithWhereUniqueWithoutProfileInput | InventoryItemUpsertWithWhereUniqueWithoutProfileInput[]
+    createMany?: InventoryItemCreateManyProfileInputEnvelope
+    set?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
+    disconnect?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
+    delete?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
+    connect?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
+    update?: InventoryItemUpdateWithWhereUniqueWithoutProfileInput | InventoryItemUpdateWithWhereUniqueWithoutProfileInput[]
+    updateMany?: InventoryItemUpdateManyWithWhereWithoutProfileInput | InventoryItemUpdateManyWithWhereWithoutProfileInput[]
+    deleteMany?: InventoryItemScalarWhereInput | InventoryItemScalarWhereInput[]
+  }
+
   export type ProfileCreateNestedOneWithoutPlotsInput = {
     create?: XOR<ProfileCreateWithoutPlotsInput, ProfileUncheckedCreateWithoutPlotsInput>
     connectOrCreate?: ProfileCreateOrConnectWithoutPlotsInput
     connect?: ProfileWhereUniqueInput
   }
 
-  export type CropCreateNestedOneWithoutPlotsInput = {
-    create?: XOR<CropCreateWithoutPlotsInput, CropUncheckedCreateWithoutPlotsInput>
-    connectOrCreate?: CropCreateOrConnectWithoutPlotsInput
-    connect?: CropWhereUniqueInput
+  export type ItemCreateNestedOneWithoutPlotsInput = {
+    create?: XOR<ItemCreateWithoutPlotsInput, ItemUncheckedCreateWithoutPlotsInput>
+    connectOrCreate?: ItemCreateOrConnectWithoutPlotsInput
+    connect?: ItemWhereUniqueInput
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -8245,14 +9945,21 @@ export namespace Prisma {
     update?: XOR<XOR<ProfileUpdateToOneWithWhereWithoutPlotsInput, ProfileUpdateWithoutPlotsInput>, ProfileUncheckedUpdateWithoutPlotsInput>
   }
 
-  export type CropUpdateOneWithoutPlotsNestedInput = {
-    create?: XOR<CropCreateWithoutPlotsInput, CropUncheckedCreateWithoutPlotsInput>
-    connectOrCreate?: CropCreateOrConnectWithoutPlotsInput
-    upsert?: CropUpsertWithoutPlotsInput
-    disconnect?: CropWhereInput | boolean
-    delete?: CropWhereInput | boolean
-    connect?: CropWhereUniqueInput
-    update?: XOR<XOR<CropUpdateToOneWithWhereWithoutPlotsInput, CropUpdateWithoutPlotsInput>, CropUncheckedUpdateWithoutPlotsInput>
+  export type ItemUpdateOneWithoutPlotsNestedInput = {
+    create?: XOR<ItemCreateWithoutPlotsInput, ItemUncheckedCreateWithoutPlotsInput>
+    connectOrCreate?: ItemCreateOrConnectWithoutPlotsInput
+    upsert?: ItemUpsertWithoutPlotsInput
+    disconnect?: ItemWhereInput | boolean
+    delete?: ItemWhereInput | boolean
+    connect?: ItemWhereUniqueInput
+    update?: XOR<XOR<ItemUpdateToOneWithWhereWithoutPlotsInput, ItemUpdateWithoutPlotsInput>, ItemUncheckedUpdateWithoutPlotsInput>
+  }
+
+  export type InventoryItemCreateNestedManyWithoutItemInput = {
+    create?: XOR<InventoryItemCreateWithoutItemInput, InventoryItemUncheckedCreateWithoutItemInput> | InventoryItemCreateWithoutItemInput[] | InventoryItemUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: InventoryItemCreateOrConnectWithoutItemInput | InventoryItemCreateOrConnectWithoutItemInput[]
+    createMany?: InventoryItemCreateManyItemInputEnvelope
+    connect?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
   }
 
   export type PlotCreateNestedManyWithoutCropInput = {
@@ -8262,11 +9969,40 @@ export namespace Prisma {
     connect?: PlotWhereUniqueInput | PlotWhereUniqueInput[]
   }
 
+  export type InventoryItemUncheckedCreateNestedManyWithoutItemInput = {
+    create?: XOR<InventoryItemCreateWithoutItemInput, InventoryItemUncheckedCreateWithoutItemInput> | InventoryItemCreateWithoutItemInput[] | InventoryItemUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: InventoryItemCreateOrConnectWithoutItemInput | InventoryItemCreateOrConnectWithoutItemInput[]
+    createMany?: InventoryItemCreateManyItemInputEnvelope
+    connect?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
+  }
+
   export type PlotUncheckedCreateNestedManyWithoutCropInput = {
     create?: XOR<PlotCreateWithoutCropInput, PlotUncheckedCreateWithoutCropInput> | PlotCreateWithoutCropInput[] | PlotUncheckedCreateWithoutCropInput[]
     connectOrCreate?: PlotCreateOrConnectWithoutCropInput | PlotCreateOrConnectWithoutCropInput[]
     createMany?: PlotCreateManyCropInputEnvelope
     connect?: PlotWhereUniqueInput | PlotWhereUniqueInput[]
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type InventoryItemUpdateManyWithoutItemNestedInput = {
+    create?: XOR<InventoryItemCreateWithoutItemInput, InventoryItemUncheckedCreateWithoutItemInput> | InventoryItemCreateWithoutItemInput[] | InventoryItemUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: InventoryItemCreateOrConnectWithoutItemInput | InventoryItemCreateOrConnectWithoutItemInput[]
+    upsert?: InventoryItemUpsertWithWhereUniqueWithoutItemInput | InventoryItemUpsertWithWhereUniqueWithoutItemInput[]
+    createMany?: InventoryItemCreateManyItemInputEnvelope
+    set?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
+    disconnect?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
+    delete?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
+    connect?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
+    update?: InventoryItemUpdateWithWhereUniqueWithoutItemInput | InventoryItemUpdateWithWhereUniqueWithoutItemInput[]
+    updateMany?: InventoryItemUpdateManyWithWhereWithoutItemInput | InventoryItemUpdateManyWithWhereWithoutItemInput[]
+    deleteMany?: InventoryItemScalarWhereInput | InventoryItemScalarWhereInput[]
   }
 
   export type PlotUpdateManyWithoutCropNestedInput = {
@@ -8283,6 +10019,20 @@ export namespace Prisma {
     deleteMany?: PlotScalarWhereInput | PlotScalarWhereInput[]
   }
 
+  export type InventoryItemUncheckedUpdateManyWithoutItemNestedInput = {
+    create?: XOR<InventoryItemCreateWithoutItemInput, InventoryItemUncheckedCreateWithoutItemInput> | InventoryItemCreateWithoutItemInput[] | InventoryItemUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: InventoryItemCreateOrConnectWithoutItemInput | InventoryItemCreateOrConnectWithoutItemInput[]
+    upsert?: InventoryItemUpsertWithWhereUniqueWithoutItemInput | InventoryItemUpsertWithWhereUniqueWithoutItemInput[]
+    createMany?: InventoryItemCreateManyItemInputEnvelope
+    set?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
+    disconnect?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
+    delete?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
+    connect?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
+    update?: InventoryItemUpdateWithWhereUniqueWithoutItemInput | InventoryItemUpdateWithWhereUniqueWithoutItemInput[]
+    updateMany?: InventoryItemUpdateManyWithWhereWithoutItemInput | InventoryItemUpdateManyWithWhereWithoutItemInput[]
+    deleteMany?: InventoryItemScalarWhereInput | InventoryItemScalarWhereInput[]
+  }
+
   export type PlotUncheckedUpdateManyWithoutCropNestedInput = {
     create?: XOR<PlotCreateWithoutCropInput, PlotUncheckedCreateWithoutCropInput> | PlotCreateWithoutCropInput[] | PlotUncheckedCreateWithoutCropInput[]
     connectOrCreate?: PlotCreateOrConnectWithoutCropInput | PlotCreateOrConnectWithoutCropInput[]
@@ -8295,6 +10045,34 @@ export namespace Prisma {
     update?: PlotUpdateWithWhereUniqueWithoutCropInput | PlotUpdateWithWhereUniqueWithoutCropInput[]
     updateMany?: PlotUpdateManyWithWhereWithoutCropInput | PlotUpdateManyWithWhereWithoutCropInput[]
     deleteMany?: PlotScalarWhereInput | PlotScalarWhereInput[]
+  }
+
+  export type ProfileCreateNestedOneWithoutInventoryInput = {
+    create?: XOR<ProfileCreateWithoutInventoryInput, ProfileUncheckedCreateWithoutInventoryInput>
+    connectOrCreate?: ProfileCreateOrConnectWithoutInventoryInput
+    connect?: ProfileWhereUniqueInput
+  }
+
+  export type ItemCreateNestedOneWithoutInventoryItemsInput = {
+    create?: XOR<ItemCreateWithoutInventoryItemsInput, ItemUncheckedCreateWithoutInventoryItemsInput>
+    connectOrCreate?: ItemCreateOrConnectWithoutInventoryItemsInput
+    connect?: ItemWhereUniqueInput
+  }
+
+  export type ProfileUpdateOneRequiredWithoutInventoryNestedInput = {
+    create?: XOR<ProfileCreateWithoutInventoryInput, ProfileUncheckedCreateWithoutInventoryInput>
+    connectOrCreate?: ProfileCreateOrConnectWithoutInventoryInput
+    upsert?: ProfileUpsertWithoutInventoryInput
+    connect?: ProfileWhereUniqueInput
+    update?: XOR<XOR<ProfileUpdateToOneWithWhereWithoutInventoryInput, ProfileUpdateWithoutInventoryInput>, ProfileUncheckedUpdateWithoutInventoryInput>
+  }
+
+  export type ItemUpdateOneRequiredWithoutInventoryItemsNestedInput = {
+    create?: XOR<ItemCreateWithoutInventoryItemsInput, ItemUncheckedCreateWithoutInventoryItemsInput>
+    connectOrCreate?: ItemCreateOrConnectWithoutInventoryItemsInput
+    upsert?: ItemUpsertWithoutInventoryItemsInput
+    connect?: ItemWhereUniqueInput
+    update?: XOR<XOR<ItemUpdateToOneWithWhereWithoutInventoryItemsInput, ItemUpdateWithoutInventoryItemsInput>, ItemUncheckedUpdateWithoutInventoryItemsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -8470,6 +10248,33 @@ export namespace Prisma {
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
   }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
   export type NestedJsonNullableFilter<$PrismaModel = never> =
     | PatchUndefined<
         Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
@@ -8503,6 +10308,7 @@ export namespace Prisma {
     farmName?: string | null
     createdAt?: Date | string
     plots?: PlotCreateNestedManyWithoutProfileInput
+    inventory?: InventoryItemCreateNestedManyWithoutProfileInput
   }
 
   export type ProfileUncheckedCreateWithoutUserInput = {
@@ -8514,6 +10320,7 @@ export namespace Prisma {
     farmName?: string | null
     createdAt?: Date | string
     plots?: PlotUncheckedCreateNestedManyWithoutProfileInput
+    inventory?: InventoryItemUncheckedCreateNestedManyWithoutProfileInput
   }
 
   export type ProfileCreateOrConnectWithoutUserInput = {
@@ -8541,6 +10348,7 @@ export namespace Prisma {
     farmName?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     plots?: PlotUpdateManyWithoutProfileNestedInput
+    inventory?: InventoryItemUpdateManyWithoutProfileNestedInput
   }
 
   export type ProfileUncheckedUpdateWithoutUserInput = {
@@ -8552,6 +10360,7 @@ export namespace Prisma {
     farmName?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     plots?: PlotUncheckedUpdateManyWithoutProfileNestedInput
+    inventory?: InventoryItemUncheckedUpdateManyWithoutProfileNestedInput
   }
 
   export type UserCreateWithoutProfileInput = {
@@ -8580,7 +10389,7 @@ export namespace Prisma {
     index: number
     plantedAt?: Date | string | null
     isUnlocked?: boolean
-    crop?: CropCreateNestedOneWithoutPlotsInput
+    crop?: ItemCreateNestedOneWithoutPlotsInput
   }
 
   export type PlotUncheckedCreateWithoutProfileInput = {
@@ -8598,6 +10407,32 @@ export namespace Prisma {
 
   export type PlotCreateManyProfileInputEnvelope = {
     data: PlotCreateManyProfileInput | PlotCreateManyProfileInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type InventoryItemCreateWithoutProfileInput = {
+    id?: string
+    quantity?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    item: ItemCreateNestedOneWithoutInventoryItemsInput
+  }
+
+  export type InventoryItemUncheckedCreateWithoutProfileInput = {
+    id?: string
+    itemSlug: string
+    quantity?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InventoryItemCreateOrConnectWithoutProfileInput = {
+    where: InventoryItemWhereUniqueInput
+    create: XOR<InventoryItemCreateWithoutProfileInput, InventoryItemUncheckedCreateWithoutProfileInput>
+  }
+
+  export type InventoryItemCreateManyProfileInputEnvelope = {
+    data: InventoryItemCreateManyProfileInput | InventoryItemCreateManyProfileInput[]
     skipDuplicates?: boolean
   }
 
@@ -8656,6 +10491,34 @@ export namespace Prisma {
     isUnlocked?: BoolFilter<"Plot"> | boolean
   }
 
+  export type InventoryItemUpsertWithWhereUniqueWithoutProfileInput = {
+    where: InventoryItemWhereUniqueInput
+    update: XOR<InventoryItemUpdateWithoutProfileInput, InventoryItemUncheckedUpdateWithoutProfileInput>
+    create: XOR<InventoryItemCreateWithoutProfileInput, InventoryItemUncheckedCreateWithoutProfileInput>
+  }
+
+  export type InventoryItemUpdateWithWhereUniqueWithoutProfileInput = {
+    where: InventoryItemWhereUniqueInput
+    data: XOR<InventoryItemUpdateWithoutProfileInput, InventoryItemUncheckedUpdateWithoutProfileInput>
+  }
+
+  export type InventoryItemUpdateManyWithWhereWithoutProfileInput = {
+    where: InventoryItemScalarWhereInput
+    data: XOR<InventoryItemUpdateManyMutationInput, InventoryItemUncheckedUpdateManyWithoutProfileInput>
+  }
+
+  export type InventoryItemScalarWhereInput = {
+    AND?: InventoryItemScalarWhereInput | InventoryItemScalarWhereInput[]
+    OR?: InventoryItemScalarWhereInput[]
+    NOT?: InventoryItemScalarWhereInput | InventoryItemScalarWhereInput[]
+    id?: StringFilter<"InventoryItem"> | string
+    profileId?: StringFilter<"InventoryItem"> | string
+    itemSlug?: StringFilter<"InventoryItem"> | string
+    quantity?: IntFilter<"InventoryItem"> | number
+    createdAt?: DateTimeFilter<"InventoryItem"> | Date | string
+    updatedAt?: DateTimeFilter<"InventoryItem"> | Date | string
+  }
+
   export type ProfileCreateWithoutPlotsInput = {
     id?: string
     avatar?: string | null
@@ -8665,6 +10528,7 @@ export namespace Prisma {
     farmName?: string | null
     createdAt?: Date | string
     user: UserCreateNestedOneWithoutProfileInput
+    inventory?: InventoryItemCreateNestedManyWithoutProfileInput
   }
 
   export type ProfileUncheckedCreateWithoutPlotsInput = {
@@ -8676,6 +10540,7 @@ export namespace Prisma {
     coins?: number
     farmName?: string | null
     createdAt?: Date | string
+    inventory?: InventoryItemUncheckedCreateNestedManyWithoutProfileInput
   }
 
   export type ProfileCreateOrConnectWithoutPlotsInput = {
@@ -8683,31 +10548,43 @@ export namespace Prisma {
     create: XOR<ProfileCreateWithoutPlotsInput, ProfileUncheckedCreateWithoutPlotsInput>
   }
 
-  export type CropCreateWithoutPlotsInput = {
+  export type ItemCreateWithoutPlotsInput = {
     id?: string
-    name: string
     slug: string
-    price: number
-    sellPrice: number
-    xpReward: number
-    growthTime: number
+    name: string
+    description?: string | null
+    type: string
+    buyPrice?: number
+    sellPrice?: number
     minLevel?: number
+    growthTime?: number | null
+    xpReward?: number | null
+    yieldItemSlug?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    inventoryItems?: InventoryItemCreateNestedManyWithoutItemInput
   }
 
-  export type CropUncheckedCreateWithoutPlotsInput = {
+  export type ItemUncheckedCreateWithoutPlotsInput = {
     id?: string
-    name: string
     slug: string
-    price: number
-    sellPrice: number
-    xpReward: number
-    growthTime: number
+    name: string
+    description?: string | null
+    type: string
+    buyPrice?: number
+    sellPrice?: number
     minLevel?: number
+    growthTime?: number | null
+    xpReward?: number | null
+    yieldItemSlug?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    inventoryItems?: InventoryItemUncheckedCreateNestedManyWithoutItemInput
   }
 
-  export type CropCreateOrConnectWithoutPlotsInput = {
-    where: CropWhereUniqueInput
-    create: XOR<CropCreateWithoutPlotsInput, CropUncheckedCreateWithoutPlotsInput>
+  export type ItemCreateOrConnectWithoutPlotsInput = {
+    where: ItemWhereUniqueInput
+    create: XOR<ItemCreateWithoutPlotsInput, ItemUncheckedCreateWithoutPlotsInput>
   }
 
   export type ProfileUpsertWithoutPlotsInput = {
@@ -8730,6 +10607,7 @@ export namespace Prisma {
     farmName?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutProfileNestedInput
+    inventory?: InventoryItemUpdateManyWithoutProfileNestedInput
   }
 
   export type ProfileUncheckedUpdateWithoutPlotsInput = {
@@ -8741,39 +10619,78 @@ export namespace Prisma {
     coins?: IntFieldUpdateOperationsInput | number
     farmName?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inventory?: InventoryItemUncheckedUpdateManyWithoutProfileNestedInput
   }
 
-  export type CropUpsertWithoutPlotsInput = {
-    update: XOR<CropUpdateWithoutPlotsInput, CropUncheckedUpdateWithoutPlotsInput>
-    create: XOR<CropCreateWithoutPlotsInput, CropUncheckedCreateWithoutPlotsInput>
-    where?: CropWhereInput
+  export type ItemUpsertWithoutPlotsInput = {
+    update: XOR<ItemUpdateWithoutPlotsInput, ItemUncheckedUpdateWithoutPlotsInput>
+    create: XOR<ItemCreateWithoutPlotsInput, ItemUncheckedCreateWithoutPlotsInput>
+    where?: ItemWhereInput
   }
 
-  export type CropUpdateToOneWithWhereWithoutPlotsInput = {
-    where?: CropWhereInput
-    data: XOR<CropUpdateWithoutPlotsInput, CropUncheckedUpdateWithoutPlotsInput>
+  export type ItemUpdateToOneWithWhereWithoutPlotsInput = {
+    where?: ItemWhereInput
+    data: XOR<ItemUpdateWithoutPlotsInput, ItemUncheckedUpdateWithoutPlotsInput>
   }
 
-  export type CropUpdateWithoutPlotsInput = {
+  export type ItemUpdateWithoutPlotsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
-    price?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    buyPrice?: IntFieldUpdateOperationsInput | number
     sellPrice?: IntFieldUpdateOperationsInput | number
-    xpReward?: IntFieldUpdateOperationsInput | number
-    growthTime?: IntFieldUpdateOperationsInput | number
     minLevel?: IntFieldUpdateOperationsInput | number
+    growthTime?: NullableIntFieldUpdateOperationsInput | number | null
+    xpReward?: NullableIntFieldUpdateOperationsInput | number | null
+    yieldItemSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inventoryItems?: InventoryItemUpdateManyWithoutItemNestedInput
   }
 
-  export type CropUncheckedUpdateWithoutPlotsInput = {
+  export type ItemUncheckedUpdateWithoutPlotsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
-    price?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    buyPrice?: IntFieldUpdateOperationsInput | number
     sellPrice?: IntFieldUpdateOperationsInput | number
-    xpReward?: IntFieldUpdateOperationsInput | number
-    growthTime?: IntFieldUpdateOperationsInput | number
     minLevel?: IntFieldUpdateOperationsInput | number
+    growthTime?: NullableIntFieldUpdateOperationsInput | number | null
+    xpReward?: NullableIntFieldUpdateOperationsInput | number | null
+    yieldItemSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inventoryItems?: InventoryItemUncheckedUpdateManyWithoutItemNestedInput
+  }
+
+  export type InventoryItemCreateWithoutItemInput = {
+    id?: string
+    quantity?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    profile: ProfileCreateNestedOneWithoutInventoryInput
+  }
+
+  export type InventoryItemUncheckedCreateWithoutItemInput = {
+    id?: string
+    profileId: string
+    quantity?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InventoryItemCreateOrConnectWithoutItemInput = {
+    where: InventoryItemWhereUniqueInput
+    create: XOR<InventoryItemCreateWithoutItemInput, InventoryItemUncheckedCreateWithoutItemInput>
+  }
+
+  export type InventoryItemCreateManyItemInputEnvelope = {
+    data: InventoryItemCreateManyItemInput | InventoryItemCreateManyItemInput[]
+    skipDuplicates?: boolean
   }
 
   export type PlotCreateWithoutCropInput = {
@@ -8802,6 +10719,22 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type InventoryItemUpsertWithWhereUniqueWithoutItemInput = {
+    where: InventoryItemWhereUniqueInput
+    update: XOR<InventoryItemUpdateWithoutItemInput, InventoryItemUncheckedUpdateWithoutItemInput>
+    create: XOR<InventoryItemCreateWithoutItemInput, InventoryItemUncheckedCreateWithoutItemInput>
+  }
+
+  export type InventoryItemUpdateWithWhereUniqueWithoutItemInput = {
+    where: InventoryItemWhereUniqueInput
+    data: XOR<InventoryItemUpdateWithoutItemInput, InventoryItemUncheckedUpdateWithoutItemInput>
+  }
+
+  export type InventoryItemUpdateManyWithWhereWithoutItemInput = {
+    where: InventoryItemScalarWhereInput
+    data: XOR<InventoryItemUpdateManyMutationInput, InventoryItemUncheckedUpdateManyWithoutItemInput>
+  }
+
   export type PlotUpsertWithWhereUniqueWithoutCropInput = {
     where: PlotWhereUniqueInput
     update: XOR<PlotUpdateWithoutCropInput, PlotUncheckedUpdateWithoutCropInput>
@@ -8818,6 +10751,154 @@ export namespace Prisma {
     data: XOR<PlotUpdateManyMutationInput, PlotUncheckedUpdateManyWithoutCropInput>
   }
 
+  export type ProfileCreateWithoutInventoryInput = {
+    id?: string
+    avatar?: string | null
+    level?: number
+    experience?: number
+    coins?: number
+    farmName?: string | null
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutProfileInput
+    plots?: PlotCreateNestedManyWithoutProfileInput
+  }
+
+  export type ProfileUncheckedCreateWithoutInventoryInput = {
+    id?: string
+    userId: string
+    avatar?: string | null
+    level?: number
+    experience?: number
+    coins?: number
+    farmName?: string | null
+    createdAt?: Date | string
+    plots?: PlotUncheckedCreateNestedManyWithoutProfileInput
+  }
+
+  export type ProfileCreateOrConnectWithoutInventoryInput = {
+    where: ProfileWhereUniqueInput
+    create: XOR<ProfileCreateWithoutInventoryInput, ProfileUncheckedCreateWithoutInventoryInput>
+  }
+
+  export type ItemCreateWithoutInventoryItemsInput = {
+    id?: string
+    slug: string
+    name: string
+    description?: string | null
+    type: string
+    buyPrice?: number
+    sellPrice?: number
+    minLevel?: number
+    growthTime?: number | null
+    xpReward?: number | null
+    yieldItemSlug?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    plots?: PlotCreateNestedManyWithoutCropInput
+  }
+
+  export type ItemUncheckedCreateWithoutInventoryItemsInput = {
+    id?: string
+    slug: string
+    name: string
+    description?: string | null
+    type: string
+    buyPrice?: number
+    sellPrice?: number
+    minLevel?: number
+    growthTime?: number | null
+    xpReward?: number | null
+    yieldItemSlug?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    plots?: PlotUncheckedCreateNestedManyWithoutCropInput
+  }
+
+  export type ItemCreateOrConnectWithoutInventoryItemsInput = {
+    where: ItemWhereUniqueInput
+    create: XOR<ItemCreateWithoutInventoryItemsInput, ItemUncheckedCreateWithoutInventoryItemsInput>
+  }
+
+  export type ProfileUpsertWithoutInventoryInput = {
+    update: XOR<ProfileUpdateWithoutInventoryInput, ProfileUncheckedUpdateWithoutInventoryInput>
+    create: XOR<ProfileCreateWithoutInventoryInput, ProfileUncheckedCreateWithoutInventoryInput>
+    where?: ProfileWhereInput
+  }
+
+  export type ProfileUpdateToOneWithWhereWithoutInventoryInput = {
+    where?: ProfileWhereInput
+    data: XOR<ProfileUpdateWithoutInventoryInput, ProfileUncheckedUpdateWithoutInventoryInput>
+  }
+
+  export type ProfileUpdateWithoutInventoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: IntFieldUpdateOperationsInput | number
+    experience?: IntFieldUpdateOperationsInput | number
+    coins?: IntFieldUpdateOperationsInput | number
+    farmName?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutProfileNestedInput
+    plots?: PlotUpdateManyWithoutProfileNestedInput
+  }
+
+  export type ProfileUncheckedUpdateWithoutInventoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: IntFieldUpdateOperationsInput | number
+    experience?: IntFieldUpdateOperationsInput | number
+    coins?: IntFieldUpdateOperationsInput | number
+    farmName?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    plots?: PlotUncheckedUpdateManyWithoutProfileNestedInput
+  }
+
+  export type ItemUpsertWithoutInventoryItemsInput = {
+    update: XOR<ItemUpdateWithoutInventoryItemsInput, ItemUncheckedUpdateWithoutInventoryItemsInput>
+    create: XOR<ItemCreateWithoutInventoryItemsInput, ItemUncheckedCreateWithoutInventoryItemsInput>
+    where?: ItemWhereInput
+  }
+
+  export type ItemUpdateToOneWithWhereWithoutInventoryItemsInput = {
+    where?: ItemWhereInput
+    data: XOR<ItemUpdateWithoutInventoryItemsInput, ItemUncheckedUpdateWithoutInventoryItemsInput>
+  }
+
+  export type ItemUpdateWithoutInventoryItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    buyPrice?: IntFieldUpdateOperationsInput | number
+    sellPrice?: IntFieldUpdateOperationsInput | number
+    minLevel?: IntFieldUpdateOperationsInput | number
+    growthTime?: NullableIntFieldUpdateOperationsInput | number | null
+    xpReward?: NullableIntFieldUpdateOperationsInput | number | null
+    yieldItemSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    plots?: PlotUpdateManyWithoutCropNestedInput
+  }
+
+  export type ItemUncheckedUpdateWithoutInventoryItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    buyPrice?: IntFieldUpdateOperationsInput | number
+    sellPrice?: IntFieldUpdateOperationsInput | number
+    minLevel?: IntFieldUpdateOperationsInput | number
+    growthTime?: NullableIntFieldUpdateOperationsInput | number | null
+    xpReward?: NullableIntFieldUpdateOperationsInput | number | null
+    yieldItemSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    plots?: PlotUncheckedUpdateManyWithoutCropNestedInput
+  }
+
   export type PlotCreateManyProfileInput = {
     id?: string
     index: number
@@ -8826,12 +10907,20 @@ export namespace Prisma {
     isUnlocked?: boolean
   }
 
+  export type InventoryItemCreateManyProfileInput = {
+    id?: string
+    itemSlug: string
+    quantity?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type PlotUpdateWithoutProfileInput = {
     id?: StringFieldUpdateOperationsInput | string
     index?: IntFieldUpdateOperationsInput | number
     plantedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isUnlocked?: BoolFieldUpdateOperationsInput | boolean
-    crop?: CropUpdateOneWithoutPlotsNestedInput
+    crop?: ItemUpdateOneWithoutPlotsNestedInput
   }
 
   export type PlotUncheckedUpdateWithoutProfileInput = {
@@ -8850,12 +10939,68 @@ export namespace Prisma {
     isUnlocked?: BoolFieldUpdateOperationsInput | boolean
   }
 
+  export type InventoryItemUpdateWithoutProfileInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    item?: ItemUpdateOneRequiredWithoutInventoryItemsNestedInput
+  }
+
+  export type InventoryItemUncheckedUpdateWithoutProfileInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    itemSlug?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InventoryItemUncheckedUpdateManyWithoutProfileInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    itemSlug?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InventoryItemCreateManyItemInput = {
+    id?: string
+    profileId: string
+    quantity?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type PlotCreateManyCropInput = {
     id?: string
     profileId: string
     index: number
     plantedAt?: Date | string | null
     isUnlocked?: boolean
+  }
+
+  export type InventoryItemUpdateWithoutItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    profile?: ProfileUpdateOneRequiredWithoutInventoryNestedInput
+  }
+
+  export type InventoryItemUncheckedUpdateWithoutItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    profileId?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InventoryItemUncheckedUpdateManyWithoutItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    profileId?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PlotUpdateWithoutCropInput = {

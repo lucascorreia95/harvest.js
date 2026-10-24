@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { UsersService } from '../users/users.service';
 
-export type ActivityAction = 'plant' | 'harvest' | 'unlock_plot' | 'level_up' | 'earn_coins' | 'spend_coins';
+export type ActivityAction = 'plant' | 'harvest' | 'unlock_plot' | 'level_up' | 'earn_coins' | 'spend_coins' | 'earn_xp';
 
 export interface ActivityMetadata {
   cropSlug?: string;
@@ -100,10 +100,20 @@ export class ActivityService {
   async logSpendCoins(userId: string, amount: number, purpose: string, tx?: any) {
     const username = await this.getUsername(userId);
     const description = `${username} gastou ${amount} moedas (${purpose})`;
-    
+
     return this.logActivity(userId, 'spend_coins', description, {
       coins: amount,
       purpose,
+    }, tx);
+  }
+
+  async logEarnXp(userId: string, amount: number, source: string, tx?: any) {
+    const username = await this.getUsername(userId);
+    const description = `${username} ganhou ${amount} XP (${source})`;
+
+    return this.logActivity(userId, 'earn_xp', description, {
+      xpGained: amount,
+      source,
     }, tx);
   }
 

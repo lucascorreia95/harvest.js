@@ -1,13 +1,11 @@
 import { useAuth as useAuthContext } from '../../contexts/AuthContext';
-import { useAuth as useAuthActions } from '../../hooks/useAuth';
 import { useRequireAuth } from '../../hooks/useRequireAuth';
 import { useFarm } from '../../hooks/useFarm';
 import { FarmGrid } from '../../components/FarmGrid';
 
 export default function GamePage() {
   useRequireAuth(); // Redirect to login if not authenticated
-  const { user, loading } = useAuthContext();
-  const { logout } = useAuthActions();
+  const { loading } = useAuthContext();
   const { farmData, loading: farmLoading, error } = useFarm();
 
   if (loading || farmLoading) {

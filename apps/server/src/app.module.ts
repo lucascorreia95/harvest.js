@@ -6,6 +6,8 @@ import { UsersModule } from './users/users.module';
 import { FarmModule } from './farm/farm.module';
 import { ExperienceModule } from './experience/experience.module';
 import { ActivityModule } from './activity/activity.module';
+import { ShopModule } from './shop/shop.module';
+import { InventoryModule } from './inventory/inventory.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
@@ -20,6 +22,8 @@ import { AppService } from './app.service';
     FarmModule,
     ExperienceModule,
     ActivityModule,
+    ShopModule,
+    InventoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],

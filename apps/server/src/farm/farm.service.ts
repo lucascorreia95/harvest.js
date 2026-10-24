@@ -3,6 +3,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { UsersService } from '../users/users.service';
 import { ExperienceService } from '../experience/experience.service';
 import { ActivityService } from '../activity/activity.service';
+import { InventoryService } from '../inventory/inventory.service';
 
 @Injectable()
 export class FarmService {
@@ -10,9 +11,9 @@ export class FarmService {
     private prisma: PrismaService,
     private usersService: UsersService,
     private experienceService: ExperienceService,
-    private activityService: ActivityService
+    private activityService: ActivityService,
+    private inventoryService: InventoryService,
   ) {}
-
 
   async getFarmState(userId: string) {
     const profile = await this.usersService.getUserProfile(userId);
@@ -22,13 +23,13 @@ export class FarmService {
       orderBy: { index: 'asc' },
     });
 
-    // Retorna apenas os plots que existem no banco
-    // Inicialmente serão 6 (0-5), e aumentará conforme o usuário for desbloqueando
+    // Retorna os plots formatados, preservando compatibilidade com o front
     const formattedPlots = plots.map((plot) => ({
       index: plot.index,
       isUnlocked: plot.isUnlocked,
       crop: plot.crop ? {
-        slug: plot.crop.slug,
+        slug: plot.crop.yieldItemSlug || plot.crop.slug, // ex: 'wheat' para renderizar sprite
+        itemSlug: plot.crop.slug, // ex: 'wheat_seed'
         growthTime: plot.crop.growthTime,
         plantedAt: plot.plantedAt,
       } : null,
@@ -104,22 +105,37 @@ export class FarmService {
   }
 
   async plantCrop(userId: string, plotIndex: number, cropSlug: string) {
-    const crop = await this.prisma.crop.findUnique({
-      where: { slug: cropSlug },
+    // Busca a semente pelo slug direto (ex: 'wheat_seed') ou pelo yield (ex: 'wheat')
+    const seedItem = await this.prisma.item.findFirst({
+      where: {
+        type: 'SEED',
+        OR: [
+          { slug: cropSlug },
+          { yieldItemSlug: cropSlug },
+        ],
+      },
     });
 
-    if (!crop) {
-      throw new NotFoundException('Crop not found.');
+    if (!seedItem) {
+      throw new NotFoundException(`Semente não encontrada no catálogo para: ${cropSlug}`);
     }
 
     const profile = await this.usersService.getUserProfile(userId);
 
-    if (profile.level < crop.minLevel) {
-      throw new BadRequestException(`Insufficient level. Required: ${crop.minLevel}`);
+    if (profile.level < seedItem.minLevel) {
+      throw new BadRequestException(`Nível insuficiente. Necessário: ${seedItem.minLevel}`);
     }
 
-    if (profile.coins < crop.price) {
-      throw new BadRequestException(`Insufficient coins. Required: ${crop.price}`);
+    const hasSeedInInventory = await this.inventoryService.hasItem(
+      profile.id,
+      seedItem.slug,
+      1,
+    );
+
+    if (!hasSeedInInventory && profile.coins < seedItem.buyPrice) {
+      throw new BadRequestException(
+        `Você não possui ${seedItem.name} no inventário e não possui moedas suficientes (${seedItem.buyPrice}) para compra direta.`,
+      );
     }
 
     const plot = await this.prisma.plot.findUnique({
@@ -140,18 +156,34 @@ export class FarmService {
     }
 
     return this.prisma.$transaction(async (tx) => {
-      // Prevenção de race condition: garante que o saldo ainda é suficiente
-      const profileUpdate = await tx.profile.update({
-        where: { 
-          id: profile.id,
-          coins: { gte: crop.price } // Só atualiza se ainda tiver moedas suficientes
-        },
-        data: {
-          coins: {
-            decrement: crop.price,
+      let remainingCoins = profile.coins;
+
+      if (hasSeedInInventory) {
+        // Consome 1 semente do inventário
+        await this.inventoryService.removeItem(profile.id, seedItem.slug, 1, tx);
+      } else {
+        // Compra direta se não tiver a semente no inventário
+        const profileUpdate = await tx.profile.update({
+          where: { 
+            id: profile.id,
+            coins: { gte: seedItem.buyPrice },
           },
-        },
-      });
+          data: {
+            coins: {
+              decrement: seedItem.buyPrice,
+            },
+          },
+        });
+        remainingCoins = profileUpdate.coins;
+
+        // Log da compra direta de semente ao plantar
+        await this.activityService.logSpendCoins(
+          userId,
+          seedItem.buyPrice,
+          `Compra direta de 1x ${seedItem.name} ao plantar no Plot ${plotIndex}`,
+          tx,
+        );
+      }
 
       // Planta a semente
       const updatedPlot = await tx.plot.update({
@@ -162,18 +194,18 @@ export class FarmService {
           },
         },
         data: {
-          cropType: cropSlug,
+          cropType: seedItem.slug,
           plantedAt: new Date(),
         },
         include: { crop: true },
       });
 
       // Log da atividade
-      await this.activityService.logPlanting(userId, crop.name, plotIndex, cropSlug, crop.price, tx);
+      await this.activityService.logPlanting(userId, seedItem.name, plotIndex, seedItem.slug, seedItem.buyPrice, tx);
 
       return {
         plot: updatedPlot,
-        remainingCoins: profileUpdate.coins,
+        remainingCoins,
       };
     });
   }
@@ -203,19 +235,19 @@ export class FarmService {
       throw new BadRequestException('Planting date not found.');
     }
 
+    const growthTime = plot.crop.growthTime || 0;
     const now = new Date();
     const plantedAt = new Date(plot.plantedAt);
     const timeDiff = Math.floor((now.getTime() - plantedAt.getTime()) / 1000);
 
-    if (timeDiff < plot.crop.growthTime) {
-      const remainingTime = plot.crop.growthTime - timeDiff;
+    if (timeDiff < growthTime) {
+      const remainingTime = growthTime - timeDiff;
       throw new BadRequestException(
         `Crop not ready. Remaining time: ${remainingTime} seconds.`
       );
     }
 
     return this.prisma.$transaction(async (tx) => {
-      // VERIFICAÇÃO CRÍTICA: Verifica se o plot ainda tem a mesma plantação
       // Evita colheitas duplicadas em caso de race conditions
       const currentPlot = await tx.plot.findUnique({
         where: {
@@ -236,20 +268,28 @@ export class FarmService {
         throw new BadRequestException('Crop state has changed. Please try again.');
       }
 
-      // Prevenção de race condition: garante que o profile ainda existe
-      const updatedProfile = await tx.profile.update({
-        where: { id: profile.id },
-        data: {
-          coins: {
-            increment: plot.crop.sellPrice,
-          },
-        },
+      // Descobre o fruto colhido correspondente à semente
+      const yieldSlug = plot.crop.yieldItemSlug || plot.crop.slug;
+      const yieldItem = await tx.item.findUnique({
+        where: { slug: yieldSlug },
       });
 
-      // Adiciona experiência usando ExperienceService dentro da mesma transação
-      const experienceResult = await this.experienceService.addExperience(profile.id, plot.crop.xpReward, tx);
+      // Adiciona o fruto colhido ao inventário do jogador!
+      await this.inventoryService.addItem(profile.id, yieldSlug, 1, tx);
 
-      // Limpa o plot APÓS adicionar XP e moedas
+      // Adiciona experiência usando ExperienceService
+      const xpAmount = plot.crop.xpReward || 0;
+      const experienceResult = await this.experienceService.addExperience(profile.id, xpAmount, tx);
+
+      // Log de ganho de XP
+      await this.activityService.logEarnXp(
+        userId,
+        xpAmount,
+        `Colheita de ${harvestedName} no Plot ${plotIndex}`,
+        tx,
+      );
+
+      // Limpa o plot
       const clearedPlot = await tx.plot.update({
         where: {
           profileId_index: {
@@ -264,18 +304,32 @@ export class FarmService {
         include: { crop: true },
       });
 
+      const harvestedName = yieldItem?.name || plot.crop.name;
+
       // Log da atividade de colheita
-      await this.activityService.logHarvesting(userId, plot.crop.name, plotIndex, plot.crop.sellPrice, plot.crop.xpReward, tx);
+      await this.activityService.logHarvesting(
+        userId,
+        harvestedName,
+        plotIndex,
+        yieldItem?.sellPrice || 0,
+        xpAmount,
+        tx,
+      );
 
       // Log de level up se ocorreu
       if (experienceResult.levelUp) {
-        await this.activityService.logLevelUp(userId, experienceResult.newLevel, experienceResult.newLevel - experienceResult.levelsGained, tx);
+        await this.activityService.logLevelUp(
+          userId,
+          experienceResult.newLevel,
+          experienceResult.newLevel - experienceResult.levelsGained,
+          tx,
+        );
       }
 
       return {
-        harvestedCrop: plot.crop,
-        earnedCoins: plot.crop.sellPrice,
-        earnedXp: plot.crop.xpReward,
+        harvestedItem: yieldItem || plot.crop,
+        harvestedCrop: yieldItem || plot.crop, // compatibilidade com clientes anteriores
+        earnedXp: xpAmount,
         plot: clearedPlot,
         newExperience: experienceResult.newExperience,
         levelUp: experienceResult.levelUp,

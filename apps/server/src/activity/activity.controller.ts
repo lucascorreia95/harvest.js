@@ -10,7 +10,7 @@ export class ActivityController {
 
   @Get()
   async getUserActivities(@Request() req, @Query() query: ActivityQueryDto): Promise<ActivityResponseDto[]> {
-    const userId = req.user.userId;
+    const userId = req.user.sub || req.user.userId;
     const { limit = 20, offset = 0, action } = query;
 
     let activities;
@@ -32,7 +32,7 @@ export class ActivityController {
 
   @Get('stats')
   async getActivityStats(@Request() req): Promise<ActivityStatsDto[]> {
-    const userId = req.user.userId;
+    const userId = req.user.sub || req.user.userId;
     const stats = await this.activityService.getActivityStats(userId);
     
     return stats.map(stat => ({

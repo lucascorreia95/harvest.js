@@ -15,15 +15,41 @@ The goal of Harvest.js is to move beyond simple CRUD applications. It demonstrat
 
 - Monorepo Architecture: Ensuring a seamless developer experience by sharing types and logic between the frontend and backend.
 
-## 🚀 Sprint 1 MVP - Authentication & Profile System
+## 🚀 Current State - Farm Simulation Core
 
 ### ✅ Completed Features:
 
+**Authentication & Profile:**
 - **Database Schema**: User, Profile, and Session models with Prisma ORM
 - **Backend API**: NestJS with JWT authentication and passport strategies
 - **Frontend UI**: React with Tailwind CSS, authentication forms, and dashboard
 - **Authentication Flow**: Registration, login, logout, and profile management
 - **Game Elements**: Level system, experience points, coins, and farm naming
+
+**Farm System:**
+- **Plot Grid**: 28 unlockable plots with progressive pricing
+- **Planting**: Plant seeds from inventory or buy directly when planting
+- **Growth System**: Time-based crop growth with server-side timestamps
+- **Harvesting**: Harvest crops when ready, earn XP and collect produce
+- **Experience**: XP rewards on harvest with automatic level progression
+
+**Shop System:**
+- **Item Catalog**: Dynamic catalog with seeds, crops, fertilizers, tools, animals
+- **Seed Shop**: Seeds with growth time, XP rewards, profit calculations, and coins per minute
+- **Buying**: Purchase items with automatic inventory management
+- **Price Validation**: Level requirements and affordability checks
+
+**Inventory System:**
+- **Inventory Management**: Track all owned items with quantities
+- **Selling**: Sell items from inventory to earn coins
+- **Type Filtering**: Filter by item type (SEED, CROP, etc.)
+- **Item Details**: Growth time, XP rewards, buy/sell prices
+
+**Activity Logging:**
+- **Comprehensive Logs**: Track all player actions (plant, harvest, unlock, level up, earn/spend coins, earn XP)
+- **Activity Stats**: Queryable statistics by action type
+- **Recent Activities**: Global activity feed
+- **Audit Trail**: Complete history of player transactions
 
 ### 🏗️ Architecture:
 
@@ -129,21 +155,63 @@ PORT=3000
 
 ### Users:
 
-- `PUT /users/profile` - Update user profile
+- `GET /users/profile` - Get user profile
+- `PUT /users/profile` - Update user profile (displayName, avatar, bio, farmName)
+
+### Farm:
+
+- `GET /farm` - Get farm state (plots and crops)
+- `POST /farm/unlock` - Unlock a plot (costs coins)
+- `POST /farm/plant` - Plant a seed in a plot (uses inventory or buys directly)
+- `POST /farm/harvest` - Harvest a mature crop (earns XP and produce)
+
+### Shop:
+
+- `GET /shop` - Get shop items (optional filter: `?type=SEED|FERTILIZER|TOOL|ANIMAL`)
+- `GET /shop/seeds` - Get only seeds from shop
+- `GET /shop/catalog` - Get full catalog grouped by category
+- `POST /shop/buy` - Buy items from shop (itemSlug, quantity)
+
+### Inventory:
+
+- `GET /inventory` - Get user inventory (optional filter: `?type=SEED|CROP`)
+- `POST /inventory/sell` - Sell items from inventory (itemSlug, quantity)
+
+### Activity:
+
+- `GET /activity` - Get user activities (pagination and action filter)
+- `GET /activity/stats` - Get activity statistics by action type
+- `GET /activity/recent` - Get recent global activities
 
 ## 🧪 Testing the System
 
 1. **Register**: Create a new account at http://localhost:5173
 2. **Login**: Sign in with your credentials
-3. **Dashboard**: View your profile and farm stats
-4. **Profile**: Update your display name and farm name
+3. **Dashboard**: View your profile, level, coins, and experience
+4. **Profile**: Update your display name, avatar, bio, and farm name
+5. **Farm**: View your plots, unlock new plots, plant seeds, and harvest crops
+6. **Shop**: Browse items, buy seeds and other items
+7. **Inventory**: View your items, sell harvested crops
+8. **Activity**: View your activity history and statistics
 
-## 🔄 Next Steps (Future Sprints)
+## 🔄 Next Steps (Future Features)
 
-- **Sprint 2**: Farm grid system and crop planting mechanics
-- **Sprint 3**: Time-based growth and harvesting
-- **Sprint 4**: Market system and trading
-- **Sprint 5**: Social features and multiplayer elements
+**Completed (Sprints 1-3):**
+- ✅ Authentication & Profile System
+- ✅ Farm grid system and crop planting mechanics
+- ✅ Time-based growth and harvesting
+- ✅ Shop system with item catalog
+- ✅ Inventory management and selling
+- ✅ Activity logging and statistics
+
+**Planned (Future Sprints):**
+- **Sprint 4**: Fertilizers and growth acceleration
+- **Sprint 5**: Tools and equipment system
+- **Sprint 6**: Animals and animal products
+- **Sprint 7**: Market system and trading between players
+- **Sprint 8**: Social features (friends, leaderboards, visiting farms)
+- **Sprint 9**: Achievements and quests
+- **Sprint 10**: Premium currency and monetization
 
 ## 🤝 Contributing
 
