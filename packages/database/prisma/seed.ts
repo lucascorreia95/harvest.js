@@ -63,6 +63,97 @@ const items = [
     minLevel: 3,
   },
 
+  // Animais (compráveis na loja)
+  {
+    name: 'Galinha',
+    slug: 'chicken',
+    description: 'Galinha que bota ovos quando alimentada.',
+    type: 'ANIMAL',
+    buyPrice: 200,
+    sellPrice: 50,
+    minLevel: 3,
+    productionTime: 60, // 1 minuto para botar ovo após alimentar
+    foodSlug: 'chicken_feed',
+    foodQuantity: 1,
+    yieldItemSlug: 'egg',
+  },
+  {
+    name: 'Porco',
+    slug: 'pig',
+    description: 'Porco que engorda quando alimentado e pode ser vendido.',
+    type: 'ANIMAL',
+    buyPrice: 300,
+    sellPrice: 100,
+    minLevel: 5,
+    productionTime: 120, // 2 minutos para engordar após alimentar
+    foodSlug: 'pig_feed',
+    foodQuantity: 2,
+    maxWeight: 100, // Peso máximo em kg
+    weightGain: 10, // Ganha 10kg por alimentação
+  },
+  {
+    name: 'Vaca',
+    slug: 'cow',
+    description: 'Vaca que produz leite quando alimentada.',
+    type: 'ANIMAL',
+    buyPrice: 500,
+    sellPrice: 150,
+    minLevel: 7,
+    productionTime: 180, // 3 minutos para produzir leite após alimentar
+    foodSlug: 'cow_feed',
+    foodQuantity: 3,
+    yieldItemSlug: 'milk',
+  },
+
+  // Comidas para animais (compráveis na loja)
+  {
+    name: 'Ração de Galinha',
+    slug: 'chicken_feed',
+    description: 'Ração nutritiva para galinhas.',
+    type: 'FOOD',
+    buyPrice: 5,
+    sellPrice: 2,
+    minLevel: 3,
+  },
+  {
+    name: 'Ração de Porco',
+    slug: 'pig_feed',
+    description: 'Ração especial para porcos engordarem.',
+    type: 'FOOD',
+    buyPrice: 10,
+    sellPrice: 4,
+    minLevel: 5,
+  },
+  {
+    name: 'Ração de Vaca',
+    slug: 'cow_feed',
+    description: 'Ração rica para vacas produzirem leite.',
+    type: 'FOOD',
+    buyPrice: 15,
+    sellPrice: 6,
+    minLevel: 7,
+  },
+
+  // Produtos de animais (NÃO compráveis na loja: buyPrice = 0, apenas vendíveis)
+  {
+    name: 'Ovo',
+    slug: 'egg',
+    description: 'Ovo fresco de galinha.',
+    type: 'ANIMAL_PRODUCT',
+    buyPrice: 0,
+    sellPrice: 15,
+    minLevel: 3,
+  },
+  {
+    name: 'Leite',
+    slug: 'milk',
+    description: 'Leite fresco de vaca.',
+    type: 'ANIMAL_PRODUCT',
+    buyPrice: 0,
+    sellPrice: 25,
+    minLevel: 7,
+  },
+
   // Colheitas (NÃO compráveis na loja: buyPrice = 0, apenas vendíveis)
   {
     name: 'Trigo',

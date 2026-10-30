@@ -161,6 +161,11 @@ exports.Prisma.ItemScalarFieldEnum = {
   growthTime: 'growthTime',
   xpReward: 'xpReward',
   yieldItemSlug: 'yieldItemSlug',
+  productionTime: 'productionTime',
+  foodSlug: 'foodSlug',
+  foodQuantity: 'foodQuantity',
+  maxWeight: 'maxWeight',
+  weightGain: 'weightGain',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -172,6 +177,16 @@ exports.Prisma.ActivityLogScalarFieldEnum = {
   description: 'description',
   metadata: 'metadata',
   createdAt: 'createdAt'
+};
+
+exports.Prisma.AnimalScalarFieldEnum = {
+  id: 'id',
+  profileId: 'profileId',
+  animalSlug: 'animalSlug',
+  fedAt: 'fedAt',
+  weight: 'weight',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.InventoryItemScalarFieldEnum = {
@@ -216,6 +231,7 @@ exports.Prisma.ModelName = {
   Plot: 'Plot',
   Item: 'Item',
   ActivityLog: 'ActivityLog',
+  Animal: 'Animal',
   InventoryItem: 'InventoryItem'
 };
 

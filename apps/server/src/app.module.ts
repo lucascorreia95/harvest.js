@@ -8,6 +8,7 @@ import { ExperienceModule } from './experience/experience.module';
 import { ActivityModule } from './activity/activity.module';
 import { ShopModule } from './shop/shop.module';
 import { InventoryModule } from './inventory/inventory.module';
+import { AnimalModule } from './animal/animal.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
@@ -24,6 +25,7 @@ import { AppService } from './app.service';
     ActivityModule,
     ShopModule,
     InventoryModule,
+    AnimalModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -39,6 +39,11 @@ export type Item = $Result.DefaultSelection<Prisma.$ItemPayload>
  */
 export type ActivityLog = $Result.DefaultSelection<Prisma.$ActivityLogPayload>
 /**
+ * Model Animal
+ * 
+ */
+export type Animal = $Result.DefaultSelection<Prisma.$AnimalPayload>
+/**
  * Model InventoryItem
  * 
  */
@@ -211,6 +216,16 @@ export class PrismaClient<
     * ```
     */
   get activityLog(): Prisma.ActivityLogDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.animal`: Exposes CRUD operations for the **Animal** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Animals
+    * const animals = await prisma.animal.findMany()
+    * ```
+    */
+  get animal(): Prisma.AnimalDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.inventoryItem`: Exposes CRUD operations for the **InventoryItem** model.
@@ -667,6 +682,7 @@ export namespace Prisma {
     Plot: 'Plot',
     Item: 'Item',
     ActivityLog: 'ActivityLog',
+    Animal: 'Animal',
     InventoryItem: 'InventoryItem'
   };
 
@@ -686,7 +702,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "profile" | "plot" | "item" | "activityLog" | "inventoryItem"
+      modelProps: "user" | "profile" | "plot" | "item" | "activityLog" | "animal" | "inventoryItem"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1060,6 +1076,80 @@ export namespace Prisma {
           }
         }
       }
+      Animal: {
+        payload: Prisma.$AnimalPayload<ExtArgs>
+        fields: Prisma.AnimalFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AnimalFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimalPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AnimalFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimalPayload>
+          }
+          findFirst: {
+            args: Prisma.AnimalFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimalPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AnimalFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimalPayload>
+          }
+          findMany: {
+            args: Prisma.AnimalFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimalPayload>[]
+          }
+          create: {
+            args: Prisma.AnimalCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimalPayload>
+          }
+          createMany: {
+            args: Prisma.AnimalCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AnimalCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimalPayload>[]
+          }
+          delete: {
+            args: Prisma.AnimalDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimalPayload>
+          }
+          update: {
+            args: Prisma.AnimalUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimalPayload>
+          }
+          deleteMany: {
+            args: Prisma.AnimalDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AnimalUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AnimalUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimalPayload>[]
+          }
+          upsert: {
+            args: Prisma.AnimalUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimalPayload>
+          }
+          aggregate: {
+            args: Prisma.AnimalAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAnimal>
+          }
+          groupBy: {
+            args: Prisma.AnimalGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AnimalGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AnimalCountArgs<ExtArgs>
+            result: $Utils.Optional<AnimalCountAggregateOutputType> | number
+          }
+        }
+      }
       InventoryItem: {
         payload: Prisma.$InventoryItemPayload<ExtArgs>
         fields: Prisma.InventoryItemFieldRefs
@@ -1235,6 +1325,7 @@ export namespace Prisma {
     plot?: PlotOmit
     item?: ItemOmit
     activityLog?: ActivityLogOmit
+    animal?: AnimalOmit
     inventoryItem?: InventoryItemOmit
   }
 
@@ -1318,11 +1409,13 @@ export namespace Prisma {
   export type ProfileCountOutputType = {
     plots: number
     inventory: number
+    animals: number
   }
 
   export type ProfileCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     plots?: boolean | ProfileCountOutputTypeCountPlotsArgs
     inventory?: boolean | ProfileCountOutputTypeCountInventoryArgs
+    animals?: boolean | ProfileCountOutputTypeCountAnimalsArgs
   }
 
   // Custom InputTypes
@@ -1350,6 +1443,13 @@ export namespace Prisma {
     where?: InventoryItemWhereInput
   }
 
+  /**
+   * ProfileCountOutputType without action
+   */
+  export type ProfileCountOutputTypeCountAnimalsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AnimalWhereInput
+  }
+
 
   /**
    * Count Type ItemCountOutputType
@@ -1358,11 +1458,13 @@ export namespace Prisma {
   export type ItemCountOutputType = {
     inventoryItems: number
     plots: number
+    animals: number
   }
 
   export type ItemCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     inventoryItems?: boolean | ItemCountOutputTypeCountInventoryItemsArgs
     plots?: boolean | ItemCountOutputTypeCountPlotsArgs
+    animals?: boolean | ItemCountOutputTypeCountAnimalsArgs
   }
 
   // Custom InputTypes
@@ -1388,6 +1490,13 @@ export namespace Prisma {
    */
   export type ItemCountOutputTypeCountPlotsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PlotWhereInput
+  }
+
+  /**
+   * ItemCountOutputType without action
+   */
+  export type ItemCountOutputTypeCountAnimalsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AnimalWhereInput
   }
 
 
@@ -2691,6 +2800,7 @@ export namespace Prisma {
     user?: boolean | UserDefaultArgs<ExtArgs>
     plots?: boolean | Profile$plotsArgs<ExtArgs>
     inventory?: boolean | Profile$inventoryArgs<ExtArgs>
+    animals?: boolean | Profile$animalsArgs<ExtArgs>
     _count?: boolean | ProfileCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["profile"]>
 
@@ -2734,6 +2844,7 @@ export namespace Prisma {
     user?: boolean | UserDefaultArgs<ExtArgs>
     plots?: boolean | Profile$plotsArgs<ExtArgs>
     inventory?: boolean | Profile$inventoryArgs<ExtArgs>
+    animals?: boolean | Profile$animalsArgs<ExtArgs>
     _count?: boolean | ProfileCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ProfileIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2749,6 +2860,7 @@ export namespace Prisma {
       user: Prisma.$UserPayload<ExtArgs>
       plots: Prisma.$PlotPayload<ExtArgs>[]
       inventory: Prisma.$InventoryItemPayload<ExtArgs>[]
+      animals: Prisma.$AnimalPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3156,6 +3268,7 @@ export namespace Prisma {
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     plots<T extends Profile$plotsArgs<ExtArgs> = {}>(args?: Subset<T, Profile$plotsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     inventory<T extends Profile$inventoryArgs<ExtArgs> = {}>(args?: Subset<T, Profile$inventoryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InventoryItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    animals<T extends Profile$animalsArgs<ExtArgs> = {}>(args?: Subset<T, Profile$animalsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnimalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3634,6 +3747,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: InventoryItemScalarFieldEnum | InventoryItemScalarFieldEnum[]
+  }
+
+  /**
+   * Profile.animals
+   */
+  export type Profile$animalsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Animal
+     */
+    select?: AnimalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Animal
+     */
+    omit?: AnimalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimalInclude<ExtArgs> | null
+    where?: AnimalWhereInput
+    orderBy?: AnimalOrderByWithRelationInput | AnimalOrderByWithRelationInput[]
+    cursor?: AnimalWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AnimalScalarFieldEnum | AnimalScalarFieldEnum[]
   }
 
   /**
@@ -4805,6 +4942,10 @@ export namespace Prisma {
     minLevel: number | null
     growthTime: number | null
     xpReward: number | null
+    productionTime: number | null
+    foodQuantity: number | null
+    maxWeight: number | null
+    weightGain: number | null
   }
 
   export type ItemSumAggregateOutputType = {
@@ -4813,6 +4954,10 @@ export namespace Prisma {
     minLevel: number | null
     growthTime: number | null
     xpReward: number | null
+    productionTime: number | null
+    foodQuantity: number | null
+    maxWeight: number | null
+    weightGain: number | null
   }
 
   export type ItemMinAggregateOutputType = {
@@ -4827,6 +4972,11 @@ export namespace Prisma {
     growthTime: number | null
     xpReward: number | null
     yieldItemSlug: string | null
+    productionTime: number | null
+    foodSlug: string | null
+    foodQuantity: number | null
+    maxWeight: number | null
+    weightGain: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -4843,6 +4993,11 @@ export namespace Prisma {
     growthTime: number | null
     xpReward: number | null
     yieldItemSlug: string | null
+    productionTime: number | null
+    foodSlug: string | null
+    foodQuantity: number | null
+    maxWeight: number | null
+    weightGain: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -4859,6 +5014,11 @@ export namespace Prisma {
     growthTime: number
     xpReward: number
     yieldItemSlug: number
+    productionTime: number
+    foodSlug: number
+    foodQuantity: number
+    maxWeight: number
+    weightGain: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -4871,6 +5031,10 @@ export namespace Prisma {
     minLevel?: true
     growthTime?: true
     xpReward?: true
+    productionTime?: true
+    foodQuantity?: true
+    maxWeight?: true
+    weightGain?: true
   }
 
   export type ItemSumAggregateInputType = {
@@ -4879,6 +5043,10 @@ export namespace Prisma {
     minLevel?: true
     growthTime?: true
     xpReward?: true
+    productionTime?: true
+    foodQuantity?: true
+    maxWeight?: true
+    weightGain?: true
   }
 
   export type ItemMinAggregateInputType = {
@@ -4893,6 +5061,11 @@ export namespace Prisma {
     growthTime?: true
     xpReward?: true
     yieldItemSlug?: true
+    productionTime?: true
+    foodSlug?: true
+    foodQuantity?: true
+    maxWeight?: true
+    weightGain?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -4909,6 +5082,11 @@ export namespace Prisma {
     growthTime?: true
     xpReward?: true
     yieldItemSlug?: true
+    productionTime?: true
+    foodSlug?: true
+    foodQuantity?: true
+    maxWeight?: true
+    weightGain?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -4925,6 +5103,11 @@ export namespace Prisma {
     growthTime?: true
     xpReward?: true
     yieldItemSlug?: true
+    productionTime?: true
+    foodSlug?: true
+    foodQuantity?: true
+    maxWeight?: true
+    weightGain?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -5028,6 +5211,11 @@ export namespace Prisma {
     growthTime: number | null
     xpReward: number | null
     yieldItemSlug: string | null
+    productionTime: number | null
+    foodSlug: string | null
+    foodQuantity: number | null
+    maxWeight: number | null
+    weightGain: number | null
     createdAt: Date
     updatedAt: Date
     _count: ItemCountAggregateOutputType | null
@@ -5063,10 +5251,16 @@ export namespace Prisma {
     growthTime?: boolean
     xpReward?: boolean
     yieldItemSlug?: boolean
+    productionTime?: boolean
+    foodSlug?: boolean
+    foodQuantity?: boolean
+    maxWeight?: boolean
+    weightGain?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     inventoryItems?: boolean | Item$inventoryItemsArgs<ExtArgs>
     plots?: boolean | Item$plotsArgs<ExtArgs>
+    animals?: boolean | Item$animalsArgs<ExtArgs>
     _count?: boolean | ItemCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["item"]>
 
@@ -5082,6 +5276,11 @@ export namespace Prisma {
     growthTime?: boolean
     xpReward?: boolean
     yieldItemSlug?: boolean
+    productionTime?: boolean
+    foodSlug?: boolean
+    foodQuantity?: boolean
+    maxWeight?: boolean
+    weightGain?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["item"]>
@@ -5098,6 +5297,11 @@ export namespace Prisma {
     growthTime?: boolean
     xpReward?: boolean
     yieldItemSlug?: boolean
+    productionTime?: boolean
+    foodSlug?: boolean
+    foodQuantity?: boolean
+    maxWeight?: boolean
+    weightGain?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["item"]>
@@ -5114,14 +5318,20 @@ export namespace Prisma {
     growthTime?: boolean
     xpReward?: boolean
     yieldItemSlug?: boolean
+    productionTime?: boolean
+    foodSlug?: boolean
+    foodQuantity?: boolean
+    maxWeight?: boolean
+    weightGain?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "name" | "description" | "type" | "buyPrice" | "sellPrice" | "minLevel" | "growthTime" | "xpReward" | "yieldItemSlug" | "createdAt" | "updatedAt", ExtArgs["result"]["item"]>
+  export type ItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "name" | "description" | "type" | "buyPrice" | "sellPrice" | "minLevel" | "growthTime" | "xpReward" | "yieldItemSlug" | "productionTime" | "foodSlug" | "foodQuantity" | "maxWeight" | "weightGain" | "createdAt" | "updatedAt", ExtArgs["result"]["item"]>
   export type ItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     inventoryItems?: boolean | Item$inventoryItemsArgs<ExtArgs>
     plots?: boolean | Item$plotsArgs<ExtArgs>
+    animals?: boolean | Item$animalsArgs<ExtArgs>
     _count?: boolean | ItemCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -5132,6 +5342,7 @@ export namespace Prisma {
     objects: {
       inventoryItems: Prisma.$InventoryItemPayload<ExtArgs>[]
       plots: Prisma.$PlotPayload<ExtArgs>[]
+      animals: Prisma.$AnimalPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -5145,6 +5356,11 @@ export namespace Prisma {
       growthTime: number | null
       xpReward: number | null
       yieldItemSlug: string | null
+      productionTime: number | null
+      foodSlug: string | null
+      foodQuantity: number | null
+      maxWeight: number | null
+      weightGain: number | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["item"]>
@@ -5543,6 +5759,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     inventoryItems<T extends Item$inventoryItemsArgs<ExtArgs> = {}>(args?: Subset<T, Item$inventoryItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InventoryItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     plots<T extends Item$plotsArgs<ExtArgs> = {}>(args?: Subset<T, Item$plotsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    animals<T extends Item$animalsArgs<ExtArgs> = {}>(args?: Subset<T, Item$animalsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnimalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5583,6 +5800,11 @@ export namespace Prisma {
     readonly growthTime: FieldRef<"Item", 'Int'>
     readonly xpReward: FieldRef<"Item", 'Int'>
     readonly yieldItemSlug: FieldRef<"Item", 'String'>
+    readonly productionTime: FieldRef<"Item", 'Int'>
+    readonly foodSlug: FieldRef<"Item", 'String'>
+    readonly foodQuantity: FieldRef<"Item", 'Int'>
+    readonly maxWeight: FieldRef<"Item", 'Int'>
+    readonly weightGain: FieldRef<"Item", 'Int'>
     readonly createdAt: FieldRef<"Item", 'DateTime'>
     readonly updatedAt: FieldRef<"Item", 'DateTime'>
   }
@@ -6018,6 +6240,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: PlotScalarFieldEnum | PlotScalarFieldEnum[]
+  }
+
+  /**
+   * Item.animals
+   */
+  export type Item$animalsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Animal
+     */
+    select?: AnimalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Animal
+     */
+    omit?: AnimalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimalInclude<ExtArgs> | null
+    where?: AnimalWhereInput
+    orderBy?: AnimalOrderByWithRelationInput | AnimalOrderByWithRelationInput[]
+    cursor?: AnimalWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AnimalScalarFieldEnum | AnimalScalarFieldEnum[]
   }
 
   /**
@@ -7040,6 +7286,1151 @@ export namespace Prisma {
      * Omit specific fields from the ActivityLog
      */
     omit?: ActivityLogOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Animal
+   */
+
+  export type AggregateAnimal = {
+    _count: AnimalCountAggregateOutputType | null
+    _avg: AnimalAvgAggregateOutputType | null
+    _sum: AnimalSumAggregateOutputType | null
+    _min: AnimalMinAggregateOutputType | null
+    _max: AnimalMaxAggregateOutputType | null
+  }
+
+  export type AnimalAvgAggregateOutputType = {
+    weight: number | null
+  }
+
+  export type AnimalSumAggregateOutputType = {
+    weight: number | null
+  }
+
+  export type AnimalMinAggregateOutputType = {
+    id: string | null
+    profileId: string | null
+    animalSlug: string | null
+    fedAt: Date | null
+    weight: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AnimalMaxAggregateOutputType = {
+    id: string | null
+    profileId: string | null
+    animalSlug: string | null
+    fedAt: Date | null
+    weight: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AnimalCountAggregateOutputType = {
+    id: number
+    profileId: number
+    animalSlug: number
+    fedAt: number
+    weight: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type AnimalAvgAggregateInputType = {
+    weight?: true
+  }
+
+  export type AnimalSumAggregateInputType = {
+    weight?: true
+  }
+
+  export type AnimalMinAggregateInputType = {
+    id?: true
+    profileId?: true
+    animalSlug?: true
+    fedAt?: true
+    weight?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AnimalMaxAggregateInputType = {
+    id?: true
+    profileId?: true
+    animalSlug?: true
+    fedAt?: true
+    weight?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AnimalCountAggregateInputType = {
+    id?: true
+    profileId?: true
+    animalSlug?: true
+    fedAt?: true
+    weight?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type AnimalAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Animal to aggregate.
+     */
+    where?: AnimalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Animals to fetch.
+     */
+    orderBy?: AnimalOrderByWithRelationInput | AnimalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AnimalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Animals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Animals.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Animals
+    **/
+    _count?: true | AnimalCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: AnimalAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: AnimalSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AnimalMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AnimalMaxAggregateInputType
+  }
+
+  export type GetAnimalAggregateType<T extends AnimalAggregateArgs> = {
+        [P in keyof T & keyof AggregateAnimal]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAnimal[P]>
+      : GetScalarType<T[P], AggregateAnimal[P]>
+  }
+
+
+
+
+  export type AnimalGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AnimalWhereInput
+    orderBy?: AnimalOrderByWithAggregationInput | AnimalOrderByWithAggregationInput[]
+    by: AnimalScalarFieldEnum[] | AnimalScalarFieldEnum
+    having?: AnimalScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AnimalCountAggregateInputType | true
+    _avg?: AnimalAvgAggregateInputType
+    _sum?: AnimalSumAggregateInputType
+    _min?: AnimalMinAggregateInputType
+    _max?: AnimalMaxAggregateInputType
+  }
+
+  export type AnimalGroupByOutputType = {
+    id: string
+    profileId: string
+    animalSlug: string
+    fedAt: Date | null
+    weight: number | null
+    createdAt: Date
+    updatedAt: Date
+    _count: AnimalCountAggregateOutputType | null
+    _avg: AnimalAvgAggregateOutputType | null
+    _sum: AnimalSumAggregateOutputType | null
+    _min: AnimalMinAggregateOutputType | null
+    _max: AnimalMaxAggregateOutputType | null
+  }
+
+  type GetAnimalGroupByPayload<T extends AnimalGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AnimalGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AnimalGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AnimalGroupByOutputType[P]>
+            : GetScalarType<T[P], AnimalGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AnimalSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    profileId?: boolean
+    animalSlug?: boolean
+    fedAt?: boolean
+    weight?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    profile?: boolean | ProfileDefaultArgs<ExtArgs>
+    animal?: boolean | Animal$animalArgs<ExtArgs>
+  }, ExtArgs["result"]["animal"]>
+
+  export type AnimalSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    profileId?: boolean
+    animalSlug?: boolean
+    fedAt?: boolean
+    weight?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    profile?: boolean | ProfileDefaultArgs<ExtArgs>
+    animal?: boolean | Animal$animalArgs<ExtArgs>
+  }, ExtArgs["result"]["animal"]>
+
+  export type AnimalSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    profileId?: boolean
+    animalSlug?: boolean
+    fedAt?: boolean
+    weight?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    profile?: boolean | ProfileDefaultArgs<ExtArgs>
+    animal?: boolean | Animal$animalArgs<ExtArgs>
+  }, ExtArgs["result"]["animal"]>
+
+  export type AnimalSelectScalar = {
+    id?: boolean
+    profileId?: boolean
+    animalSlug?: boolean
+    fedAt?: boolean
+    weight?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type AnimalOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "profileId" | "animalSlug" | "fedAt" | "weight" | "createdAt" | "updatedAt", ExtArgs["result"]["animal"]>
+  export type AnimalInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    profile?: boolean | ProfileDefaultArgs<ExtArgs>
+    animal?: boolean | Animal$animalArgs<ExtArgs>
+  }
+  export type AnimalIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    profile?: boolean | ProfileDefaultArgs<ExtArgs>
+    animal?: boolean | Animal$animalArgs<ExtArgs>
+  }
+  export type AnimalIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    profile?: boolean | ProfileDefaultArgs<ExtArgs>
+    animal?: boolean | Animal$animalArgs<ExtArgs>
+  }
+
+  export type $AnimalPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Animal"
+    objects: {
+      profile: Prisma.$ProfilePayload<ExtArgs>
+      animal: Prisma.$ItemPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      profileId: string
+      animalSlug: string
+      fedAt: Date | null
+      weight: number | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["animal"]>
+    composites: {}
+  }
+
+  type AnimalGetPayload<S extends boolean | null | undefined | AnimalDefaultArgs> = $Result.GetResult<Prisma.$AnimalPayload, S>
+
+  type AnimalCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AnimalFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AnimalCountAggregateInputType | true
+    }
+
+  export interface AnimalDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Animal'], meta: { name: 'Animal' } }
+    /**
+     * Find zero or one Animal that matches the filter.
+     * @param {AnimalFindUniqueArgs} args - Arguments to find a Animal
+     * @example
+     * // Get one Animal
+     * const animal = await prisma.animal.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AnimalFindUniqueArgs>(args: SelectSubset<T, AnimalFindUniqueArgs<ExtArgs>>): Prisma__AnimalClient<$Result.GetResult<Prisma.$AnimalPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Animal that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AnimalFindUniqueOrThrowArgs} args - Arguments to find a Animal
+     * @example
+     * // Get one Animal
+     * const animal = await prisma.animal.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AnimalFindUniqueOrThrowArgs>(args: SelectSubset<T, AnimalFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AnimalClient<$Result.GetResult<Prisma.$AnimalPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Animal that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnimalFindFirstArgs} args - Arguments to find a Animal
+     * @example
+     * // Get one Animal
+     * const animal = await prisma.animal.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AnimalFindFirstArgs>(args?: SelectSubset<T, AnimalFindFirstArgs<ExtArgs>>): Prisma__AnimalClient<$Result.GetResult<Prisma.$AnimalPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Animal that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnimalFindFirstOrThrowArgs} args - Arguments to find a Animal
+     * @example
+     * // Get one Animal
+     * const animal = await prisma.animal.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AnimalFindFirstOrThrowArgs>(args?: SelectSubset<T, AnimalFindFirstOrThrowArgs<ExtArgs>>): Prisma__AnimalClient<$Result.GetResult<Prisma.$AnimalPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Animals that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnimalFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Animals
+     * const animals = await prisma.animal.findMany()
+     * 
+     * // Get first 10 Animals
+     * const animals = await prisma.animal.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const animalWithIdOnly = await prisma.animal.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AnimalFindManyArgs>(args?: SelectSubset<T, AnimalFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnimalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Animal.
+     * @param {AnimalCreateArgs} args - Arguments to create a Animal.
+     * @example
+     * // Create one Animal
+     * const Animal = await prisma.animal.create({
+     *   data: {
+     *     // ... data to create a Animal
+     *   }
+     * })
+     * 
+     */
+    create<T extends AnimalCreateArgs>(args: SelectSubset<T, AnimalCreateArgs<ExtArgs>>): Prisma__AnimalClient<$Result.GetResult<Prisma.$AnimalPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Animals.
+     * @param {AnimalCreateManyArgs} args - Arguments to create many Animals.
+     * @example
+     * // Create many Animals
+     * const animal = await prisma.animal.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AnimalCreateManyArgs>(args?: SelectSubset<T, AnimalCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Animals and returns the data saved in the database.
+     * @param {AnimalCreateManyAndReturnArgs} args - Arguments to create many Animals.
+     * @example
+     * // Create many Animals
+     * const animal = await prisma.animal.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Animals and only return the `id`
+     * const animalWithIdOnly = await prisma.animal.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AnimalCreateManyAndReturnArgs>(args?: SelectSubset<T, AnimalCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnimalPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Animal.
+     * @param {AnimalDeleteArgs} args - Arguments to delete one Animal.
+     * @example
+     * // Delete one Animal
+     * const Animal = await prisma.animal.delete({
+     *   where: {
+     *     // ... filter to delete one Animal
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AnimalDeleteArgs>(args: SelectSubset<T, AnimalDeleteArgs<ExtArgs>>): Prisma__AnimalClient<$Result.GetResult<Prisma.$AnimalPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Animal.
+     * @param {AnimalUpdateArgs} args - Arguments to update one Animal.
+     * @example
+     * // Update one Animal
+     * const animal = await prisma.animal.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AnimalUpdateArgs>(args: SelectSubset<T, AnimalUpdateArgs<ExtArgs>>): Prisma__AnimalClient<$Result.GetResult<Prisma.$AnimalPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Animals.
+     * @param {AnimalDeleteManyArgs} args - Arguments to filter Animals to delete.
+     * @example
+     * // Delete a few Animals
+     * const { count } = await prisma.animal.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AnimalDeleteManyArgs>(args?: SelectSubset<T, AnimalDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Animals.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnimalUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Animals
+     * const animal = await prisma.animal.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AnimalUpdateManyArgs>(args: SelectSubset<T, AnimalUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Animals and returns the data updated in the database.
+     * @param {AnimalUpdateManyAndReturnArgs} args - Arguments to update many Animals.
+     * @example
+     * // Update many Animals
+     * const animal = await prisma.animal.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Animals and only return the `id`
+     * const animalWithIdOnly = await prisma.animal.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AnimalUpdateManyAndReturnArgs>(args: SelectSubset<T, AnimalUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnimalPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Animal.
+     * @param {AnimalUpsertArgs} args - Arguments to update or create a Animal.
+     * @example
+     * // Update or create a Animal
+     * const animal = await prisma.animal.upsert({
+     *   create: {
+     *     // ... data to create a Animal
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Animal we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AnimalUpsertArgs>(args: SelectSubset<T, AnimalUpsertArgs<ExtArgs>>): Prisma__AnimalClient<$Result.GetResult<Prisma.$AnimalPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Animals.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnimalCountArgs} args - Arguments to filter Animals to count.
+     * @example
+     * // Count the number of Animals
+     * const count = await prisma.animal.count({
+     *   where: {
+     *     // ... the filter for the Animals we want to count
+     *   }
+     * })
+    **/
+    count<T extends AnimalCountArgs>(
+      args?: Subset<T, AnimalCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AnimalCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Animal.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnimalAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AnimalAggregateArgs>(args: Subset<T, AnimalAggregateArgs>): Prisma.PrismaPromise<GetAnimalAggregateType<T>>
+
+    /**
+     * Group by Animal.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnimalGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AnimalGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AnimalGroupByArgs['orderBy'] }
+        : { orderBy?: AnimalGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AnimalGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAnimalGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Animal model
+   */
+  readonly fields: AnimalFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Animal.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AnimalClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    profile<T extends ProfileDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProfileDefaultArgs<ExtArgs>>): Prisma__ProfileClient<$Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    animal<T extends Animal$animalArgs<ExtArgs> = {}>(args?: Subset<T, Animal$animalArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Animal model
+   */
+  interface AnimalFieldRefs {
+    readonly id: FieldRef<"Animal", 'String'>
+    readonly profileId: FieldRef<"Animal", 'String'>
+    readonly animalSlug: FieldRef<"Animal", 'String'>
+    readonly fedAt: FieldRef<"Animal", 'DateTime'>
+    readonly weight: FieldRef<"Animal", 'Int'>
+    readonly createdAt: FieldRef<"Animal", 'DateTime'>
+    readonly updatedAt: FieldRef<"Animal", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Animal findUnique
+   */
+  export type AnimalFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Animal
+     */
+    select?: AnimalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Animal
+     */
+    omit?: AnimalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimalInclude<ExtArgs> | null
+    /**
+     * Filter, which Animal to fetch.
+     */
+    where: AnimalWhereUniqueInput
+  }
+
+  /**
+   * Animal findUniqueOrThrow
+   */
+  export type AnimalFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Animal
+     */
+    select?: AnimalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Animal
+     */
+    omit?: AnimalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimalInclude<ExtArgs> | null
+    /**
+     * Filter, which Animal to fetch.
+     */
+    where: AnimalWhereUniqueInput
+  }
+
+  /**
+   * Animal findFirst
+   */
+  export type AnimalFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Animal
+     */
+    select?: AnimalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Animal
+     */
+    omit?: AnimalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimalInclude<ExtArgs> | null
+    /**
+     * Filter, which Animal to fetch.
+     */
+    where?: AnimalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Animals to fetch.
+     */
+    orderBy?: AnimalOrderByWithRelationInput | AnimalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Animals.
+     */
+    cursor?: AnimalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Animals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Animals.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Animals.
+     */
+    distinct?: AnimalScalarFieldEnum | AnimalScalarFieldEnum[]
+  }
+
+  /**
+   * Animal findFirstOrThrow
+   */
+  export type AnimalFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Animal
+     */
+    select?: AnimalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Animal
+     */
+    omit?: AnimalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimalInclude<ExtArgs> | null
+    /**
+     * Filter, which Animal to fetch.
+     */
+    where?: AnimalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Animals to fetch.
+     */
+    orderBy?: AnimalOrderByWithRelationInput | AnimalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Animals.
+     */
+    cursor?: AnimalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Animals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Animals.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Animals.
+     */
+    distinct?: AnimalScalarFieldEnum | AnimalScalarFieldEnum[]
+  }
+
+  /**
+   * Animal findMany
+   */
+  export type AnimalFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Animal
+     */
+    select?: AnimalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Animal
+     */
+    omit?: AnimalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimalInclude<ExtArgs> | null
+    /**
+     * Filter, which Animals to fetch.
+     */
+    where?: AnimalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Animals to fetch.
+     */
+    orderBy?: AnimalOrderByWithRelationInput | AnimalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Animals.
+     */
+    cursor?: AnimalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Animals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Animals.
+     */
+    skip?: number
+    distinct?: AnimalScalarFieldEnum | AnimalScalarFieldEnum[]
+  }
+
+  /**
+   * Animal create
+   */
+  export type AnimalCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Animal
+     */
+    select?: AnimalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Animal
+     */
+    omit?: AnimalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimalInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Animal.
+     */
+    data: XOR<AnimalCreateInput, AnimalUncheckedCreateInput>
+  }
+
+  /**
+   * Animal createMany
+   */
+  export type AnimalCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Animals.
+     */
+    data: AnimalCreateManyInput | AnimalCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Animal createManyAndReturn
+   */
+  export type AnimalCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Animal
+     */
+    select?: AnimalSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Animal
+     */
+    omit?: AnimalOmit<ExtArgs> | null
+    /**
+     * The data used to create many Animals.
+     */
+    data: AnimalCreateManyInput | AnimalCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimalIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Animal update
+   */
+  export type AnimalUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Animal
+     */
+    select?: AnimalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Animal
+     */
+    omit?: AnimalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimalInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Animal.
+     */
+    data: XOR<AnimalUpdateInput, AnimalUncheckedUpdateInput>
+    /**
+     * Choose, which Animal to update.
+     */
+    where: AnimalWhereUniqueInput
+  }
+
+  /**
+   * Animal updateMany
+   */
+  export type AnimalUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Animals.
+     */
+    data: XOR<AnimalUpdateManyMutationInput, AnimalUncheckedUpdateManyInput>
+    /**
+     * Filter which Animals to update
+     */
+    where?: AnimalWhereInput
+    /**
+     * Limit how many Animals to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Animal updateManyAndReturn
+   */
+  export type AnimalUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Animal
+     */
+    select?: AnimalSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Animal
+     */
+    omit?: AnimalOmit<ExtArgs> | null
+    /**
+     * The data used to update Animals.
+     */
+    data: XOR<AnimalUpdateManyMutationInput, AnimalUncheckedUpdateManyInput>
+    /**
+     * Filter which Animals to update
+     */
+    where?: AnimalWhereInput
+    /**
+     * Limit how many Animals to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimalIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Animal upsert
+   */
+  export type AnimalUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Animal
+     */
+    select?: AnimalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Animal
+     */
+    omit?: AnimalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimalInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Animal to update in case it exists.
+     */
+    where: AnimalWhereUniqueInput
+    /**
+     * In case the Animal found by the `where` argument doesn't exist, create a new Animal with this data.
+     */
+    create: XOR<AnimalCreateInput, AnimalUncheckedCreateInput>
+    /**
+     * In case the Animal was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AnimalUpdateInput, AnimalUncheckedUpdateInput>
+  }
+
+  /**
+   * Animal delete
+   */
+  export type AnimalDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Animal
+     */
+    select?: AnimalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Animal
+     */
+    omit?: AnimalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimalInclude<ExtArgs> | null
+    /**
+     * Filter which Animal to delete.
+     */
+    where: AnimalWhereUniqueInput
+  }
+
+  /**
+   * Animal deleteMany
+   */
+  export type AnimalDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Animals to delete
+     */
+    where?: AnimalWhereInput
+    /**
+     * Limit how many Animals to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Animal.animal
+   */
+  export type Animal$animalArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Item
+     */
+    omit?: ItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ItemInclude<ExtArgs> | null
+    where?: ItemWhereInput
+  }
+
+  /**
+   * Animal without action
+   */
+  export type AnimalDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Animal
+     */
+    select?: AnimalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Animal
+     */
+    omit?: AnimalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimalInclude<ExtArgs> | null
   }
 
 
@@ -8219,6 +9610,11 @@ export namespace Prisma {
     growthTime: 'growthTime',
     xpReward: 'xpReward',
     yieldItemSlug: 'yieldItemSlug',
+    productionTime: 'productionTime',
+    foodSlug: 'foodSlug',
+    foodQuantity: 'foodQuantity',
+    maxWeight: 'maxWeight',
+    weightGain: 'weightGain',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -8236,6 +9632,19 @@ export namespace Prisma {
   };
 
   export type ActivityLogScalarFieldEnum = (typeof ActivityLogScalarFieldEnum)[keyof typeof ActivityLogScalarFieldEnum]
+
+
+  export const AnimalScalarFieldEnum: {
+    id: 'id',
+    profileId: 'profileId',
+    animalSlug: 'animalSlug',
+    fedAt: 'fedAt',
+    weight: 'weight',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type AnimalScalarFieldEnum = (typeof AnimalScalarFieldEnum)[keyof typeof AnimalScalarFieldEnum]
 
 
   export const InventoryItemScalarFieldEnum: {
@@ -8446,6 +9855,7 @@ export namespace Prisma {
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     plots?: PlotListRelationFilter
     inventory?: InventoryItemListRelationFilter
+    animals?: AnimalListRelationFilter
   }
 
   export type ProfileOrderByWithRelationInput = {
@@ -8460,6 +9870,7 @@ export namespace Prisma {
     user?: UserOrderByWithRelationInput
     plots?: PlotOrderByRelationAggregateInput
     inventory?: InventoryItemOrderByRelationAggregateInput
+    animals?: AnimalOrderByRelationAggregateInput
   }
 
   export type ProfileWhereUniqueInput = Prisma.AtLeast<{
@@ -8477,6 +9888,7 @@ export namespace Prisma {
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     plots?: PlotListRelationFilter
     inventory?: InventoryItemListRelationFilter
+    animals?: AnimalListRelationFilter
   }, "id" | "userId">
 
   export type ProfileOrderByWithAggregationInput = {
@@ -8590,10 +10002,16 @@ export namespace Prisma {
     growthTime?: IntNullableFilter<"Item"> | number | null
     xpReward?: IntNullableFilter<"Item"> | number | null
     yieldItemSlug?: StringNullableFilter<"Item"> | string | null
+    productionTime?: IntNullableFilter<"Item"> | number | null
+    foodSlug?: StringNullableFilter<"Item"> | string | null
+    foodQuantity?: IntNullableFilter<"Item"> | number | null
+    maxWeight?: IntNullableFilter<"Item"> | number | null
+    weightGain?: IntNullableFilter<"Item"> | number | null
     createdAt?: DateTimeFilter<"Item"> | Date | string
     updatedAt?: DateTimeFilter<"Item"> | Date | string
     inventoryItems?: InventoryItemListRelationFilter
     plots?: PlotListRelationFilter
+    animals?: AnimalListRelationFilter
   }
 
   export type ItemOrderByWithRelationInput = {
@@ -8608,10 +10026,16 @@ export namespace Prisma {
     growthTime?: SortOrderInput | SortOrder
     xpReward?: SortOrderInput | SortOrder
     yieldItemSlug?: SortOrderInput | SortOrder
+    productionTime?: SortOrderInput | SortOrder
+    foodSlug?: SortOrderInput | SortOrder
+    foodQuantity?: SortOrderInput | SortOrder
+    maxWeight?: SortOrderInput | SortOrder
+    weightGain?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     inventoryItems?: InventoryItemOrderByRelationAggregateInput
     plots?: PlotOrderByRelationAggregateInput
+    animals?: AnimalOrderByRelationAggregateInput
   }
 
   export type ItemWhereUniqueInput = Prisma.AtLeast<{
@@ -8629,10 +10053,16 @@ export namespace Prisma {
     growthTime?: IntNullableFilter<"Item"> | number | null
     xpReward?: IntNullableFilter<"Item"> | number | null
     yieldItemSlug?: StringNullableFilter<"Item"> | string | null
+    productionTime?: IntNullableFilter<"Item"> | number | null
+    foodSlug?: StringNullableFilter<"Item"> | string | null
+    foodQuantity?: IntNullableFilter<"Item"> | number | null
+    maxWeight?: IntNullableFilter<"Item"> | number | null
+    weightGain?: IntNullableFilter<"Item"> | number | null
     createdAt?: DateTimeFilter<"Item"> | Date | string
     updatedAt?: DateTimeFilter<"Item"> | Date | string
     inventoryItems?: InventoryItemListRelationFilter
     plots?: PlotListRelationFilter
+    animals?: AnimalListRelationFilter
   }, "id" | "slug">
 
   export type ItemOrderByWithAggregationInput = {
@@ -8647,6 +10077,11 @@ export namespace Prisma {
     growthTime?: SortOrderInput | SortOrder
     xpReward?: SortOrderInput | SortOrder
     yieldItemSlug?: SortOrderInput | SortOrder
+    productionTime?: SortOrderInput | SortOrder
+    foodSlug?: SortOrderInput | SortOrder
+    foodQuantity?: SortOrderInput | SortOrder
+    maxWeight?: SortOrderInput | SortOrder
+    weightGain?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: ItemCountOrderByAggregateInput
@@ -8671,6 +10106,11 @@ export namespace Prisma {
     growthTime?: IntNullableWithAggregatesFilter<"Item"> | number | null
     xpReward?: IntNullableWithAggregatesFilter<"Item"> | number | null
     yieldItemSlug?: StringNullableWithAggregatesFilter<"Item"> | string | null
+    productionTime?: IntNullableWithAggregatesFilter<"Item"> | number | null
+    foodSlug?: StringNullableWithAggregatesFilter<"Item"> | string | null
+    foodQuantity?: IntNullableWithAggregatesFilter<"Item"> | number | null
+    maxWeight?: IntNullableWithAggregatesFilter<"Item"> | number | null
+    weightGain?: IntNullableWithAggregatesFilter<"Item"> | number | null
     createdAt?: DateTimeWithAggregatesFilter<"Item"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Item"> | Date | string
   }
@@ -8730,6 +10170,77 @@ export namespace Prisma {
     description?: StringWithAggregatesFilter<"ActivityLog"> | string
     metadata?: JsonNullableWithAggregatesFilter<"ActivityLog">
     createdAt?: DateTimeWithAggregatesFilter<"ActivityLog"> | Date | string
+  }
+
+  export type AnimalWhereInput = {
+    AND?: AnimalWhereInput | AnimalWhereInput[]
+    OR?: AnimalWhereInput[]
+    NOT?: AnimalWhereInput | AnimalWhereInput[]
+    id?: StringFilter<"Animal"> | string
+    profileId?: StringFilter<"Animal"> | string
+    animalSlug?: StringFilter<"Animal"> | string
+    fedAt?: DateTimeNullableFilter<"Animal"> | Date | string | null
+    weight?: IntNullableFilter<"Animal"> | number | null
+    createdAt?: DateTimeFilter<"Animal"> | Date | string
+    updatedAt?: DateTimeFilter<"Animal"> | Date | string
+    profile?: XOR<ProfileScalarRelationFilter, ProfileWhereInput>
+    animal?: XOR<ItemNullableScalarRelationFilter, ItemWhereInput> | null
+  }
+
+  export type AnimalOrderByWithRelationInput = {
+    id?: SortOrder
+    profileId?: SortOrder
+    animalSlug?: SortOrder
+    fedAt?: SortOrderInput | SortOrder
+    weight?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    profile?: ProfileOrderByWithRelationInput
+    animal?: ItemOrderByWithRelationInput
+  }
+
+  export type AnimalWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    profileId_animalSlug?: AnimalProfileIdAnimalSlugCompoundUniqueInput
+    AND?: AnimalWhereInput | AnimalWhereInput[]
+    OR?: AnimalWhereInput[]
+    NOT?: AnimalWhereInput | AnimalWhereInput[]
+    profileId?: StringFilter<"Animal"> | string
+    animalSlug?: StringFilter<"Animal"> | string
+    fedAt?: DateTimeNullableFilter<"Animal"> | Date | string | null
+    weight?: IntNullableFilter<"Animal"> | number | null
+    createdAt?: DateTimeFilter<"Animal"> | Date | string
+    updatedAt?: DateTimeFilter<"Animal"> | Date | string
+    profile?: XOR<ProfileScalarRelationFilter, ProfileWhereInput>
+    animal?: XOR<ItemNullableScalarRelationFilter, ItemWhereInput> | null
+  }, "id" | "profileId_animalSlug">
+
+  export type AnimalOrderByWithAggregationInput = {
+    id?: SortOrder
+    profileId?: SortOrder
+    animalSlug?: SortOrder
+    fedAt?: SortOrderInput | SortOrder
+    weight?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: AnimalCountOrderByAggregateInput
+    _avg?: AnimalAvgOrderByAggregateInput
+    _max?: AnimalMaxOrderByAggregateInput
+    _min?: AnimalMinOrderByAggregateInput
+    _sum?: AnimalSumOrderByAggregateInput
+  }
+
+  export type AnimalScalarWhereWithAggregatesInput = {
+    AND?: AnimalScalarWhereWithAggregatesInput | AnimalScalarWhereWithAggregatesInput[]
+    OR?: AnimalScalarWhereWithAggregatesInput[]
+    NOT?: AnimalScalarWhereWithAggregatesInput | AnimalScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Animal"> | string
+    profileId?: StringWithAggregatesFilter<"Animal"> | string
+    animalSlug?: StringWithAggregatesFilter<"Animal"> | string
+    fedAt?: DateTimeNullableWithAggregatesFilter<"Animal"> | Date | string | null
+    weight?: IntNullableWithAggregatesFilter<"Animal"> | number | null
+    createdAt?: DateTimeWithAggregatesFilter<"Animal"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Animal"> | Date | string
   }
 
   export type InventoryItemWhereInput = {
@@ -8869,6 +10380,7 @@ export namespace Prisma {
     user: UserCreateNestedOneWithoutProfileInput
     plots?: PlotCreateNestedManyWithoutProfileInput
     inventory?: InventoryItemCreateNestedManyWithoutProfileInput
+    animals?: AnimalCreateNestedManyWithoutProfileInput
   }
 
   export type ProfileUncheckedCreateInput = {
@@ -8882,6 +10394,7 @@ export namespace Prisma {
     createdAt?: Date | string
     plots?: PlotUncheckedCreateNestedManyWithoutProfileInput
     inventory?: InventoryItemUncheckedCreateNestedManyWithoutProfileInput
+    animals?: AnimalUncheckedCreateNestedManyWithoutProfileInput
   }
 
   export type ProfileUpdateInput = {
@@ -8895,6 +10408,7 @@ export namespace Prisma {
     user?: UserUpdateOneRequiredWithoutProfileNestedInput
     plots?: PlotUpdateManyWithoutProfileNestedInput
     inventory?: InventoryItemUpdateManyWithoutProfileNestedInput
+    animals?: AnimalUpdateManyWithoutProfileNestedInput
   }
 
   export type ProfileUncheckedUpdateInput = {
@@ -8908,6 +10422,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     plots?: PlotUncheckedUpdateManyWithoutProfileNestedInput
     inventory?: InventoryItemUncheckedUpdateManyWithoutProfileNestedInput
+    animals?: AnimalUncheckedUpdateManyWithoutProfileNestedInput
   }
 
   export type ProfileCreateManyInput = {
@@ -9015,10 +10530,16 @@ export namespace Prisma {
     growthTime?: number | null
     xpReward?: number | null
     yieldItemSlug?: string | null
+    productionTime?: number | null
+    foodSlug?: string | null
+    foodQuantity?: number | null
+    maxWeight?: number | null
+    weightGain?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
     inventoryItems?: InventoryItemCreateNestedManyWithoutItemInput
     plots?: PlotCreateNestedManyWithoutCropInput
+    animals?: AnimalCreateNestedManyWithoutAnimalInput
   }
 
   export type ItemUncheckedCreateInput = {
@@ -9033,10 +10554,16 @@ export namespace Prisma {
     growthTime?: number | null
     xpReward?: number | null
     yieldItemSlug?: string | null
+    productionTime?: number | null
+    foodSlug?: string | null
+    foodQuantity?: number | null
+    maxWeight?: number | null
+    weightGain?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
     inventoryItems?: InventoryItemUncheckedCreateNestedManyWithoutItemInput
     plots?: PlotUncheckedCreateNestedManyWithoutCropInput
+    animals?: AnimalUncheckedCreateNestedManyWithoutAnimalInput
   }
 
   export type ItemUpdateInput = {
@@ -9051,10 +10578,16 @@ export namespace Prisma {
     growthTime?: NullableIntFieldUpdateOperationsInput | number | null
     xpReward?: NullableIntFieldUpdateOperationsInput | number | null
     yieldItemSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    productionTime?: NullableIntFieldUpdateOperationsInput | number | null
+    foodSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    foodQuantity?: NullableIntFieldUpdateOperationsInput | number | null
+    maxWeight?: NullableIntFieldUpdateOperationsInput | number | null
+    weightGain?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inventoryItems?: InventoryItemUpdateManyWithoutItemNestedInput
     plots?: PlotUpdateManyWithoutCropNestedInput
+    animals?: AnimalUpdateManyWithoutAnimalNestedInput
   }
 
   export type ItemUncheckedUpdateInput = {
@@ -9069,10 +10602,16 @@ export namespace Prisma {
     growthTime?: NullableIntFieldUpdateOperationsInput | number | null
     xpReward?: NullableIntFieldUpdateOperationsInput | number | null
     yieldItemSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    productionTime?: NullableIntFieldUpdateOperationsInput | number | null
+    foodSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    foodQuantity?: NullableIntFieldUpdateOperationsInput | number | null
+    maxWeight?: NullableIntFieldUpdateOperationsInput | number | null
+    weightGain?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inventoryItems?: InventoryItemUncheckedUpdateManyWithoutItemNestedInput
     plots?: PlotUncheckedUpdateManyWithoutCropNestedInput
+    animals?: AnimalUncheckedUpdateManyWithoutAnimalNestedInput
   }
 
   export type ItemCreateManyInput = {
@@ -9087,6 +10626,11 @@ export namespace Prisma {
     growthTime?: number | null
     xpReward?: number | null
     yieldItemSlug?: string | null
+    productionTime?: number | null
+    foodSlug?: string | null
+    foodQuantity?: number | null
+    maxWeight?: number | null
+    weightGain?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -9103,6 +10647,11 @@ export namespace Prisma {
     growthTime?: NullableIntFieldUpdateOperationsInput | number | null
     xpReward?: NullableIntFieldUpdateOperationsInput | number | null
     yieldItemSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    productionTime?: NullableIntFieldUpdateOperationsInput | number | null
+    foodSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    foodQuantity?: NullableIntFieldUpdateOperationsInput | number | null
+    maxWeight?: NullableIntFieldUpdateOperationsInput | number | null
+    weightGain?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9119,6 +10668,11 @@ export namespace Prisma {
     growthTime?: NullableIntFieldUpdateOperationsInput | number | null
     xpReward?: NullableIntFieldUpdateOperationsInput | number | null
     yieldItemSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    productionTime?: NullableIntFieldUpdateOperationsInput | number | null
+    foodSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    foodQuantity?: NullableIntFieldUpdateOperationsInput | number | null
+    maxWeight?: NullableIntFieldUpdateOperationsInput | number | null
+    weightGain?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9184,6 +10738,74 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     metadata?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AnimalCreateInput = {
+    id?: string
+    fedAt?: Date | string | null
+    weight?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    profile: ProfileCreateNestedOneWithoutAnimalsInput
+    animal?: ItemCreateNestedOneWithoutAnimalsInput
+  }
+
+  export type AnimalUncheckedCreateInput = {
+    id?: string
+    profileId: string
+    animalSlug: string
+    fedAt?: Date | string | null
+    weight?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AnimalUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    weight?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    profile?: ProfileUpdateOneRequiredWithoutAnimalsNestedInput
+    animal?: ItemUpdateOneWithoutAnimalsNestedInput
+  }
+
+  export type AnimalUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    profileId?: StringFieldUpdateOperationsInput | string
+    animalSlug?: StringFieldUpdateOperationsInput | string
+    fedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    weight?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AnimalCreateManyInput = {
+    id?: string
+    profileId: string
+    animalSlug: string
+    fedAt?: Date | string | null
+    weight?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AnimalUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    weight?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AnimalUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    profileId?: StringFieldUpdateOperationsInput | string
+    animalSlug?: StringFieldUpdateOperationsInput | string
+    fedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    weight?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type InventoryItemCreateInput = {
@@ -9377,6 +10999,12 @@ export namespace Prisma {
     none?: InventoryItemWhereInput
   }
 
+  export type AnimalListRelationFilter = {
+    every?: AnimalWhereInput
+    some?: AnimalWhereInput
+    none?: AnimalWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -9387,6 +11015,10 @@ export namespace Prisma {
   }
 
   export type InventoryItemOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AnimalOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -9580,6 +11212,11 @@ export namespace Prisma {
     growthTime?: SortOrder
     xpReward?: SortOrder
     yieldItemSlug?: SortOrder
+    productionTime?: SortOrder
+    foodSlug?: SortOrder
+    foodQuantity?: SortOrder
+    maxWeight?: SortOrder
+    weightGain?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -9590,6 +11227,10 @@ export namespace Prisma {
     minLevel?: SortOrder
     growthTime?: SortOrder
     xpReward?: SortOrder
+    productionTime?: SortOrder
+    foodQuantity?: SortOrder
+    maxWeight?: SortOrder
+    weightGain?: SortOrder
   }
 
   export type ItemMaxOrderByAggregateInput = {
@@ -9604,6 +11245,11 @@ export namespace Prisma {
     growthTime?: SortOrder
     xpReward?: SortOrder
     yieldItemSlug?: SortOrder
+    productionTime?: SortOrder
+    foodSlug?: SortOrder
+    foodQuantity?: SortOrder
+    maxWeight?: SortOrder
+    weightGain?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -9620,6 +11266,11 @@ export namespace Prisma {
     growthTime?: SortOrder
     xpReward?: SortOrder
     yieldItemSlug?: SortOrder
+    productionTime?: SortOrder
+    foodSlug?: SortOrder
+    foodQuantity?: SortOrder
+    maxWeight?: SortOrder
+    weightGain?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -9630,6 +11281,10 @@ export namespace Prisma {
     minLevel?: SortOrder
     growthTime?: SortOrder
     xpReward?: SortOrder
+    productionTime?: SortOrder
+    foodQuantity?: SortOrder
+    maxWeight?: SortOrder
+    weightGain?: SortOrder
   }
 
   export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -9720,6 +11375,49 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedJsonNullableFilter<$PrismaModel>
     _max?: NestedJsonNullableFilter<$PrismaModel>
+  }
+
+  export type AnimalProfileIdAnimalSlugCompoundUniqueInput = {
+    profileId: string
+    animalSlug: string
+  }
+
+  export type AnimalCountOrderByAggregateInput = {
+    id?: SortOrder
+    profileId?: SortOrder
+    animalSlug?: SortOrder
+    fedAt?: SortOrder
+    weight?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AnimalAvgOrderByAggregateInput = {
+    weight?: SortOrder
+  }
+
+  export type AnimalMaxOrderByAggregateInput = {
+    id?: SortOrder
+    profileId?: SortOrder
+    animalSlug?: SortOrder
+    fedAt?: SortOrder
+    weight?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AnimalMinOrderByAggregateInput = {
+    id?: SortOrder
+    profileId?: SortOrder
+    animalSlug?: SortOrder
+    fedAt?: SortOrder
+    weight?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AnimalSumOrderByAggregateInput = {
+    weight?: SortOrder
   }
 
   export type ItemScalarRelationFilter = {
@@ -9827,6 +11525,13 @@ export namespace Prisma {
     connect?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
   }
 
+  export type AnimalCreateNestedManyWithoutProfileInput = {
+    create?: XOR<AnimalCreateWithoutProfileInput, AnimalUncheckedCreateWithoutProfileInput> | AnimalCreateWithoutProfileInput[] | AnimalUncheckedCreateWithoutProfileInput[]
+    connectOrCreate?: AnimalCreateOrConnectWithoutProfileInput | AnimalCreateOrConnectWithoutProfileInput[]
+    createMany?: AnimalCreateManyProfileInputEnvelope
+    connect?: AnimalWhereUniqueInput | AnimalWhereUniqueInput[]
+  }
+
   export type PlotUncheckedCreateNestedManyWithoutProfileInput = {
     create?: XOR<PlotCreateWithoutProfileInput, PlotUncheckedCreateWithoutProfileInput> | PlotCreateWithoutProfileInput[] | PlotUncheckedCreateWithoutProfileInput[]
     connectOrCreate?: PlotCreateOrConnectWithoutProfileInput | PlotCreateOrConnectWithoutProfileInput[]
@@ -9839,6 +11544,13 @@ export namespace Prisma {
     connectOrCreate?: InventoryItemCreateOrConnectWithoutProfileInput | InventoryItemCreateOrConnectWithoutProfileInput[]
     createMany?: InventoryItemCreateManyProfileInputEnvelope
     connect?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
+  }
+
+  export type AnimalUncheckedCreateNestedManyWithoutProfileInput = {
+    create?: XOR<AnimalCreateWithoutProfileInput, AnimalUncheckedCreateWithoutProfileInput> | AnimalCreateWithoutProfileInput[] | AnimalUncheckedCreateWithoutProfileInput[]
+    connectOrCreate?: AnimalCreateOrConnectWithoutProfileInput | AnimalCreateOrConnectWithoutProfileInput[]
+    createMany?: AnimalCreateManyProfileInputEnvelope
+    connect?: AnimalWhereUniqueInput | AnimalWhereUniqueInput[]
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -9889,6 +11601,20 @@ export namespace Prisma {
     deleteMany?: InventoryItemScalarWhereInput | InventoryItemScalarWhereInput[]
   }
 
+  export type AnimalUpdateManyWithoutProfileNestedInput = {
+    create?: XOR<AnimalCreateWithoutProfileInput, AnimalUncheckedCreateWithoutProfileInput> | AnimalCreateWithoutProfileInput[] | AnimalUncheckedCreateWithoutProfileInput[]
+    connectOrCreate?: AnimalCreateOrConnectWithoutProfileInput | AnimalCreateOrConnectWithoutProfileInput[]
+    upsert?: AnimalUpsertWithWhereUniqueWithoutProfileInput | AnimalUpsertWithWhereUniqueWithoutProfileInput[]
+    createMany?: AnimalCreateManyProfileInputEnvelope
+    set?: AnimalWhereUniqueInput | AnimalWhereUniqueInput[]
+    disconnect?: AnimalWhereUniqueInput | AnimalWhereUniqueInput[]
+    delete?: AnimalWhereUniqueInput | AnimalWhereUniqueInput[]
+    connect?: AnimalWhereUniqueInput | AnimalWhereUniqueInput[]
+    update?: AnimalUpdateWithWhereUniqueWithoutProfileInput | AnimalUpdateWithWhereUniqueWithoutProfileInput[]
+    updateMany?: AnimalUpdateManyWithWhereWithoutProfileInput | AnimalUpdateManyWithWhereWithoutProfileInput[]
+    deleteMany?: AnimalScalarWhereInput | AnimalScalarWhereInput[]
+  }
+
   export type PlotUncheckedUpdateManyWithoutProfileNestedInput = {
     create?: XOR<PlotCreateWithoutProfileInput, PlotUncheckedCreateWithoutProfileInput> | PlotCreateWithoutProfileInput[] | PlotUncheckedCreateWithoutProfileInput[]
     connectOrCreate?: PlotCreateOrConnectWithoutProfileInput | PlotCreateOrConnectWithoutProfileInput[]
@@ -9915,6 +11641,20 @@ export namespace Prisma {
     update?: InventoryItemUpdateWithWhereUniqueWithoutProfileInput | InventoryItemUpdateWithWhereUniqueWithoutProfileInput[]
     updateMany?: InventoryItemUpdateManyWithWhereWithoutProfileInput | InventoryItemUpdateManyWithWhereWithoutProfileInput[]
     deleteMany?: InventoryItemScalarWhereInput | InventoryItemScalarWhereInput[]
+  }
+
+  export type AnimalUncheckedUpdateManyWithoutProfileNestedInput = {
+    create?: XOR<AnimalCreateWithoutProfileInput, AnimalUncheckedCreateWithoutProfileInput> | AnimalCreateWithoutProfileInput[] | AnimalUncheckedCreateWithoutProfileInput[]
+    connectOrCreate?: AnimalCreateOrConnectWithoutProfileInput | AnimalCreateOrConnectWithoutProfileInput[]
+    upsert?: AnimalUpsertWithWhereUniqueWithoutProfileInput | AnimalUpsertWithWhereUniqueWithoutProfileInput[]
+    createMany?: AnimalCreateManyProfileInputEnvelope
+    set?: AnimalWhereUniqueInput | AnimalWhereUniqueInput[]
+    disconnect?: AnimalWhereUniqueInput | AnimalWhereUniqueInput[]
+    delete?: AnimalWhereUniqueInput | AnimalWhereUniqueInput[]
+    connect?: AnimalWhereUniqueInput | AnimalWhereUniqueInput[]
+    update?: AnimalUpdateWithWhereUniqueWithoutProfileInput | AnimalUpdateWithWhereUniqueWithoutProfileInput[]
+    updateMany?: AnimalUpdateManyWithWhereWithoutProfileInput | AnimalUpdateManyWithWhereWithoutProfileInput[]
+    deleteMany?: AnimalScalarWhereInput | AnimalScalarWhereInput[]
   }
 
   export type ProfileCreateNestedOneWithoutPlotsInput = {
@@ -9969,6 +11709,13 @@ export namespace Prisma {
     connect?: PlotWhereUniqueInput | PlotWhereUniqueInput[]
   }
 
+  export type AnimalCreateNestedManyWithoutAnimalInput = {
+    create?: XOR<AnimalCreateWithoutAnimalInput, AnimalUncheckedCreateWithoutAnimalInput> | AnimalCreateWithoutAnimalInput[] | AnimalUncheckedCreateWithoutAnimalInput[]
+    connectOrCreate?: AnimalCreateOrConnectWithoutAnimalInput | AnimalCreateOrConnectWithoutAnimalInput[]
+    createMany?: AnimalCreateManyAnimalInputEnvelope
+    connect?: AnimalWhereUniqueInput | AnimalWhereUniqueInput[]
+  }
+
   export type InventoryItemUncheckedCreateNestedManyWithoutItemInput = {
     create?: XOR<InventoryItemCreateWithoutItemInput, InventoryItemUncheckedCreateWithoutItemInput> | InventoryItemCreateWithoutItemInput[] | InventoryItemUncheckedCreateWithoutItemInput[]
     connectOrCreate?: InventoryItemCreateOrConnectWithoutItemInput | InventoryItemCreateOrConnectWithoutItemInput[]
@@ -9981,6 +11728,13 @@ export namespace Prisma {
     connectOrCreate?: PlotCreateOrConnectWithoutCropInput | PlotCreateOrConnectWithoutCropInput[]
     createMany?: PlotCreateManyCropInputEnvelope
     connect?: PlotWhereUniqueInput | PlotWhereUniqueInput[]
+  }
+
+  export type AnimalUncheckedCreateNestedManyWithoutAnimalInput = {
+    create?: XOR<AnimalCreateWithoutAnimalInput, AnimalUncheckedCreateWithoutAnimalInput> | AnimalCreateWithoutAnimalInput[] | AnimalUncheckedCreateWithoutAnimalInput[]
+    connectOrCreate?: AnimalCreateOrConnectWithoutAnimalInput | AnimalCreateOrConnectWithoutAnimalInput[]
+    createMany?: AnimalCreateManyAnimalInputEnvelope
+    connect?: AnimalWhereUniqueInput | AnimalWhereUniqueInput[]
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -10019,6 +11773,20 @@ export namespace Prisma {
     deleteMany?: PlotScalarWhereInput | PlotScalarWhereInput[]
   }
 
+  export type AnimalUpdateManyWithoutAnimalNestedInput = {
+    create?: XOR<AnimalCreateWithoutAnimalInput, AnimalUncheckedCreateWithoutAnimalInput> | AnimalCreateWithoutAnimalInput[] | AnimalUncheckedCreateWithoutAnimalInput[]
+    connectOrCreate?: AnimalCreateOrConnectWithoutAnimalInput | AnimalCreateOrConnectWithoutAnimalInput[]
+    upsert?: AnimalUpsertWithWhereUniqueWithoutAnimalInput | AnimalUpsertWithWhereUniqueWithoutAnimalInput[]
+    createMany?: AnimalCreateManyAnimalInputEnvelope
+    set?: AnimalWhereUniqueInput | AnimalWhereUniqueInput[]
+    disconnect?: AnimalWhereUniqueInput | AnimalWhereUniqueInput[]
+    delete?: AnimalWhereUniqueInput | AnimalWhereUniqueInput[]
+    connect?: AnimalWhereUniqueInput | AnimalWhereUniqueInput[]
+    update?: AnimalUpdateWithWhereUniqueWithoutAnimalInput | AnimalUpdateWithWhereUniqueWithoutAnimalInput[]
+    updateMany?: AnimalUpdateManyWithWhereWithoutAnimalInput | AnimalUpdateManyWithWhereWithoutAnimalInput[]
+    deleteMany?: AnimalScalarWhereInput | AnimalScalarWhereInput[]
+  }
+
   export type InventoryItemUncheckedUpdateManyWithoutItemNestedInput = {
     create?: XOR<InventoryItemCreateWithoutItemInput, InventoryItemUncheckedCreateWithoutItemInput> | InventoryItemCreateWithoutItemInput[] | InventoryItemUncheckedCreateWithoutItemInput[]
     connectOrCreate?: InventoryItemCreateOrConnectWithoutItemInput | InventoryItemCreateOrConnectWithoutItemInput[]
@@ -10045,6 +11813,50 @@ export namespace Prisma {
     update?: PlotUpdateWithWhereUniqueWithoutCropInput | PlotUpdateWithWhereUniqueWithoutCropInput[]
     updateMany?: PlotUpdateManyWithWhereWithoutCropInput | PlotUpdateManyWithWhereWithoutCropInput[]
     deleteMany?: PlotScalarWhereInput | PlotScalarWhereInput[]
+  }
+
+  export type AnimalUncheckedUpdateManyWithoutAnimalNestedInput = {
+    create?: XOR<AnimalCreateWithoutAnimalInput, AnimalUncheckedCreateWithoutAnimalInput> | AnimalCreateWithoutAnimalInput[] | AnimalUncheckedCreateWithoutAnimalInput[]
+    connectOrCreate?: AnimalCreateOrConnectWithoutAnimalInput | AnimalCreateOrConnectWithoutAnimalInput[]
+    upsert?: AnimalUpsertWithWhereUniqueWithoutAnimalInput | AnimalUpsertWithWhereUniqueWithoutAnimalInput[]
+    createMany?: AnimalCreateManyAnimalInputEnvelope
+    set?: AnimalWhereUniqueInput | AnimalWhereUniqueInput[]
+    disconnect?: AnimalWhereUniqueInput | AnimalWhereUniqueInput[]
+    delete?: AnimalWhereUniqueInput | AnimalWhereUniqueInput[]
+    connect?: AnimalWhereUniqueInput | AnimalWhereUniqueInput[]
+    update?: AnimalUpdateWithWhereUniqueWithoutAnimalInput | AnimalUpdateWithWhereUniqueWithoutAnimalInput[]
+    updateMany?: AnimalUpdateManyWithWhereWithoutAnimalInput | AnimalUpdateManyWithWhereWithoutAnimalInput[]
+    deleteMany?: AnimalScalarWhereInput | AnimalScalarWhereInput[]
+  }
+
+  export type ProfileCreateNestedOneWithoutAnimalsInput = {
+    create?: XOR<ProfileCreateWithoutAnimalsInput, ProfileUncheckedCreateWithoutAnimalsInput>
+    connectOrCreate?: ProfileCreateOrConnectWithoutAnimalsInput
+    connect?: ProfileWhereUniqueInput
+  }
+
+  export type ItemCreateNestedOneWithoutAnimalsInput = {
+    create?: XOR<ItemCreateWithoutAnimalsInput, ItemUncheckedCreateWithoutAnimalsInput>
+    connectOrCreate?: ItemCreateOrConnectWithoutAnimalsInput
+    connect?: ItemWhereUniqueInput
+  }
+
+  export type ProfileUpdateOneRequiredWithoutAnimalsNestedInput = {
+    create?: XOR<ProfileCreateWithoutAnimalsInput, ProfileUncheckedCreateWithoutAnimalsInput>
+    connectOrCreate?: ProfileCreateOrConnectWithoutAnimalsInput
+    upsert?: ProfileUpsertWithoutAnimalsInput
+    connect?: ProfileWhereUniqueInput
+    update?: XOR<XOR<ProfileUpdateToOneWithWhereWithoutAnimalsInput, ProfileUpdateWithoutAnimalsInput>, ProfileUncheckedUpdateWithoutAnimalsInput>
+  }
+
+  export type ItemUpdateOneWithoutAnimalsNestedInput = {
+    create?: XOR<ItemCreateWithoutAnimalsInput, ItemUncheckedCreateWithoutAnimalsInput>
+    connectOrCreate?: ItemCreateOrConnectWithoutAnimalsInput
+    upsert?: ItemUpsertWithoutAnimalsInput
+    disconnect?: ItemWhereInput | boolean
+    delete?: ItemWhereInput | boolean
+    connect?: ItemWhereUniqueInput
+    update?: XOR<XOR<ItemUpdateToOneWithWhereWithoutAnimalsInput, ItemUpdateWithoutAnimalsInput>, ItemUncheckedUpdateWithoutAnimalsInput>
   }
 
   export type ProfileCreateNestedOneWithoutInventoryInput = {
@@ -10309,6 +12121,7 @@ export namespace Prisma {
     createdAt?: Date | string
     plots?: PlotCreateNestedManyWithoutProfileInput
     inventory?: InventoryItemCreateNestedManyWithoutProfileInput
+    animals?: AnimalCreateNestedManyWithoutProfileInput
   }
 
   export type ProfileUncheckedCreateWithoutUserInput = {
@@ -10321,6 +12134,7 @@ export namespace Prisma {
     createdAt?: Date | string
     plots?: PlotUncheckedCreateNestedManyWithoutProfileInput
     inventory?: InventoryItemUncheckedCreateNestedManyWithoutProfileInput
+    animals?: AnimalUncheckedCreateNestedManyWithoutProfileInput
   }
 
   export type ProfileCreateOrConnectWithoutUserInput = {
@@ -10349,6 +12163,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     plots?: PlotUpdateManyWithoutProfileNestedInput
     inventory?: InventoryItemUpdateManyWithoutProfileNestedInput
+    animals?: AnimalUpdateManyWithoutProfileNestedInput
   }
 
   export type ProfileUncheckedUpdateWithoutUserInput = {
@@ -10361,6 +12176,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     plots?: PlotUncheckedUpdateManyWithoutProfileNestedInput
     inventory?: InventoryItemUncheckedUpdateManyWithoutProfileNestedInput
+    animals?: AnimalUncheckedUpdateManyWithoutProfileNestedInput
   }
 
   export type UserCreateWithoutProfileInput = {
@@ -10433,6 +12249,34 @@ export namespace Prisma {
 
   export type InventoryItemCreateManyProfileInputEnvelope = {
     data: InventoryItemCreateManyProfileInput | InventoryItemCreateManyProfileInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AnimalCreateWithoutProfileInput = {
+    id?: string
+    fedAt?: Date | string | null
+    weight?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    animal?: ItemCreateNestedOneWithoutAnimalsInput
+  }
+
+  export type AnimalUncheckedCreateWithoutProfileInput = {
+    id?: string
+    animalSlug: string
+    fedAt?: Date | string | null
+    weight?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AnimalCreateOrConnectWithoutProfileInput = {
+    where: AnimalWhereUniqueInput
+    create: XOR<AnimalCreateWithoutProfileInput, AnimalUncheckedCreateWithoutProfileInput>
+  }
+
+  export type AnimalCreateManyProfileInputEnvelope = {
+    data: AnimalCreateManyProfileInput | AnimalCreateManyProfileInput[]
     skipDuplicates?: boolean
   }
 
@@ -10519,6 +12363,35 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"InventoryItem"> | Date | string
   }
 
+  export type AnimalUpsertWithWhereUniqueWithoutProfileInput = {
+    where: AnimalWhereUniqueInput
+    update: XOR<AnimalUpdateWithoutProfileInput, AnimalUncheckedUpdateWithoutProfileInput>
+    create: XOR<AnimalCreateWithoutProfileInput, AnimalUncheckedCreateWithoutProfileInput>
+  }
+
+  export type AnimalUpdateWithWhereUniqueWithoutProfileInput = {
+    where: AnimalWhereUniqueInput
+    data: XOR<AnimalUpdateWithoutProfileInput, AnimalUncheckedUpdateWithoutProfileInput>
+  }
+
+  export type AnimalUpdateManyWithWhereWithoutProfileInput = {
+    where: AnimalScalarWhereInput
+    data: XOR<AnimalUpdateManyMutationInput, AnimalUncheckedUpdateManyWithoutProfileInput>
+  }
+
+  export type AnimalScalarWhereInput = {
+    AND?: AnimalScalarWhereInput | AnimalScalarWhereInput[]
+    OR?: AnimalScalarWhereInput[]
+    NOT?: AnimalScalarWhereInput | AnimalScalarWhereInput[]
+    id?: StringFilter<"Animal"> | string
+    profileId?: StringFilter<"Animal"> | string
+    animalSlug?: StringFilter<"Animal"> | string
+    fedAt?: DateTimeNullableFilter<"Animal"> | Date | string | null
+    weight?: IntNullableFilter<"Animal"> | number | null
+    createdAt?: DateTimeFilter<"Animal"> | Date | string
+    updatedAt?: DateTimeFilter<"Animal"> | Date | string
+  }
+
   export type ProfileCreateWithoutPlotsInput = {
     id?: string
     avatar?: string | null
@@ -10529,6 +12402,7 @@ export namespace Prisma {
     createdAt?: Date | string
     user: UserCreateNestedOneWithoutProfileInput
     inventory?: InventoryItemCreateNestedManyWithoutProfileInput
+    animals?: AnimalCreateNestedManyWithoutProfileInput
   }
 
   export type ProfileUncheckedCreateWithoutPlotsInput = {
@@ -10541,6 +12415,7 @@ export namespace Prisma {
     farmName?: string | null
     createdAt?: Date | string
     inventory?: InventoryItemUncheckedCreateNestedManyWithoutProfileInput
+    animals?: AnimalUncheckedCreateNestedManyWithoutProfileInput
   }
 
   export type ProfileCreateOrConnectWithoutPlotsInput = {
@@ -10560,9 +12435,15 @@ export namespace Prisma {
     growthTime?: number | null
     xpReward?: number | null
     yieldItemSlug?: string | null
+    productionTime?: number | null
+    foodSlug?: string | null
+    foodQuantity?: number | null
+    maxWeight?: number | null
+    weightGain?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
     inventoryItems?: InventoryItemCreateNestedManyWithoutItemInput
+    animals?: AnimalCreateNestedManyWithoutAnimalInput
   }
 
   export type ItemUncheckedCreateWithoutPlotsInput = {
@@ -10577,9 +12458,15 @@ export namespace Prisma {
     growthTime?: number | null
     xpReward?: number | null
     yieldItemSlug?: string | null
+    productionTime?: number | null
+    foodSlug?: string | null
+    foodQuantity?: number | null
+    maxWeight?: number | null
+    weightGain?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
     inventoryItems?: InventoryItemUncheckedCreateNestedManyWithoutItemInput
+    animals?: AnimalUncheckedCreateNestedManyWithoutAnimalInput
   }
 
   export type ItemCreateOrConnectWithoutPlotsInput = {
@@ -10608,6 +12495,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutProfileNestedInput
     inventory?: InventoryItemUpdateManyWithoutProfileNestedInput
+    animals?: AnimalUpdateManyWithoutProfileNestedInput
   }
 
   export type ProfileUncheckedUpdateWithoutPlotsInput = {
@@ -10620,6 +12508,7 @@ export namespace Prisma {
     farmName?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inventory?: InventoryItemUncheckedUpdateManyWithoutProfileNestedInput
+    animals?: AnimalUncheckedUpdateManyWithoutProfileNestedInput
   }
 
   export type ItemUpsertWithoutPlotsInput = {
@@ -10645,9 +12534,15 @@ export namespace Prisma {
     growthTime?: NullableIntFieldUpdateOperationsInput | number | null
     xpReward?: NullableIntFieldUpdateOperationsInput | number | null
     yieldItemSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    productionTime?: NullableIntFieldUpdateOperationsInput | number | null
+    foodSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    foodQuantity?: NullableIntFieldUpdateOperationsInput | number | null
+    maxWeight?: NullableIntFieldUpdateOperationsInput | number | null
+    weightGain?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inventoryItems?: InventoryItemUpdateManyWithoutItemNestedInput
+    animals?: AnimalUpdateManyWithoutAnimalNestedInput
   }
 
   export type ItemUncheckedUpdateWithoutPlotsInput = {
@@ -10662,9 +12557,15 @@ export namespace Prisma {
     growthTime?: NullableIntFieldUpdateOperationsInput | number | null
     xpReward?: NullableIntFieldUpdateOperationsInput | number | null
     yieldItemSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    productionTime?: NullableIntFieldUpdateOperationsInput | number | null
+    foodSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    foodQuantity?: NullableIntFieldUpdateOperationsInput | number | null
+    maxWeight?: NullableIntFieldUpdateOperationsInput | number | null
+    weightGain?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inventoryItems?: InventoryItemUncheckedUpdateManyWithoutItemNestedInput
+    animals?: AnimalUncheckedUpdateManyWithoutAnimalNestedInput
   }
 
   export type InventoryItemCreateWithoutItemInput = {
@@ -10719,6 +12620,34 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type AnimalCreateWithoutAnimalInput = {
+    id?: string
+    fedAt?: Date | string | null
+    weight?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    profile: ProfileCreateNestedOneWithoutAnimalsInput
+  }
+
+  export type AnimalUncheckedCreateWithoutAnimalInput = {
+    id?: string
+    profileId: string
+    fedAt?: Date | string | null
+    weight?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AnimalCreateOrConnectWithoutAnimalInput = {
+    where: AnimalWhereUniqueInput
+    create: XOR<AnimalCreateWithoutAnimalInput, AnimalUncheckedCreateWithoutAnimalInput>
+  }
+
+  export type AnimalCreateManyAnimalInputEnvelope = {
+    data: AnimalCreateManyAnimalInput | AnimalCreateManyAnimalInput[]
+    skipDuplicates?: boolean
+  }
+
   export type InventoryItemUpsertWithWhereUniqueWithoutItemInput = {
     where: InventoryItemWhereUniqueInput
     update: XOR<InventoryItemUpdateWithoutItemInput, InventoryItemUncheckedUpdateWithoutItemInput>
@@ -10751,6 +12680,198 @@ export namespace Prisma {
     data: XOR<PlotUpdateManyMutationInput, PlotUncheckedUpdateManyWithoutCropInput>
   }
 
+  export type AnimalUpsertWithWhereUniqueWithoutAnimalInput = {
+    where: AnimalWhereUniqueInput
+    update: XOR<AnimalUpdateWithoutAnimalInput, AnimalUncheckedUpdateWithoutAnimalInput>
+    create: XOR<AnimalCreateWithoutAnimalInput, AnimalUncheckedCreateWithoutAnimalInput>
+  }
+
+  export type AnimalUpdateWithWhereUniqueWithoutAnimalInput = {
+    where: AnimalWhereUniqueInput
+    data: XOR<AnimalUpdateWithoutAnimalInput, AnimalUncheckedUpdateWithoutAnimalInput>
+  }
+
+  export type AnimalUpdateManyWithWhereWithoutAnimalInput = {
+    where: AnimalScalarWhereInput
+    data: XOR<AnimalUpdateManyMutationInput, AnimalUncheckedUpdateManyWithoutAnimalInput>
+  }
+
+  export type ProfileCreateWithoutAnimalsInput = {
+    id?: string
+    avatar?: string | null
+    level?: number
+    experience?: number
+    coins?: number
+    farmName?: string | null
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutProfileInput
+    plots?: PlotCreateNestedManyWithoutProfileInput
+    inventory?: InventoryItemCreateNestedManyWithoutProfileInput
+  }
+
+  export type ProfileUncheckedCreateWithoutAnimalsInput = {
+    id?: string
+    userId: string
+    avatar?: string | null
+    level?: number
+    experience?: number
+    coins?: number
+    farmName?: string | null
+    createdAt?: Date | string
+    plots?: PlotUncheckedCreateNestedManyWithoutProfileInput
+    inventory?: InventoryItemUncheckedCreateNestedManyWithoutProfileInput
+  }
+
+  export type ProfileCreateOrConnectWithoutAnimalsInput = {
+    where: ProfileWhereUniqueInput
+    create: XOR<ProfileCreateWithoutAnimalsInput, ProfileUncheckedCreateWithoutAnimalsInput>
+  }
+
+  export type ItemCreateWithoutAnimalsInput = {
+    id?: string
+    slug: string
+    name: string
+    description?: string | null
+    type: string
+    buyPrice?: number
+    sellPrice?: number
+    minLevel?: number
+    growthTime?: number | null
+    xpReward?: number | null
+    yieldItemSlug?: string | null
+    productionTime?: number | null
+    foodSlug?: string | null
+    foodQuantity?: number | null
+    maxWeight?: number | null
+    weightGain?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    inventoryItems?: InventoryItemCreateNestedManyWithoutItemInput
+    plots?: PlotCreateNestedManyWithoutCropInput
+  }
+
+  export type ItemUncheckedCreateWithoutAnimalsInput = {
+    id?: string
+    slug: string
+    name: string
+    description?: string | null
+    type: string
+    buyPrice?: number
+    sellPrice?: number
+    minLevel?: number
+    growthTime?: number | null
+    xpReward?: number | null
+    yieldItemSlug?: string | null
+    productionTime?: number | null
+    foodSlug?: string | null
+    foodQuantity?: number | null
+    maxWeight?: number | null
+    weightGain?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    inventoryItems?: InventoryItemUncheckedCreateNestedManyWithoutItemInput
+    plots?: PlotUncheckedCreateNestedManyWithoutCropInput
+  }
+
+  export type ItemCreateOrConnectWithoutAnimalsInput = {
+    where: ItemWhereUniqueInput
+    create: XOR<ItemCreateWithoutAnimalsInput, ItemUncheckedCreateWithoutAnimalsInput>
+  }
+
+  export type ProfileUpsertWithoutAnimalsInput = {
+    update: XOR<ProfileUpdateWithoutAnimalsInput, ProfileUncheckedUpdateWithoutAnimalsInput>
+    create: XOR<ProfileCreateWithoutAnimalsInput, ProfileUncheckedCreateWithoutAnimalsInput>
+    where?: ProfileWhereInput
+  }
+
+  export type ProfileUpdateToOneWithWhereWithoutAnimalsInput = {
+    where?: ProfileWhereInput
+    data: XOR<ProfileUpdateWithoutAnimalsInput, ProfileUncheckedUpdateWithoutAnimalsInput>
+  }
+
+  export type ProfileUpdateWithoutAnimalsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: IntFieldUpdateOperationsInput | number
+    experience?: IntFieldUpdateOperationsInput | number
+    coins?: IntFieldUpdateOperationsInput | number
+    farmName?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutProfileNestedInput
+    plots?: PlotUpdateManyWithoutProfileNestedInput
+    inventory?: InventoryItemUpdateManyWithoutProfileNestedInput
+  }
+
+  export type ProfileUncheckedUpdateWithoutAnimalsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: IntFieldUpdateOperationsInput | number
+    experience?: IntFieldUpdateOperationsInput | number
+    coins?: IntFieldUpdateOperationsInput | number
+    farmName?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    plots?: PlotUncheckedUpdateManyWithoutProfileNestedInput
+    inventory?: InventoryItemUncheckedUpdateManyWithoutProfileNestedInput
+  }
+
+  export type ItemUpsertWithoutAnimalsInput = {
+    update: XOR<ItemUpdateWithoutAnimalsInput, ItemUncheckedUpdateWithoutAnimalsInput>
+    create: XOR<ItemCreateWithoutAnimalsInput, ItemUncheckedCreateWithoutAnimalsInput>
+    where?: ItemWhereInput
+  }
+
+  export type ItemUpdateToOneWithWhereWithoutAnimalsInput = {
+    where?: ItemWhereInput
+    data: XOR<ItemUpdateWithoutAnimalsInput, ItemUncheckedUpdateWithoutAnimalsInput>
+  }
+
+  export type ItemUpdateWithoutAnimalsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    buyPrice?: IntFieldUpdateOperationsInput | number
+    sellPrice?: IntFieldUpdateOperationsInput | number
+    minLevel?: IntFieldUpdateOperationsInput | number
+    growthTime?: NullableIntFieldUpdateOperationsInput | number | null
+    xpReward?: NullableIntFieldUpdateOperationsInput | number | null
+    yieldItemSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    productionTime?: NullableIntFieldUpdateOperationsInput | number | null
+    foodSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    foodQuantity?: NullableIntFieldUpdateOperationsInput | number | null
+    maxWeight?: NullableIntFieldUpdateOperationsInput | number | null
+    weightGain?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inventoryItems?: InventoryItemUpdateManyWithoutItemNestedInput
+    plots?: PlotUpdateManyWithoutCropNestedInput
+  }
+
+  export type ItemUncheckedUpdateWithoutAnimalsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    buyPrice?: IntFieldUpdateOperationsInput | number
+    sellPrice?: IntFieldUpdateOperationsInput | number
+    minLevel?: IntFieldUpdateOperationsInput | number
+    growthTime?: NullableIntFieldUpdateOperationsInput | number | null
+    xpReward?: NullableIntFieldUpdateOperationsInput | number | null
+    yieldItemSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    productionTime?: NullableIntFieldUpdateOperationsInput | number | null
+    foodSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    foodQuantity?: NullableIntFieldUpdateOperationsInput | number | null
+    maxWeight?: NullableIntFieldUpdateOperationsInput | number | null
+    weightGain?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inventoryItems?: InventoryItemUncheckedUpdateManyWithoutItemNestedInput
+    plots?: PlotUncheckedUpdateManyWithoutCropNestedInput
+  }
+
   export type ProfileCreateWithoutInventoryInput = {
     id?: string
     avatar?: string | null
@@ -10761,6 +12882,7 @@ export namespace Prisma {
     createdAt?: Date | string
     user: UserCreateNestedOneWithoutProfileInput
     plots?: PlotCreateNestedManyWithoutProfileInput
+    animals?: AnimalCreateNestedManyWithoutProfileInput
   }
 
   export type ProfileUncheckedCreateWithoutInventoryInput = {
@@ -10773,6 +12895,7 @@ export namespace Prisma {
     farmName?: string | null
     createdAt?: Date | string
     plots?: PlotUncheckedCreateNestedManyWithoutProfileInput
+    animals?: AnimalUncheckedCreateNestedManyWithoutProfileInput
   }
 
   export type ProfileCreateOrConnectWithoutInventoryInput = {
@@ -10792,9 +12915,15 @@ export namespace Prisma {
     growthTime?: number | null
     xpReward?: number | null
     yieldItemSlug?: string | null
+    productionTime?: number | null
+    foodSlug?: string | null
+    foodQuantity?: number | null
+    maxWeight?: number | null
+    weightGain?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
     plots?: PlotCreateNestedManyWithoutCropInput
+    animals?: AnimalCreateNestedManyWithoutAnimalInput
   }
 
   export type ItemUncheckedCreateWithoutInventoryItemsInput = {
@@ -10809,9 +12938,15 @@ export namespace Prisma {
     growthTime?: number | null
     xpReward?: number | null
     yieldItemSlug?: string | null
+    productionTime?: number | null
+    foodSlug?: string | null
+    foodQuantity?: number | null
+    maxWeight?: number | null
+    weightGain?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
     plots?: PlotUncheckedCreateNestedManyWithoutCropInput
+    animals?: AnimalUncheckedCreateNestedManyWithoutAnimalInput
   }
 
   export type ItemCreateOrConnectWithoutInventoryItemsInput = {
@@ -10840,6 +12975,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutProfileNestedInput
     plots?: PlotUpdateManyWithoutProfileNestedInput
+    animals?: AnimalUpdateManyWithoutProfileNestedInput
   }
 
   export type ProfileUncheckedUpdateWithoutInventoryInput = {
@@ -10852,6 +12988,7 @@ export namespace Prisma {
     farmName?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     plots?: PlotUncheckedUpdateManyWithoutProfileNestedInput
+    animals?: AnimalUncheckedUpdateManyWithoutProfileNestedInput
   }
 
   export type ItemUpsertWithoutInventoryItemsInput = {
@@ -10877,9 +13014,15 @@ export namespace Prisma {
     growthTime?: NullableIntFieldUpdateOperationsInput | number | null
     xpReward?: NullableIntFieldUpdateOperationsInput | number | null
     yieldItemSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    productionTime?: NullableIntFieldUpdateOperationsInput | number | null
+    foodSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    foodQuantity?: NullableIntFieldUpdateOperationsInput | number | null
+    maxWeight?: NullableIntFieldUpdateOperationsInput | number | null
+    weightGain?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     plots?: PlotUpdateManyWithoutCropNestedInput
+    animals?: AnimalUpdateManyWithoutAnimalNestedInput
   }
 
   export type ItemUncheckedUpdateWithoutInventoryItemsInput = {
@@ -10894,9 +13037,15 @@ export namespace Prisma {
     growthTime?: NullableIntFieldUpdateOperationsInput | number | null
     xpReward?: NullableIntFieldUpdateOperationsInput | number | null
     yieldItemSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    productionTime?: NullableIntFieldUpdateOperationsInput | number | null
+    foodSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    foodQuantity?: NullableIntFieldUpdateOperationsInput | number | null
+    maxWeight?: NullableIntFieldUpdateOperationsInput | number | null
+    weightGain?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     plots?: PlotUncheckedUpdateManyWithoutCropNestedInput
+    animals?: AnimalUncheckedUpdateManyWithoutAnimalNestedInput
   }
 
   export type PlotCreateManyProfileInput = {
@@ -10911,6 +13060,15 @@ export namespace Prisma {
     id?: string
     itemSlug: string
     quantity?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AnimalCreateManyProfileInput = {
+    id?: string
+    animalSlug: string
+    fedAt?: Date | string | null
+    weight?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -10963,6 +13121,33 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type AnimalUpdateWithoutProfileInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    weight?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    animal?: ItemUpdateOneWithoutAnimalsNestedInput
+  }
+
+  export type AnimalUncheckedUpdateWithoutProfileInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    animalSlug?: StringFieldUpdateOperationsInput | string
+    fedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    weight?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AnimalUncheckedUpdateManyWithoutProfileInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    animalSlug?: StringFieldUpdateOperationsInput | string
+    fedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    weight?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type InventoryItemCreateManyItemInput = {
     id?: string
     profileId: string
@@ -10977,6 +13162,15 @@ export namespace Prisma {
     index: number
     plantedAt?: Date | string | null
     isUnlocked?: boolean
+  }
+
+  export type AnimalCreateManyAnimalInput = {
+    id?: string
+    profileId: string
+    fedAt?: Date | string | null
+    weight?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type InventoryItemUpdateWithoutItemInput = {
@@ -11025,6 +13219,33 @@ export namespace Prisma {
     index?: IntFieldUpdateOperationsInput | number
     plantedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isUnlocked?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type AnimalUpdateWithoutAnimalInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    weight?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    profile?: ProfileUpdateOneRequiredWithoutAnimalsNestedInput
+  }
+
+  export type AnimalUncheckedUpdateWithoutAnimalInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    profileId?: StringFieldUpdateOperationsInput | string
+    fedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    weight?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AnimalUncheckedUpdateManyWithoutAnimalInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    profileId?: StringFieldUpdateOperationsInput | string
+    fedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    weight?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

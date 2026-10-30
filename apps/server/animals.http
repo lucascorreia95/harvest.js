@@ -1,0 +1,180 @@
+### Animals API Tests
+
+# 1. Login para obter token
+# @name login
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "password": "123456"
+}
+
+###
+
+@token = {{ login.response.body.access_token }}
+
+###
+
+# 2. Obter animais do jogador
+GET http://localhost:3000/animals
+Authorization: Bearer {{token}}
+
+###
+
+# 3. Comprar galinha
+POST http://localhost:3000/animals/buy
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "animalSlug": "chicken"
+}
+
+###
+
+# 4. Comprar ração de galinha
+POST http://localhost:3000/shop/buy
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "itemSlug": "chicken_feed",
+  "quantity": 5
+}
+
+###
+
+# 5. Alimentar galinha
+POST http://localhost:3000/animals/feed
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "animalSlug": "chicken"
+}
+
+###
+
+# 6. Aguardar 1 minuto e coletar ovo
+POST http://localhost:3000/animals/collect
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "animalSlug": "chicken"
+}
+
+###
+
+# 7. Verificar inventário (deve ter ovo)
+GET http://localhost:3000/inventory
+Authorization: Bearer {{token}}
+
+###
+
+# 8. Comprar porco
+POST http://localhost:3000/animals/buy
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "animalSlug": "pig"
+}
+
+###
+
+# 9. Comprar ração de porco
+POST http://localhost:3000/shop/buy
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "itemSlug": "pig_feed",
+  "quantity": 20
+}
+
+###
+
+# 10. Alimentar porco (repetir 10x para atingir 100kg)
+POST http://localhost:3000/animals/feed
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "animalSlug": "pig"
+}
+
+###
+
+# 11. Verificar estado do porco (deve mostrar peso)
+GET http://localhost:3000/animals
+Authorization: Bearer {{token}}
+
+###
+
+# 12. Vender porco (quando atingir 100kg)
+POST http://localhost:3000/animals/sell
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "animalSlug": "pig"
+}
+
+###
+
+# 13. Comprar vaca
+POST http://localhost:3000/animals/buy
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "animalSlug": "cow"
+}
+
+###
+
+# 14. Comprar ração de vaca
+POST http://localhost:3000/shop/buy
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "itemSlug": "cow_feed",
+  "quantity": 5
+}
+
+###
+
+# 15. Alimentar vaca
+POST http://localhost:3000/animals/feed
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "animalSlug": "cow"
+}
+
+###
+
+# 16. Aguardar 3 minutos e coletar leite
+POST http://localhost:3000/animals/collect
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "animalSlug": "cow"
+}
+
+###
+
+# 17. Verificar catálogo de animais na loja
+GET http://localhost:3000/shop?type=ANIMAL
+Authorization: Bearer {{token}}
+
+###
+
+# 18. Verificar comidas na loja
+GET http://localhost:3000/shop?type=FOOD
+Authorization: Bearer {{token}}

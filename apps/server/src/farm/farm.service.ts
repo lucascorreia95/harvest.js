@@ -263,7 +263,7 @@ export class FarmService {
         throw new BadRequestException('This plot has no crop to harvest.');
       }
 
-      if (currentPlot.cropType !== plot.cropType || 
+      if (currentPlot.cropType !== plot.cropType ||
           currentPlot.plantedAt?.getTime() !== plot.plantedAt?.getTime()) {
         throw new BadRequestException('Crop state has changed. Please try again.');
       }
@@ -273,6 +273,8 @@ export class FarmService {
       const yieldItem = await tx.item.findUnique({
         where: { slug: yieldSlug },
       });
+
+      const harvestedName = yieldItem?.name || plot.crop.name;
 
       // Adiciona o fruto colhido ao inventário do jogador!
       await this.inventoryService.addItem(profile.id, yieldSlug, 1, tx);
@@ -303,8 +305,6 @@ export class FarmService {
         },
         include: { crop: true },
       });
-
-      const harvestedName = yieldItem?.name || plot.crop.name;
 
       // Log da atividade de colheita
       await this.activityService.logHarvesting(

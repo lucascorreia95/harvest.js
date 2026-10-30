@@ -46,10 +46,18 @@ The goal of Harvest.js is to move beyond simple CRUD applications. It demonstrat
 - **Item Details**: Growth time, XP rewards, buy/sell prices
 
 **Activity Logging:**
-- **Comprehensive Logs**: Track all player actions (plant, harvest, unlock, level up, earn/spend coins, earn XP)
+- **Comprehensive Logs**: Track all player actions (plant, harvest, unlock, level up, earn/spend coins, earn XP, buy/feed/collect/sell animals)
 - **Activity Stats**: Queryable statistics by action type
 - **Recent Activities**: Global activity feed
 - **Audit Trail**: Complete history of player transactions
+
+**Animal System:**
+- **Animal Ownership**: One animal per type per player (chicken, pig, cow)
+- **Feeding**: Feed animals with specific food to trigger production
+- **Production**: Animals produce items after time (chicken → egg, cow → milk)
+- **Collection**: Collect animal products when ready
+- **Pig Growth**: Pigs gain weight when fed and can be sold at maximum weight
+- **Animal Shop**: Buy animals and animal food from the shop
 
 ### 🏗️ Architecture:
 
@@ -183,6 +191,14 @@ PORT=3000
 - `GET /activity/stats` - Get activity statistics by action type
 - `GET /activity/recent` - Get recent global activities
 
+### Animals:
+
+- `GET /animals` - Get user's animals with status
+- `POST /animals/buy` - Buy an animal (animalSlug)
+- `POST /animals/feed` - Feed an animal (animalSlug)
+- `POST /animals/collect` - Collect animal product (animalSlug)
+- `POST /animals/sell` - Sell animal (only pigs at max weight) (animalSlug)
+
 ## 🧪 Testing the System
 
 1. **Register**: Create a new account at http://localhost:5173
@@ -190,24 +206,25 @@ PORT=3000
 3. **Dashboard**: View your profile, level, coins, and experience
 4. **Profile**: Update your display name, avatar, bio, and farm name
 5. **Farm**: View your plots, unlock new plots, plant seeds, and harvest crops
-6. **Shop**: Browse items, buy seeds and other items
-7. **Inventory**: View your items, sell harvested crops
-8. **Activity**: View your activity history and statistics
+6. **Shop**: Browse items, buy seeds, fertilizers, tools, animals, and food
+7. **Inventory**: View your items, sell harvested crops and animal products
+8. **Animals**: Buy animals, feed them, collect products, sell pigs
+9. **Activity**: View your activity history and statistics
 
 ## 🔄 Next Steps (Future Features)
 
-**Completed (Sprints 1-3):**
+**Completed (Sprints 1-4):**
 - ✅ Authentication & Profile System
 - ✅ Farm grid system and crop planting mechanics
 - ✅ Time-based growth and harvesting
 - ✅ Shop system with item catalog
 - ✅ Inventory management and selling
 - ✅ Activity logging and statistics
+- ✅ Animal system (chickens, pigs, cows)
 
 **Planned (Future Sprints):**
-- **Sprint 4**: Fertilizers and growth acceleration
-- **Sprint 5**: Tools and equipment system
-- **Sprint 6**: Animals and animal products
+- **Sprint 5**: Fertilizers and growth acceleration
+- **Sprint 6**: Tools and equipment system
 - **Sprint 7**: Market system and trading between players
 - **Sprint 8**: Social features (friends, leaderboards, visiting farms)
 - **Sprint 9**: Achievements and quests

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { UsersService } from '../users/users.service';
 
-export type ActivityAction = 'plant' | 'harvest' | 'unlock_plot' | 'level_up' | 'earn_coins' | 'spend_coins' | 'earn_xp';
+export type ActivityAction = 'plant' | 'harvest' | 'unlock_plot' | 'level_up' | 'earn_coins' | 'spend_coins' | 'earn_xp' | 'buy_animal' | 'feed_animal' | 'collect_product' | 'sell_animal';
 
 export interface ActivityMetadata {
   cropSlug?: string;
