@@ -3806,10 +3806,12 @@ export namespace Prisma {
 
   export type PlotAvgAggregateOutputType = {
     index: number | null
+    waterCount: number | null
   }
 
   export type PlotSumAggregateOutputType = {
     index: number | null
+    waterCount: number | null
   }
 
   export type PlotMinAggregateOutputType = {
@@ -3819,6 +3821,11 @@ export namespace Prisma {
     cropType: string | null
     plantedAt: Date | null
     isUnlocked: boolean | null
+    wateredAt: Date | null
+    waterCount: number | null
+    willHavePest: boolean | null
+    pestAppearTime: Date | null
+    pestRemoved: boolean | null
   }
 
   export type PlotMaxAggregateOutputType = {
@@ -3828,6 +3835,11 @@ export namespace Prisma {
     cropType: string | null
     plantedAt: Date | null
     isUnlocked: boolean | null
+    wateredAt: Date | null
+    waterCount: number | null
+    willHavePest: boolean | null
+    pestAppearTime: Date | null
+    pestRemoved: boolean | null
   }
 
   export type PlotCountAggregateOutputType = {
@@ -3837,16 +3849,23 @@ export namespace Prisma {
     cropType: number
     plantedAt: number
     isUnlocked: number
+    wateredAt: number
+    waterCount: number
+    willHavePest: number
+    pestAppearTime: number
+    pestRemoved: number
     _all: number
   }
 
 
   export type PlotAvgAggregateInputType = {
     index?: true
+    waterCount?: true
   }
 
   export type PlotSumAggregateInputType = {
     index?: true
+    waterCount?: true
   }
 
   export type PlotMinAggregateInputType = {
@@ -3856,6 +3875,11 @@ export namespace Prisma {
     cropType?: true
     plantedAt?: true
     isUnlocked?: true
+    wateredAt?: true
+    waterCount?: true
+    willHavePest?: true
+    pestAppearTime?: true
+    pestRemoved?: true
   }
 
   export type PlotMaxAggregateInputType = {
@@ -3865,6 +3889,11 @@ export namespace Prisma {
     cropType?: true
     plantedAt?: true
     isUnlocked?: true
+    wateredAt?: true
+    waterCount?: true
+    willHavePest?: true
+    pestAppearTime?: true
+    pestRemoved?: true
   }
 
   export type PlotCountAggregateInputType = {
@@ -3874,6 +3903,11 @@ export namespace Prisma {
     cropType?: true
     plantedAt?: true
     isUnlocked?: true
+    wateredAt?: true
+    waterCount?: true
+    willHavePest?: true
+    pestAppearTime?: true
+    pestRemoved?: true
     _all?: true
   }
 
@@ -3970,6 +4004,11 @@ export namespace Prisma {
     cropType: string | null
     plantedAt: Date | null
     isUnlocked: boolean
+    wateredAt: Date | null
+    waterCount: number
+    willHavePest: boolean
+    pestAppearTime: Date | null
+    pestRemoved: boolean
     _count: PlotCountAggregateOutputType | null
     _avg: PlotAvgAggregateOutputType | null
     _sum: PlotSumAggregateOutputType | null
@@ -3998,6 +4037,11 @@ export namespace Prisma {
     cropType?: boolean
     plantedAt?: boolean
     isUnlocked?: boolean
+    wateredAt?: boolean
+    waterCount?: boolean
+    willHavePest?: boolean
+    pestAppearTime?: boolean
+    pestRemoved?: boolean
     profile?: boolean | ProfileDefaultArgs<ExtArgs>
     crop?: boolean | Plot$cropArgs<ExtArgs>
   }, ExtArgs["result"]["plot"]>
@@ -4009,6 +4053,11 @@ export namespace Prisma {
     cropType?: boolean
     plantedAt?: boolean
     isUnlocked?: boolean
+    wateredAt?: boolean
+    waterCount?: boolean
+    willHavePest?: boolean
+    pestAppearTime?: boolean
+    pestRemoved?: boolean
     profile?: boolean | ProfileDefaultArgs<ExtArgs>
     crop?: boolean | Plot$cropArgs<ExtArgs>
   }, ExtArgs["result"]["plot"]>
@@ -4020,6 +4069,11 @@ export namespace Prisma {
     cropType?: boolean
     plantedAt?: boolean
     isUnlocked?: boolean
+    wateredAt?: boolean
+    waterCount?: boolean
+    willHavePest?: boolean
+    pestAppearTime?: boolean
+    pestRemoved?: boolean
     profile?: boolean | ProfileDefaultArgs<ExtArgs>
     crop?: boolean | Plot$cropArgs<ExtArgs>
   }, ExtArgs["result"]["plot"]>
@@ -4031,9 +4085,14 @@ export namespace Prisma {
     cropType?: boolean
     plantedAt?: boolean
     isUnlocked?: boolean
+    wateredAt?: boolean
+    waterCount?: boolean
+    willHavePest?: boolean
+    pestAppearTime?: boolean
+    pestRemoved?: boolean
   }
 
-  export type PlotOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "profileId" | "index" | "cropType" | "plantedAt" | "isUnlocked", ExtArgs["result"]["plot"]>
+  export type PlotOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "profileId" | "index" | "cropType" | "plantedAt" | "isUnlocked" | "wateredAt" | "waterCount" | "willHavePest" | "pestAppearTime" | "pestRemoved", ExtArgs["result"]["plot"]>
   export type PlotInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     profile?: boolean | ProfileDefaultArgs<ExtArgs>
     crop?: boolean | Plot$cropArgs<ExtArgs>
@@ -4060,6 +4119,11 @@ export namespace Prisma {
       cropType: string | null
       plantedAt: Date | null
       isUnlocked: boolean
+      wateredAt: Date | null
+      waterCount: number
+      willHavePest: boolean
+      pestAppearTime: Date | null
+      pestRemoved: boolean
     }, ExtArgs["result"]["plot"]>
     composites: {}
   }
@@ -4491,6 +4555,11 @@ export namespace Prisma {
     readonly cropType: FieldRef<"Plot", 'String'>
     readonly plantedAt: FieldRef<"Plot", 'DateTime'>
     readonly isUnlocked: FieldRef<"Plot", 'Boolean'>
+    readonly wateredAt: FieldRef<"Plot", 'DateTime'>
+    readonly waterCount: FieldRef<"Plot", 'Int'>
+    readonly willHavePest: FieldRef<"Plot", 'Boolean'>
+    readonly pestAppearTime: FieldRef<"Plot", 'DateTime'>
+    readonly pestRemoved: FieldRef<"Plot", 'Boolean'>
   }
     
 
@@ -4942,6 +5011,9 @@ export namespace Prisma {
     minLevel: number | null
     growthTime: number | null
     xpReward: number | null
+    waterDuration: number | null
+    waterTimeBonus: number | null
+    waterXpBonus: number | null
     productionTime: number | null
     foodQuantity: number | null
     maxWeight: number | null
@@ -4954,6 +5026,9 @@ export namespace Prisma {
     minLevel: number | null
     growthTime: number | null
     xpReward: number | null
+    waterDuration: number | null
+    waterTimeBonus: number | null
+    waterXpBonus: number | null
     productionTime: number | null
     foodQuantity: number | null
     maxWeight: number | null
@@ -4972,6 +5047,9 @@ export namespace Prisma {
     growthTime: number | null
     xpReward: number | null
     yieldItemSlug: string | null
+    waterDuration: number | null
+    waterTimeBonus: number | null
+    waterXpBonus: number | null
     productionTime: number | null
     foodSlug: string | null
     foodQuantity: number | null
@@ -4993,6 +5071,9 @@ export namespace Prisma {
     growthTime: number | null
     xpReward: number | null
     yieldItemSlug: string | null
+    waterDuration: number | null
+    waterTimeBonus: number | null
+    waterXpBonus: number | null
     productionTime: number | null
     foodSlug: string | null
     foodQuantity: number | null
@@ -5014,6 +5095,9 @@ export namespace Prisma {
     growthTime: number
     xpReward: number
     yieldItemSlug: number
+    waterDuration: number
+    waterTimeBonus: number
+    waterXpBonus: number
     productionTime: number
     foodSlug: number
     foodQuantity: number
@@ -5031,6 +5115,9 @@ export namespace Prisma {
     minLevel?: true
     growthTime?: true
     xpReward?: true
+    waterDuration?: true
+    waterTimeBonus?: true
+    waterXpBonus?: true
     productionTime?: true
     foodQuantity?: true
     maxWeight?: true
@@ -5043,6 +5130,9 @@ export namespace Prisma {
     minLevel?: true
     growthTime?: true
     xpReward?: true
+    waterDuration?: true
+    waterTimeBonus?: true
+    waterXpBonus?: true
     productionTime?: true
     foodQuantity?: true
     maxWeight?: true
@@ -5061,6 +5151,9 @@ export namespace Prisma {
     growthTime?: true
     xpReward?: true
     yieldItemSlug?: true
+    waterDuration?: true
+    waterTimeBonus?: true
+    waterXpBonus?: true
     productionTime?: true
     foodSlug?: true
     foodQuantity?: true
@@ -5082,6 +5175,9 @@ export namespace Prisma {
     growthTime?: true
     xpReward?: true
     yieldItemSlug?: true
+    waterDuration?: true
+    waterTimeBonus?: true
+    waterXpBonus?: true
     productionTime?: true
     foodSlug?: true
     foodQuantity?: true
@@ -5103,6 +5199,9 @@ export namespace Prisma {
     growthTime?: true
     xpReward?: true
     yieldItemSlug?: true
+    waterDuration?: true
+    waterTimeBonus?: true
+    waterXpBonus?: true
     productionTime?: true
     foodSlug?: true
     foodQuantity?: true
@@ -5211,6 +5310,9 @@ export namespace Prisma {
     growthTime: number | null
     xpReward: number | null
     yieldItemSlug: string | null
+    waterDuration: number | null
+    waterTimeBonus: number | null
+    waterXpBonus: number | null
     productionTime: number | null
     foodSlug: string | null
     foodQuantity: number | null
@@ -5251,6 +5353,9 @@ export namespace Prisma {
     growthTime?: boolean
     xpReward?: boolean
     yieldItemSlug?: boolean
+    waterDuration?: boolean
+    waterTimeBonus?: boolean
+    waterXpBonus?: boolean
     productionTime?: boolean
     foodSlug?: boolean
     foodQuantity?: boolean
@@ -5276,6 +5381,9 @@ export namespace Prisma {
     growthTime?: boolean
     xpReward?: boolean
     yieldItemSlug?: boolean
+    waterDuration?: boolean
+    waterTimeBonus?: boolean
+    waterXpBonus?: boolean
     productionTime?: boolean
     foodSlug?: boolean
     foodQuantity?: boolean
@@ -5297,6 +5405,9 @@ export namespace Prisma {
     growthTime?: boolean
     xpReward?: boolean
     yieldItemSlug?: boolean
+    waterDuration?: boolean
+    waterTimeBonus?: boolean
+    waterXpBonus?: boolean
     productionTime?: boolean
     foodSlug?: boolean
     foodQuantity?: boolean
@@ -5318,6 +5429,9 @@ export namespace Prisma {
     growthTime?: boolean
     xpReward?: boolean
     yieldItemSlug?: boolean
+    waterDuration?: boolean
+    waterTimeBonus?: boolean
+    waterXpBonus?: boolean
     productionTime?: boolean
     foodSlug?: boolean
     foodQuantity?: boolean
@@ -5327,7 +5441,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type ItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "name" | "description" | "type" | "buyPrice" | "sellPrice" | "minLevel" | "growthTime" | "xpReward" | "yieldItemSlug" | "productionTime" | "foodSlug" | "foodQuantity" | "maxWeight" | "weightGain" | "createdAt" | "updatedAt", ExtArgs["result"]["item"]>
+  export type ItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "name" | "description" | "type" | "buyPrice" | "sellPrice" | "minLevel" | "growthTime" | "xpReward" | "yieldItemSlug" | "waterDuration" | "waterTimeBonus" | "waterXpBonus" | "productionTime" | "foodSlug" | "foodQuantity" | "maxWeight" | "weightGain" | "createdAt" | "updatedAt", ExtArgs["result"]["item"]>
   export type ItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     inventoryItems?: boolean | Item$inventoryItemsArgs<ExtArgs>
     plots?: boolean | Item$plotsArgs<ExtArgs>
@@ -5356,6 +5470,9 @@ export namespace Prisma {
       growthTime: number | null
       xpReward: number | null
       yieldItemSlug: string | null
+      waterDuration: number | null
+      waterTimeBonus: number | null
+      waterXpBonus: number | null
       productionTime: number | null
       foodSlug: string | null
       foodQuantity: number | null
@@ -5800,6 +5917,9 @@ export namespace Prisma {
     readonly growthTime: FieldRef<"Item", 'Int'>
     readonly xpReward: FieldRef<"Item", 'Int'>
     readonly yieldItemSlug: FieldRef<"Item", 'String'>
+    readonly waterDuration: FieldRef<"Item", 'Int'>
+    readonly waterTimeBonus: FieldRef<"Item", 'Int'>
+    readonly waterXpBonus: FieldRef<"Item", 'Int'>
     readonly productionTime: FieldRef<"Item", 'Int'>
     readonly foodSlug: FieldRef<"Item", 'String'>
     readonly foodQuantity: FieldRef<"Item", 'Int'>
@@ -9592,7 +9712,12 @@ export namespace Prisma {
     index: 'index',
     cropType: 'cropType',
     plantedAt: 'plantedAt',
-    isUnlocked: 'isUnlocked'
+    isUnlocked: 'isUnlocked',
+    wateredAt: 'wateredAt',
+    waterCount: 'waterCount',
+    willHavePest: 'willHavePest',
+    pestAppearTime: 'pestAppearTime',
+    pestRemoved: 'pestRemoved'
   };
 
   export type PlotScalarFieldEnum = (typeof PlotScalarFieldEnum)[keyof typeof PlotScalarFieldEnum]
@@ -9610,6 +9735,9 @@ export namespace Prisma {
     growthTime: 'growthTime',
     xpReward: 'xpReward',
     yieldItemSlug: 'yieldItemSlug',
+    waterDuration: 'waterDuration',
+    waterTimeBonus: 'waterTimeBonus',
+    waterXpBonus: 'waterXpBonus',
     productionTime: 'productionTime',
     foodSlug: 'foodSlug',
     foodQuantity: 'foodQuantity',
@@ -9931,6 +10059,11 @@ export namespace Prisma {
     cropType?: StringNullableFilter<"Plot"> | string | null
     plantedAt?: DateTimeNullableFilter<"Plot"> | Date | string | null
     isUnlocked?: BoolFilter<"Plot"> | boolean
+    wateredAt?: DateTimeNullableFilter<"Plot"> | Date | string | null
+    waterCount?: IntFilter<"Plot"> | number
+    willHavePest?: BoolFilter<"Plot"> | boolean
+    pestAppearTime?: DateTimeNullableFilter<"Plot"> | Date | string | null
+    pestRemoved?: BoolFilter<"Plot"> | boolean
     profile?: XOR<ProfileScalarRelationFilter, ProfileWhereInput>
     crop?: XOR<ItemNullableScalarRelationFilter, ItemWhereInput> | null
   }
@@ -9942,6 +10075,11 @@ export namespace Prisma {
     cropType?: SortOrderInput | SortOrder
     plantedAt?: SortOrderInput | SortOrder
     isUnlocked?: SortOrder
+    wateredAt?: SortOrderInput | SortOrder
+    waterCount?: SortOrder
+    willHavePest?: SortOrder
+    pestAppearTime?: SortOrderInput | SortOrder
+    pestRemoved?: SortOrder
     profile?: ProfileOrderByWithRelationInput
     crop?: ItemOrderByWithRelationInput
   }
@@ -9957,6 +10095,11 @@ export namespace Prisma {
     cropType?: StringNullableFilter<"Plot"> | string | null
     plantedAt?: DateTimeNullableFilter<"Plot"> | Date | string | null
     isUnlocked?: BoolFilter<"Plot"> | boolean
+    wateredAt?: DateTimeNullableFilter<"Plot"> | Date | string | null
+    waterCount?: IntFilter<"Plot"> | number
+    willHavePest?: BoolFilter<"Plot"> | boolean
+    pestAppearTime?: DateTimeNullableFilter<"Plot"> | Date | string | null
+    pestRemoved?: BoolFilter<"Plot"> | boolean
     profile?: XOR<ProfileScalarRelationFilter, ProfileWhereInput>
     crop?: XOR<ItemNullableScalarRelationFilter, ItemWhereInput> | null
   }, "id" | "profileId_index">
@@ -9968,6 +10111,11 @@ export namespace Prisma {
     cropType?: SortOrderInput | SortOrder
     plantedAt?: SortOrderInput | SortOrder
     isUnlocked?: SortOrder
+    wateredAt?: SortOrderInput | SortOrder
+    waterCount?: SortOrder
+    willHavePest?: SortOrder
+    pestAppearTime?: SortOrderInput | SortOrder
+    pestRemoved?: SortOrder
     _count?: PlotCountOrderByAggregateInput
     _avg?: PlotAvgOrderByAggregateInput
     _max?: PlotMaxOrderByAggregateInput
@@ -9985,6 +10133,11 @@ export namespace Prisma {
     cropType?: StringNullableWithAggregatesFilter<"Plot"> | string | null
     plantedAt?: DateTimeNullableWithAggregatesFilter<"Plot"> | Date | string | null
     isUnlocked?: BoolWithAggregatesFilter<"Plot"> | boolean
+    wateredAt?: DateTimeNullableWithAggregatesFilter<"Plot"> | Date | string | null
+    waterCount?: IntWithAggregatesFilter<"Plot"> | number
+    willHavePest?: BoolWithAggregatesFilter<"Plot"> | boolean
+    pestAppearTime?: DateTimeNullableWithAggregatesFilter<"Plot"> | Date | string | null
+    pestRemoved?: BoolWithAggregatesFilter<"Plot"> | boolean
   }
 
   export type ItemWhereInput = {
@@ -10002,6 +10155,9 @@ export namespace Prisma {
     growthTime?: IntNullableFilter<"Item"> | number | null
     xpReward?: IntNullableFilter<"Item"> | number | null
     yieldItemSlug?: StringNullableFilter<"Item"> | string | null
+    waterDuration?: IntNullableFilter<"Item"> | number | null
+    waterTimeBonus?: IntNullableFilter<"Item"> | number | null
+    waterXpBonus?: IntNullableFilter<"Item"> | number | null
     productionTime?: IntNullableFilter<"Item"> | number | null
     foodSlug?: StringNullableFilter<"Item"> | string | null
     foodQuantity?: IntNullableFilter<"Item"> | number | null
@@ -10026,6 +10182,9 @@ export namespace Prisma {
     growthTime?: SortOrderInput | SortOrder
     xpReward?: SortOrderInput | SortOrder
     yieldItemSlug?: SortOrderInput | SortOrder
+    waterDuration?: SortOrderInput | SortOrder
+    waterTimeBonus?: SortOrderInput | SortOrder
+    waterXpBonus?: SortOrderInput | SortOrder
     productionTime?: SortOrderInput | SortOrder
     foodSlug?: SortOrderInput | SortOrder
     foodQuantity?: SortOrderInput | SortOrder
@@ -10053,6 +10212,9 @@ export namespace Prisma {
     growthTime?: IntNullableFilter<"Item"> | number | null
     xpReward?: IntNullableFilter<"Item"> | number | null
     yieldItemSlug?: StringNullableFilter<"Item"> | string | null
+    waterDuration?: IntNullableFilter<"Item"> | number | null
+    waterTimeBonus?: IntNullableFilter<"Item"> | number | null
+    waterXpBonus?: IntNullableFilter<"Item"> | number | null
     productionTime?: IntNullableFilter<"Item"> | number | null
     foodSlug?: StringNullableFilter<"Item"> | string | null
     foodQuantity?: IntNullableFilter<"Item"> | number | null
@@ -10077,6 +10239,9 @@ export namespace Prisma {
     growthTime?: SortOrderInput | SortOrder
     xpReward?: SortOrderInput | SortOrder
     yieldItemSlug?: SortOrderInput | SortOrder
+    waterDuration?: SortOrderInput | SortOrder
+    waterTimeBonus?: SortOrderInput | SortOrder
+    waterXpBonus?: SortOrderInput | SortOrder
     productionTime?: SortOrderInput | SortOrder
     foodSlug?: SortOrderInput | SortOrder
     foodQuantity?: SortOrderInput | SortOrder
@@ -10106,6 +10271,9 @@ export namespace Prisma {
     growthTime?: IntNullableWithAggregatesFilter<"Item"> | number | null
     xpReward?: IntNullableWithAggregatesFilter<"Item"> | number | null
     yieldItemSlug?: StringNullableWithAggregatesFilter<"Item"> | string | null
+    waterDuration?: IntNullableWithAggregatesFilter<"Item"> | number | null
+    waterTimeBonus?: IntNullableWithAggregatesFilter<"Item"> | number | null
+    waterXpBonus?: IntNullableWithAggregatesFilter<"Item"> | number | null
     productionTime?: IntNullableWithAggregatesFilter<"Item"> | number | null
     foodSlug?: StringNullableWithAggregatesFilter<"Item"> | string | null
     foodQuantity?: IntNullableWithAggregatesFilter<"Item"> | number | null
@@ -10462,6 +10630,11 @@ export namespace Prisma {
     index: number
     plantedAt?: Date | string | null
     isUnlocked?: boolean
+    wateredAt?: Date | string | null
+    waterCount?: number
+    willHavePest?: boolean
+    pestAppearTime?: Date | string | null
+    pestRemoved?: boolean
     profile: ProfileCreateNestedOneWithoutPlotsInput
     crop?: ItemCreateNestedOneWithoutPlotsInput
   }
@@ -10473,6 +10646,11 @@ export namespace Prisma {
     cropType?: string | null
     plantedAt?: Date | string | null
     isUnlocked?: boolean
+    wateredAt?: Date | string | null
+    waterCount?: number
+    willHavePest?: boolean
+    pestAppearTime?: Date | string | null
+    pestRemoved?: boolean
   }
 
   export type PlotUpdateInput = {
@@ -10480,6 +10658,11 @@ export namespace Prisma {
     index?: IntFieldUpdateOperationsInput | number
     plantedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isUnlocked?: BoolFieldUpdateOperationsInput | boolean
+    wateredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    waterCount?: IntFieldUpdateOperationsInput | number
+    willHavePest?: BoolFieldUpdateOperationsInput | boolean
+    pestAppearTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pestRemoved?: BoolFieldUpdateOperationsInput | boolean
     profile?: ProfileUpdateOneRequiredWithoutPlotsNestedInput
     crop?: ItemUpdateOneWithoutPlotsNestedInput
   }
@@ -10491,6 +10674,11 @@ export namespace Prisma {
     cropType?: NullableStringFieldUpdateOperationsInput | string | null
     plantedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isUnlocked?: BoolFieldUpdateOperationsInput | boolean
+    wateredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    waterCount?: IntFieldUpdateOperationsInput | number
+    willHavePest?: BoolFieldUpdateOperationsInput | boolean
+    pestAppearTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pestRemoved?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type PlotCreateManyInput = {
@@ -10500,6 +10688,11 @@ export namespace Prisma {
     cropType?: string | null
     plantedAt?: Date | string | null
     isUnlocked?: boolean
+    wateredAt?: Date | string | null
+    waterCount?: number
+    willHavePest?: boolean
+    pestAppearTime?: Date | string | null
+    pestRemoved?: boolean
   }
 
   export type PlotUpdateManyMutationInput = {
@@ -10507,6 +10700,11 @@ export namespace Prisma {
     index?: IntFieldUpdateOperationsInput | number
     plantedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isUnlocked?: BoolFieldUpdateOperationsInput | boolean
+    wateredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    waterCount?: IntFieldUpdateOperationsInput | number
+    willHavePest?: BoolFieldUpdateOperationsInput | boolean
+    pestAppearTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pestRemoved?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type PlotUncheckedUpdateManyInput = {
@@ -10516,6 +10714,11 @@ export namespace Prisma {
     cropType?: NullableStringFieldUpdateOperationsInput | string | null
     plantedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isUnlocked?: BoolFieldUpdateOperationsInput | boolean
+    wateredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    waterCount?: IntFieldUpdateOperationsInput | number
+    willHavePest?: BoolFieldUpdateOperationsInput | boolean
+    pestAppearTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pestRemoved?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ItemCreateInput = {
@@ -10530,6 +10733,9 @@ export namespace Prisma {
     growthTime?: number | null
     xpReward?: number | null
     yieldItemSlug?: string | null
+    waterDuration?: number | null
+    waterTimeBonus?: number | null
+    waterXpBonus?: number | null
     productionTime?: number | null
     foodSlug?: string | null
     foodQuantity?: number | null
@@ -10554,6 +10760,9 @@ export namespace Prisma {
     growthTime?: number | null
     xpReward?: number | null
     yieldItemSlug?: string | null
+    waterDuration?: number | null
+    waterTimeBonus?: number | null
+    waterXpBonus?: number | null
     productionTime?: number | null
     foodSlug?: string | null
     foodQuantity?: number | null
@@ -10578,6 +10787,9 @@ export namespace Prisma {
     growthTime?: NullableIntFieldUpdateOperationsInput | number | null
     xpReward?: NullableIntFieldUpdateOperationsInput | number | null
     yieldItemSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    waterDuration?: NullableIntFieldUpdateOperationsInput | number | null
+    waterTimeBonus?: NullableIntFieldUpdateOperationsInput | number | null
+    waterXpBonus?: NullableIntFieldUpdateOperationsInput | number | null
     productionTime?: NullableIntFieldUpdateOperationsInput | number | null
     foodSlug?: NullableStringFieldUpdateOperationsInput | string | null
     foodQuantity?: NullableIntFieldUpdateOperationsInput | number | null
@@ -10602,6 +10814,9 @@ export namespace Prisma {
     growthTime?: NullableIntFieldUpdateOperationsInput | number | null
     xpReward?: NullableIntFieldUpdateOperationsInput | number | null
     yieldItemSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    waterDuration?: NullableIntFieldUpdateOperationsInput | number | null
+    waterTimeBonus?: NullableIntFieldUpdateOperationsInput | number | null
+    waterXpBonus?: NullableIntFieldUpdateOperationsInput | number | null
     productionTime?: NullableIntFieldUpdateOperationsInput | number | null
     foodSlug?: NullableStringFieldUpdateOperationsInput | string | null
     foodQuantity?: NullableIntFieldUpdateOperationsInput | number | null
@@ -10626,6 +10841,9 @@ export namespace Prisma {
     growthTime?: number | null
     xpReward?: number | null
     yieldItemSlug?: string | null
+    waterDuration?: number | null
+    waterTimeBonus?: number | null
+    waterXpBonus?: number | null
     productionTime?: number | null
     foodSlug?: string | null
     foodQuantity?: number | null
@@ -10647,6 +10865,9 @@ export namespace Prisma {
     growthTime?: NullableIntFieldUpdateOperationsInput | number | null
     xpReward?: NullableIntFieldUpdateOperationsInput | number | null
     yieldItemSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    waterDuration?: NullableIntFieldUpdateOperationsInput | number | null
+    waterTimeBonus?: NullableIntFieldUpdateOperationsInput | number | null
+    waterXpBonus?: NullableIntFieldUpdateOperationsInput | number | null
     productionTime?: NullableIntFieldUpdateOperationsInput | number | null
     foodSlug?: NullableStringFieldUpdateOperationsInput | string | null
     foodQuantity?: NullableIntFieldUpdateOperationsInput | number | null
@@ -10668,6 +10889,9 @@ export namespace Prisma {
     growthTime?: NullableIntFieldUpdateOperationsInput | number | null
     xpReward?: NullableIntFieldUpdateOperationsInput | number | null
     yieldItemSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    waterDuration?: NullableIntFieldUpdateOperationsInput | number | null
+    waterTimeBonus?: NullableIntFieldUpdateOperationsInput | number | null
+    waterXpBonus?: NullableIntFieldUpdateOperationsInput | number | null
     productionTime?: NullableIntFieldUpdateOperationsInput | number | null
     foodSlug?: NullableStringFieldUpdateOperationsInput | string | null
     foodQuantity?: NullableIntFieldUpdateOperationsInput | number | null
@@ -11139,10 +11363,16 @@ export namespace Prisma {
     cropType?: SortOrder
     plantedAt?: SortOrder
     isUnlocked?: SortOrder
+    wateredAt?: SortOrder
+    waterCount?: SortOrder
+    willHavePest?: SortOrder
+    pestAppearTime?: SortOrder
+    pestRemoved?: SortOrder
   }
 
   export type PlotAvgOrderByAggregateInput = {
     index?: SortOrder
+    waterCount?: SortOrder
   }
 
   export type PlotMaxOrderByAggregateInput = {
@@ -11152,6 +11382,11 @@ export namespace Prisma {
     cropType?: SortOrder
     plantedAt?: SortOrder
     isUnlocked?: SortOrder
+    wateredAt?: SortOrder
+    waterCount?: SortOrder
+    willHavePest?: SortOrder
+    pestAppearTime?: SortOrder
+    pestRemoved?: SortOrder
   }
 
   export type PlotMinOrderByAggregateInput = {
@@ -11161,10 +11396,16 @@ export namespace Prisma {
     cropType?: SortOrder
     plantedAt?: SortOrder
     isUnlocked?: SortOrder
+    wateredAt?: SortOrder
+    waterCount?: SortOrder
+    willHavePest?: SortOrder
+    pestAppearTime?: SortOrder
+    pestRemoved?: SortOrder
   }
 
   export type PlotSumOrderByAggregateInput = {
     index?: SortOrder
+    waterCount?: SortOrder
   }
 
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -11212,6 +11453,9 @@ export namespace Prisma {
     growthTime?: SortOrder
     xpReward?: SortOrder
     yieldItemSlug?: SortOrder
+    waterDuration?: SortOrder
+    waterTimeBonus?: SortOrder
+    waterXpBonus?: SortOrder
     productionTime?: SortOrder
     foodSlug?: SortOrder
     foodQuantity?: SortOrder
@@ -11227,6 +11471,9 @@ export namespace Prisma {
     minLevel?: SortOrder
     growthTime?: SortOrder
     xpReward?: SortOrder
+    waterDuration?: SortOrder
+    waterTimeBonus?: SortOrder
+    waterXpBonus?: SortOrder
     productionTime?: SortOrder
     foodQuantity?: SortOrder
     maxWeight?: SortOrder
@@ -11245,6 +11492,9 @@ export namespace Prisma {
     growthTime?: SortOrder
     xpReward?: SortOrder
     yieldItemSlug?: SortOrder
+    waterDuration?: SortOrder
+    waterTimeBonus?: SortOrder
+    waterXpBonus?: SortOrder
     productionTime?: SortOrder
     foodSlug?: SortOrder
     foodQuantity?: SortOrder
@@ -11266,6 +11516,9 @@ export namespace Prisma {
     growthTime?: SortOrder
     xpReward?: SortOrder
     yieldItemSlug?: SortOrder
+    waterDuration?: SortOrder
+    waterTimeBonus?: SortOrder
+    waterXpBonus?: SortOrder
     productionTime?: SortOrder
     foodSlug?: SortOrder
     foodQuantity?: SortOrder
@@ -11281,6 +11534,9 @@ export namespace Prisma {
     minLevel?: SortOrder
     growthTime?: SortOrder
     xpReward?: SortOrder
+    waterDuration?: SortOrder
+    waterTimeBonus?: SortOrder
+    waterXpBonus?: SortOrder
     productionTime?: SortOrder
     foodQuantity?: SortOrder
     maxWeight?: SortOrder
@@ -12205,6 +12461,11 @@ export namespace Prisma {
     index: number
     plantedAt?: Date | string | null
     isUnlocked?: boolean
+    wateredAt?: Date | string | null
+    waterCount?: number
+    willHavePest?: boolean
+    pestAppearTime?: Date | string | null
+    pestRemoved?: boolean
     crop?: ItemCreateNestedOneWithoutPlotsInput
   }
 
@@ -12214,6 +12475,11 @@ export namespace Prisma {
     cropType?: string | null
     plantedAt?: Date | string | null
     isUnlocked?: boolean
+    wateredAt?: Date | string | null
+    waterCount?: number
+    willHavePest?: boolean
+    pestAppearTime?: Date | string | null
+    pestRemoved?: boolean
   }
 
   export type PlotCreateOrConnectWithoutProfileInput = {
@@ -12333,6 +12599,11 @@ export namespace Prisma {
     cropType?: StringNullableFilter<"Plot"> | string | null
     plantedAt?: DateTimeNullableFilter<"Plot"> | Date | string | null
     isUnlocked?: BoolFilter<"Plot"> | boolean
+    wateredAt?: DateTimeNullableFilter<"Plot"> | Date | string | null
+    waterCount?: IntFilter<"Plot"> | number
+    willHavePest?: BoolFilter<"Plot"> | boolean
+    pestAppearTime?: DateTimeNullableFilter<"Plot"> | Date | string | null
+    pestRemoved?: BoolFilter<"Plot"> | boolean
   }
 
   export type InventoryItemUpsertWithWhereUniqueWithoutProfileInput = {
@@ -12435,6 +12706,9 @@ export namespace Prisma {
     growthTime?: number | null
     xpReward?: number | null
     yieldItemSlug?: string | null
+    waterDuration?: number | null
+    waterTimeBonus?: number | null
+    waterXpBonus?: number | null
     productionTime?: number | null
     foodSlug?: string | null
     foodQuantity?: number | null
@@ -12458,6 +12732,9 @@ export namespace Prisma {
     growthTime?: number | null
     xpReward?: number | null
     yieldItemSlug?: string | null
+    waterDuration?: number | null
+    waterTimeBonus?: number | null
+    waterXpBonus?: number | null
     productionTime?: number | null
     foodSlug?: string | null
     foodQuantity?: number | null
@@ -12534,6 +12811,9 @@ export namespace Prisma {
     growthTime?: NullableIntFieldUpdateOperationsInput | number | null
     xpReward?: NullableIntFieldUpdateOperationsInput | number | null
     yieldItemSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    waterDuration?: NullableIntFieldUpdateOperationsInput | number | null
+    waterTimeBonus?: NullableIntFieldUpdateOperationsInput | number | null
+    waterXpBonus?: NullableIntFieldUpdateOperationsInput | number | null
     productionTime?: NullableIntFieldUpdateOperationsInput | number | null
     foodSlug?: NullableStringFieldUpdateOperationsInput | string | null
     foodQuantity?: NullableIntFieldUpdateOperationsInput | number | null
@@ -12557,6 +12837,9 @@ export namespace Prisma {
     growthTime?: NullableIntFieldUpdateOperationsInput | number | null
     xpReward?: NullableIntFieldUpdateOperationsInput | number | null
     yieldItemSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    waterDuration?: NullableIntFieldUpdateOperationsInput | number | null
+    waterTimeBonus?: NullableIntFieldUpdateOperationsInput | number | null
+    waterXpBonus?: NullableIntFieldUpdateOperationsInput | number | null
     productionTime?: NullableIntFieldUpdateOperationsInput | number | null
     foodSlug?: NullableStringFieldUpdateOperationsInput | string | null
     foodQuantity?: NullableIntFieldUpdateOperationsInput | number | null
@@ -12599,6 +12882,11 @@ export namespace Prisma {
     index: number
     plantedAt?: Date | string | null
     isUnlocked?: boolean
+    wateredAt?: Date | string | null
+    waterCount?: number
+    willHavePest?: boolean
+    pestAppearTime?: Date | string | null
+    pestRemoved?: boolean
     profile: ProfileCreateNestedOneWithoutPlotsInput
   }
 
@@ -12608,6 +12896,11 @@ export namespace Prisma {
     index: number
     plantedAt?: Date | string | null
     isUnlocked?: boolean
+    wateredAt?: Date | string | null
+    waterCount?: number
+    willHavePest?: boolean
+    pestAppearTime?: Date | string | null
+    pestRemoved?: boolean
   }
 
   export type PlotCreateOrConnectWithoutCropInput = {
@@ -12739,6 +13032,9 @@ export namespace Prisma {
     growthTime?: number | null
     xpReward?: number | null
     yieldItemSlug?: string | null
+    waterDuration?: number | null
+    waterTimeBonus?: number | null
+    waterXpBonus?: number | null
     productionTime?: number | null
     foodSlug?: string | null
     foodQuantity?: number | null
@@ -12762,6 +13058,9 @@ export namespace Prisma {
     growthTime?: number | null
     xpReward?: number | null
     yieldItemSlug?: string | null
+    waterDuration?: number | null
+    waterTimeBonus?: number | null
+    waterXpBonus?: number | null
     productionTime?: number | null
     foodSlug?: string | null
     foodQuantity?: number | null
@@ -12838,6 +13137,9 @@ export namespace Prisma {
     growthTime?: NullableIntFieldUpdateOperationsInput | number | null
     xpReward?: NullableIntFieldUpdateOperationsInput | number | null
     yieldItemSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    waterDuration?: NullableIntFieldUpdateOperationsInput | number | null
+    waterTimeBonus?: NullableIntFieldUpdateOperationsInput | number | null
+    waterXpBonus?: NullableIntFieldUpdateOperationsInput | number | null
     productionTime?: NullableIntFieldUpdateOperationsInput | number | null
     foodSlug?: NullableStringFieldUpdateOperationsInput | string | null
     foodQuantity?: NullableIntFieldUpdateOperationsInput | number | null
@@ -12861,6 +13163,9 @@ export namespace Prisma {
     growthTime?: NullableIntFieldUpdateOperationsInput | number | null
     xpReward?: NullableIntFieldUpdateOperationsInput | number | null
     yieldItemSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    waterDuration?: NullableIntFieldUpdateOperationsInput | number | null
+    waterTimeBonus?: NullableIntFieldUpdateOperationsInput | number | null
+    waterXpBonus?: NullableIntFieldUpdateOperationsInput | number | null
     productionTime?: NullableIntFieldUpdateOperationsInput | number | null
     foodSlug?: NullableStringFieldUpdateOperationsInput | string | null
     foodQuantity?: NullableIntFieldUpdateOperationsInput | number | null
@@ -12915,6 +13220,9 @@ export namespace Prisma {
     growthTime?: number | null
     xpReward?: number | null
     yieldItemSlug?: string | null
+    waterDuration?: number | null
+    waterTimeBonus?: number | null
+    waterXpBonus?: number | null
     productionTime?: number | null
     foodSlug?: string | null
     foodQuantity?: number | null
@@ -12938,6 +13246,9 @@ export namespace Prisma {
     growthTime?: number | null
     xpReward?: number | null
     yieldItemSlug?: string | null
+    waterDuration?: number | null
+    waterTimeBonus?: number | null
+    waterXpBonus?: number | null
     productionTime?: number | null
     foodSlug?: string | null
     foodQuantity?: number | null
@@ -13014,6 +13325,9 @@ export namespace Prisma {
     growthTime?: NullableIntFieldUpdateOperationsInput | number | null
     xpReward?: NullableIntFieldUpdateOperationsInput | number | null
     yieldItemSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    waterDuration?: NullableIntFieldUpdateOperationsInput | number | null
+    waterTimeBonus?: NullableIntFieldUpdateOperationsInput | number | null
+    waterXpBonus?: NullableIntFieldUpdateOperationsInput | number | null
     productionTime?: NullableIntFieldUpdateOperationsInput | number | null
     foodSlug?: NullableStringFieldUpdateOperationsInput | string | null
     foodQuantity?: NullableIntFieldUpdateOperationsInput | number | null
@@ -13037,6 +13351,9 @@ export namespace Prisma {
     growthTime?: NullableIntFieldUpdateOperationsInput | number | null
     xpReward?: NullableIntFieldUpdateOperationsInput | number | null
     yieldItemSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    waterDuration?: NullableIntFieldUpdateOperationsInput | number | null
+    waterTimeBonus?: NullableIntFieldUpdateOperationsInput | number | null
+    waterXpBonus?: NullableIntFieldUpdateOperationsInput | number | null
     productionTime?: NullableIntFieldUpdateOperationsInput | number | null
     foodSlug?: NullableStringFieldUpdateOperationsInput | string | null
     foodQuantity?: NullableIntFieldUpdateOperationsInput | number | null
@@ -13054,6 +13371,11 @@ export namespace Prisma {
     cropType?: string | null
     plantedAt?: Date | string | null
     isUnlocked?: boolean
+    wateredAt?: Date | string | null
+    waterCount?: number
+    willHavePest?: boolean
+    pestAppearTime?: Date | string | null
+    pestRemoved?: boolean
   }
 
   export type InventoryItemCreateManyProfileInput = {
@@ -13078,6 +13400,11 @@ export namespace Prisma {
     index?: IntFieldUpdateOperationsInput | number
     plantedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isUnlocked?: BoolFieldUpdateOperationsInput | boolean
+    wateredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    waterCount?: IntFieldUpdateOperationsInput | number
+    willHavePest?: BoolFieldUpdateOperationsInput | boolean
+    pestAppearTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pestRemoved?: BoolFieldUpdateOperationsInput | boolean
     crop?: ItemUpdateOneWithoutPlotsNestedInput
   }
 
@@ -13087,6 +13414,11 @@ export namespace Prisma {
     cropType?: NullableStringFieldUpdateOperationsInput | string | null
     plantedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isUnlocked?: BoolFieldUpdateOperationsInput | boolean
+    wateredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    waterCount?: IntFieldUpdateOperationsInput | number
+    willHavePest?: BoolFieldUpdateOperationsInput | boolean
+    pestAppearTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pestRemoved?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type PlotUncheckedUpdateManyWithoutProfileInput = {
@@ -13095,6 +13427,11 @@ export namespace Prisma {
     cropType?: NullableStringFieldUpdateOperationsInput | string | null
     plantedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isUnlocked?: BoolFieldUpdateOperationsInput | boolean
+    wateredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    waterCount?: IntFieldUpdateOperationsInput | number
+    willHavePest?: BoolFieldUpdateOperationsInput | boolean
+    pestAppearTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pestRemoved?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type InventoryItemUpdateWithoutProfileInput = {
@@ -13162,6 +13499,11 @@ export namespace Prisma {
     index: number
     plantedAt?: Date | string | null
     isUnlocked?: boolean
+    wateredAt?: Date | string | null
+    waterCount?: number
+    willHavePest?: boolean
+    pestAppearTime?: Date | string | null
+    pestRemoved?: boolean
   }
 
   export type AnimalCreateManyAnimalInput = {
@@ -13202,6 +13544,11 @@ export namespace Prisma {
     index?: IntFieldUpdateOperationsInput | number
     plantedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isUnlocked?: BoolFieldUpdateOperationsInput | boolean
+    wateredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    waterCount?: IntFieldUpdateOperationsInput | number
+    willHavePest?: BoolFieldUpdateOperationsInput | boolean
+    pestAppearTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pestRemoved?: BoolFieldUpdateOperationsInput | boolean
     profile?: ProfileUpdateOneRequiredWithoutPlotsNestedInput
   }
 
@@ -13211,6 +13558,11 @@ export namespace Prisma {
     index?: IntFieldUpdateOperationsInput | number
     plantedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isUnlocked?: BoolFieldUpdateOperationsInput | boolean
+    wateredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    waterCount?: IntFieldUpdateOperationsInput | number
+    willHavePest?: BoolFieldUpdateOperationsInput | boolean
+    pestAppearTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pestRemoved?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type PlotUncheckedUpdateManyWithoutCropInput = {
@@ -13219,6 +13571,11 @@ export namespace Prisma {
     index?: IntFieldUpdateOperationsInput | number
     plantedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isUnlocked?: BoolFieldUpdateOperationsInput | boolean
+    wateredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    waterCount?: IntFieldUpdateOperationsInput | number
+    willHavePest?: BoolFieldUpdateOperationsInput | boolean
+    pestAppearTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pestRemoved?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type AnimalUpdateWithoutAnimalInput = {

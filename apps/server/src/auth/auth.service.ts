@@ -115,6 +115,24 @@ export class AuthService {
         },
       });
 
+      // Presente inicial: Regador de cobre
+      await tx.inventoryItem.create({
+        data: {
+          profileId: profile.id,
+          itemSlug: 'copper_watering_can',
+          quantity: 1,
+        },
+      });
+
+      // Presente inicial: Pesticida natural
+      await tx.inventoryItem.create({
+        data: {
+          profileId: profile.id,
+          itemSlug: 'natural_pesticide',
+          quantity: 1,
+        },
+      });
+
       return newUser;
     });
 

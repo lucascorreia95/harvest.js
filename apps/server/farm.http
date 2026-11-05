@@ -1,0 +1,153 @@
+### Farm API Tests
+
+# 1. Login para obter token
+# @name login
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "password": "123456"
+}
+
+###
+
+@token = {{ login.response.body.access_token }}
+
+###
+
+# 2. Obter estado da fazenda
+GET http://localhost:3000/farm
+Authorization: Bearer {{token}}
+
+###
+
+# 3. Desbloquear o primeiro plot
+POST http://localhost:3000/farm/unlock
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "plotIndex": 0
+}
+
+###
+
+# 4. Plantar trigo
+POST http://localhost:3000/farm/plant
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "plotIndex": 0,
+  "cropSlug": "wheat_seed"
+}
+
+###
+
+# 5. Regar a planta (pode regar imediatamente após plantar)
+POST http://localhost:3000/farm/water
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "plotIndex": 0
+}
+
+###
+
+# 6. Verificar estado da fazenda (deve mostrar isWatered: true, waterCount: 1)
+GET http://localhost:3000/farm
+Authorization: Bearer {{token}}
+
+###
+
+# 7. Tentar regar novamente (deve falhar porque ainda está úmido)
+POST http://localhost:3000/farm/water
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "plotIndex": 0
+}
+
+###
+
+# 8. Aguardar o cooldown de rega (10s para trigo) para poder regar novamente
+# Após ficar seco, regar novamente para acumular bônus
+POST http://localhost:3000/farm/water
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "plotIndex": 0
+}
+
+###
+
+# 9. Colher (deve mostrar XP bônus se foi regado)
+POST http://localhost:3000/farm/harvest
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "plotIndex": 0
+}
+
+###
+
+# 10. Plantar milho (crescimento mais longo - 5min) para testar peste
+POST http://localhost:3000/farm/plant
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "plotIndex": 0,
+  "cropSlug": "corn_seed"
+}
+
+###
+
+# 11. Verificar estado da fazenda (recebe willHavePest, pestAppearTime desde o plantio)
+GET http://localhost:3000/farm
+Authorization: Bearer {{token}}
+
+###
+
+# 12. Aguardar 50% do tempo (2.5min) e verificar novamente
+# Frontend calcula: hasPest = willHavePest && !pestRemoved && agora >= pestAppearTime
+GET http://localhost:3000/farm
+Authorization: Bearer {{token}}
+
+###
+
+# 13. Se tiver peste, remover com pesticida
+POST http://localhost:3000/farm/spray
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "plotIndex": 0
+}
+
+###
+
+# 14. Tentar remover peste novamente (deve falhar se já foi removida)
+POST http://localhost:3000/farm/spray
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "plotIndex": 0
+}
+
+###
+
+# 15. Colher milho (tempo normalizado após remover peste)
+POST http://localhost:3000/farm/harvest
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "plotIndex": 0
+}

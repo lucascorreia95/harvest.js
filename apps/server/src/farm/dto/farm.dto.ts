@@ -24,3 +24,17 @@ export class HarvestCropDto {
   @Max(27)
   plotIndex: number;
 }
+
+export class WaterPlotDto {
+  @IsNumber()
+  @Min(0)
+  @Max(27)
+  plotIndex: number;
+}
+
+export class SprayPlotDto {
+  @IsNumber()
+  @Min(0)
+  @Max(27)
+  plotIndex: number;
+}

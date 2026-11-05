@@ -30,6 +30,9 @@ The goal of Harvest.js is to move beyond simple CRUD applications. It demonstrat
 - **Plot Grid**: 28 unlockable plots with progressive pricing
 - **Planting**: Plant seeds from inventory or buy directly when planting
 - **Growth System**: Time-based crop growth with server-side timestamps
+- **Watering**: Water crops to gain XP immediately and bonus XP/time on harvest
+- **Pests**: Random pest appearance (35% chance after 50% growth time) that slows growth by 50%
+- **Pesticide**: Remove pests with pesticide to restore normal growth and gain XP
 - **Harvesting**: Harvest crops when ready, earn XP and collect produce
 - **Experience**: XP rewards on harvest with automatic level progression
 
@@ -46,7 +49,7 @@ The goal of Harvest.js is to move beyond simple CRUD applications. It demonstrat
 - **Item Details**: Growth time, XP rewards, buy/sell prices
 
 **Activity Logging:**
-- **Comprehensive Logs**: Track all player actions (plant, harvest, unlock, level up, earn/spend coins, earn XP, buy/feed/collect/sell animals)
+- **Comprehensive Logs**: Track all player actions (plant, harvest, unlock, level up, earn/spend coins, earn XP, buy/feed/collect/sell animals, water, spray)
 - **Activity Stats**: Queryable statistics by action type
 - **Recent Activities**: Global activity feed
 - **Audit Trail**: Complete history of player transactions
@@ -168,9 +171,11 @@ PORT=3000
 
 ### Farm:
 
-- `GET /farm` - Get farm state (plots and crops)
+- `GET /farm` - Get farm state (plots and crops, including pest information)
 - `POST /farm/unlock` - Unlock a plot (costs coins)
-- `POST /farm/plant` - Plant a seed in a plot (uses inventory or buys directly)
+- `POST /farm/plant` - Plant a seed in a plot (uses inventory or buys directly, determines pest chance)
+- `POST /farm/water` - Water a crop (gains XP and time/XP bonus on harvest)
+- `POST /farm/spray` - Remove pest from crop (gains XP and removes growth penalty)
 - `POST /farm/harvest` - Harvest a mature crop (earns XP and produce)
 
 ### Shop:
@@ -199,13 +204,39 @@ PORT=3000
 - `POST /animals/collect` - Collect animal product (animalSlug)
 - `POST /animals/sell` - Sell animal (only pigs at max weight) (animalSlug)
 
+## 🎮 Game Mechanics
+
+### Watering System
+
+- **Cooldown**: Each crop has a water duration (e.g., 10s for wheat, 30s for carrot, 60s for corn)
+- **XP Bonus**: Immediate 1 XP per watering + bonus XP on harvest (e.g., +2 XP per watering for wheat)
+- **Time Bonus**: Each watering reduces growth time (e.g., -5s per watering for wheat)
+- **Tool**: Copper watering can is given to all new players (non-consumable, not sellable)
+
+### Pest System
+
+- **Appearance**: Pests are determined at planting time (35% chance)
+- **Timing**: Pests appear at 50% of growth time if triggered
+- **Effect**: Pests slow down growth by 50% of the original growth time
+- **Limit**: Only one pest per plant per growth cycle
+- **Removal**: Use pesticide to remove pests (gains 2 XP)
+- **Tool**: Natural pesticide is given to all new players (non-consumable, not sellable)
+
+### Example Growth Cycle (Wheat)
+
+- **Base**: 30s growth time, 5 XP
+- **Watered 3x**: 15s effective growth time (30 - 3×5), 11 XP total (5 + 3×2)
+- **With pest**: 45s effective growth time (30 + 50% penalty), 5 XP
+- **Pest removed**: Returns to normal growth time
+- **Frontend knows**: From planting moment if pest will appear and when
+
 ## 🧪 Testing the System
 
 1. **Register**: Create a new account at http://localhost:5173
 2. **Login**: Sign in with your credentials
 3. **Dashboard**: View your profile, level, coins, and experience
 4. **Profile**: Update your display name, avatar, bio, and farm name
-5. **Farm**: View your plots, unlock new plots, plant seeds, and harvest crops
+5. **Farm**: View your plots, unlock new plots, plant seeds, water crops, and harvest crops
 6. **Shop**: Browse items, buy seeds, fertilizers, tools, animals, and food
 7. **Inventory**: View your items, sell harvested crops and animal products
 8. **Animals**: Buy animals, feed them, collect products, sell pigs
@@ -213,7 +244,7 @@ PORT=3000
 
 ## 🔄 Next Steps (Future Features)
 
-**Completed (Sprints 1-4):**
+**Completed (Sprints 1-5):**
 - ✅ Authentication & Profile System
 - ✅ Farm grid system and crop planting mechanics
 - ✅ Time-based growth and harvesting
@@ -221,6 +252,8 @@ PORT=3000
 - ✅ Inventory management and selling
 - ✅ Activity logging and statistics
 - ✅ Animal system (chickens, pigs, cows)
+- ✅ Watering system with XP and time bonuses
+- ✅ Pest system with random appearance and growth penalty
 
 **Planned (Future Sprints):**
 - **Sprint 5**: Fertilizers and growth acceleration

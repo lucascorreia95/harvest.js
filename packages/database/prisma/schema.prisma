@@ -47,15 +47,20 @@ model Profile {
 }
 
 model Plot {
-  id        String   @id @default(cuid())
-  profileId String
-  index     Int      // Posição no grid (0, 1, 2...)
-  cropType  String?  // 'wheat_seed', 'carrot_seed', etc.
-  plantedAt DateTime?
-  isUnlocked Boolean @default(false)
-  
-  profile   Profile  @relation(fields: [profileId], references: [id])
-  crop      Item?    @relation("PlotToCrop", fields: [cropType], references: [slug])
+  id          String   @id @default(cuid())
+  profileId   String
+  index       Int      // Posição no grid (0, 1, 2...)
+  cropType    String?  // 'wheat_seed', 'carrot_seed', etc.
+  plantedAt   DateTime?
+  isUnlocked Boolean  @default(false)
+  wateredAt   DateTime? // Última vez que foi regado
+  waterCount  Int      @default(0) // Quantas vezes foi regado
+  willHavePest Boolean  @default(false) // Se vai ter peste (decidido no plantio)
+  pestAppearTime DateTime? // Quando a peste vai aparecer (50% do tempo)
+  pestRemoved Boolean  @default(false) // Se o jogador já removeu a peste
+
+  profile Profile @relation(fields: [profileId], references: [id])
+  crop    Item?   @relation("PlotToCrop", fields: [cropType], references: [slug])
 
   @@unique([profileId, index]) // Um jogador não pode ter dois terrenos na mesma posição
   @@map("plots")
@@ -77,6 +82,9 @@ model Item {
   growthTime    Int?     // Tempo em segundos
   xpReward      Int?     // XP concedido ao colher
   yieldItemSlug String?  // Slug do fruto que essa semente gera (ex: 'wheat')
+  waterDuration Int?     // Tempo que fica úmido após regar (segundos)
+  waterTimeBonus Int?   // Redução de tempo por regada (segundos)
+  waterXpBonus Int?     // XP bônus por regada na colheita
 
   // Atributos específicos para animais (quando type == 'ANIMAL')
   productionTime Int?    // Tempo para produzir após ser alimentado (segundos)

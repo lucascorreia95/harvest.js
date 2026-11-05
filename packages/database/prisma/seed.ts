@@ -15,6 +15,9 @@ const items = [
     growthTime: 30,
     xpReward: 5,
     yieldItemSlug: 'wheat',
+    waterDuration: 10, // 10s úmido após regar (permite regar ~3x durante 30s)
+    waterTimeBonus: 5, // Reduz 5s por regada
+    waterXpBonus: 2, // +2 XP por regada na colheita
   },
   {
     name: 'Semente de Cenoura',
@@ -27,6 +30,9 @@ const items = [
     growthTime: 120,
     xpReward: 15,
     yieldItemSlug: 'carrot',
+    waterDuration: 30, // 30s úmido após regar (permite regar ~4x durante 2min)
+    waterTimeBonus: 10, // Reduz 10s por regada
+    waterXpBonus: 3, // +3 XP por regada na colheita
   },
   {
     name: 'Semente de Milho',
@@ -39,6 +45,9 @@ const items = [
     growthTime: 300,
     xpReward: 40,
     yieldItemSlug: 'corn',
+    waterDuration: 60, // 60s úmido após regar (permite regar ~5x durante 5min)
+    waterTimeBonus: 15, // Reduz 15s por regada
+    waterXpBonus: 5, // +5 XP por regada na colheita
   },
 
   // Fertilizantes (compráveis na loja)
@@ -56,11 +65,20 @@ const items = [
   {
     name: 'Regador de Cobre',
     slug: 'copper_watering_can',
-    description: 'Regador resistente para manter a plantação hidratada.',
+    description: 'Regador resistente para manter a plantação hidratada. Presente inicial.',
     type: 'TOOL',
-    buyPrice: 150,
-    sellPrice: 50,
-    minLevel: 3,
+    buyPrice: 0, // Não é comprável (presente inicial)
+    sellPrice: 0, // Não pode ser vendido
+    minLevel: 1,
+  },
+  {
+    name: 'Pesticida Natural',
+    slug: 'natural_pesticide',
+    description: 'Pesticida natural para remover pragas das plantas. Presente inicial.',
+    type: 'TOOL',
+    buyPrice: 0, // Não é comprável (presente inicial)
+    sellPrice: 0, // Não pode ser vendido
+    minLevel: 1,
   },
 
   // Animais (compráveis na loja)

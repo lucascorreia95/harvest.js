@@ -146,7 +146,12 @@ exports.Prisma.PlotScalarFieldEnum = {
   index: 'index',
   cropType: 'cropType',
   plantedAt: 'plantedAt',
-  isUnlocked: 'isUnlocked'
+  isUnlocked: 'isUnlocked',
+  wateredAt: 'wateredAt',
+  waterCount: 'waterCount',
+  willHavePest: 'willHavePest',
+  pestAppearTime: 'pestAppearTime',
+  pestRemoved: 'pestRemoved'
 };
 
 exports.Prisma.ItemScalarFieldEnum = {
@@ -161,6 +166,9 @@ exports.Prisma.ItemScalarFieldEnum = {
   growthTime: 'growthTime',
   xpReward: 'xpReward',
   yieldItemSlug: 'yieldItemSlug',
+  waterDuration: 'waterDuration',
+  waterTimeBonus: 'waterTimeBonus',
+  waterXpBonus: 'waterXpBonus',
   productionTime: 'productionTime',
   foodSlug: 'foodSlug',
   foodQuantity: 'foodQuantity',

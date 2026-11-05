@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 import { FarmService } from './farm.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { UnlockPlotDto, PlantCropDto, HarvestCropDto } from './dto/farm.dto';
+import { UnlockPlotDto, PlantCropDto, HarvestCropDto, WaterPlotDto, SprayPlotDto } from './dto/farm.dto';
 
 @Controller('farm')
 @UseGuards(JwtAuthGuard)
@@ -40,5 +40,15 @@ export class FarmController {
   @Post('harvest')
   async harvestCrop(@Req() req, @Body() harvestCropDto: HarvestCropDto) {
     return this.farmService.harvestCrop(req.user.sub, harvestCropDto.plotIndex);
+  }
+
+  @Post('water')
+  async waterPlot(@Req() req, @Body() waterPlotDto: WaterPlotDto) {
+    return this.farmService.waterPlot(req.user.sub, waterPlotDto.plotIndex);
+  }
+
+  @Post('spray')
+  async sprayPlot(@Req() req, @Body() sprayPlotDto: SprayPlotDto) {
+    return this.farmService.sprayPlot(req.user.sub, sprayPlotDto.plotIndex);
   }
 }
